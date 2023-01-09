@@ -1,25 +1,15 @@
-import 'package:fexmonths/menu_animated.dart';
-import 'package:flutter/cupertino.dart';
+
+import 'package:fexmonths/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'Constens.dart';
-import 'Text_filedd_widget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'Icons_sochail.dart';
 import 'main.dart';
-import 'package:googleapis_auth/googleapis_auth.dart';
-import 'Creat_Accounts.dart';
-class login_screen extends StatefulWidget {
-  const login_screen({Key? key}) : super(key: key);
-  @override
-  State<login_screen> createState() => _login_screenState();
-}
+import 'Icons_sochail.dart';
+import 'package:flutter/cupertino.dart';
+import 'Creat_Account_TextFiled.dart';
 
-class _login_screenState extends State<login_screen> {
-  bool checkbox = false;
-  String username = "nasrallah";
-  var password = "Aa14119181121218";
-  String usernametext = "";
-  var Password = "";
+class Create_Account extends StatelessWidget {
+  const Create_Account({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -44,25 +34,30 @@ class _login_screenState extends State<login_screen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    //    color: Colors.red,
                     alignment: AlignmentDirectional.topEnd,
                     margin: EdgeInsets.only(right: 20),
+                  /*  width: 45,
+                    height: 45,*/
+
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                       Navigator.pop(context);
                       },
                       child: CircleAvatar(
                           backgroundColor: Color(0xFFF2F4F8),
                           child: Icon(
                             CupertinoIcons.xmark,
                             color: Colors.black,
+                            //      color: Colors.black,
                           )),
                     ),
                   ),
                   Center(
                       child: Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(
-                      color: Colors.black,
+                      //    color: Colors.black,
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
@@ -74,95 +69,60 @@ class _login_screenState extends State<login_screen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'New user?',
+                        'Already User?',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Create_Account(),));
+                          Navigator.pop(context);
                         },
                         child: Text(
-                          "Create an account",
+                          "Sign In",
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 20,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: TextField(
-                      onChanged: (vasr)
-                      {
-                        usernametext= vasr;
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Username or email",
-                        fillColor: Color(0xFFF2F4F8),
-                        filled: true,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                            borderSide: BorderSide.none),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: TextField(
-                      onChanged: (varss){
-                        Password = varss;
-                      },
-                      decoration: InputDecoration(
-                        hintText: "Password",
-                        fillColor: Color(0xFFF2F4F8),
-                        filled: true,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                            borderSide: BorderSide.none),
-                      ),
-                      obscureText: true,
-
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Transform.scale(
-                        scale: 1.2,
-                        child: Checkbox(
-                          value: checkbox,
-                          checkColor: Colors.white,
-                          activeColor:KButtonsignColor,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              checkbox = value!;
-                            });
-                          },
-                          side: BorderSide(
-                              color: KButtonsignColor,
-                              width: 1.4,
-                              style: BorderStyle.solid),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4)),
+                  SizedBox(
+                    height: 10.0,
+                    child: Container(
+                        //    color: Colors.black,
                         ),
-                      ),
-                      Text("keep me signed in ")
-                    ],
                   ),
+                  Container(
+                    margin: EdgeInsets.only(left: 24.0,right: 24.0),
+                    child: Column(
+                      children: [
+
+                        Creat_Account_TextFiled(hintText: "UserName",obscureText: false, onchangess: (dfgkdfg) {} ),
+                        SizedBox(
+                          height: 10.0,),
+                        Creat_Account_TextFiled(hintText: "LastName",obscureText: false, onchangess: (dfgkdfg) {} ),
+                        SizedBox(
+                          height: 10.0,),
+                        Creat_Account_TextFiled(hintText: "Username or Email",obscureText: false, onchangess: (dfgkdfg) {} ),
+                        SizedBox(
+                          height: 10.0,),
+                        Creat_Account_TextFiled(hintText: "Password",obscureText: true, onchangess: (dfgkdfg) {} )
+
+                      ],
+                    ),
+                  ),
+                  /* Column(
+                    children: [
+                     */ /* SizedBox(
+                        height: 1.0,
+                        child: Container(
+                    //      color: Colors.black,
+                        ),
+                      ),*/ /*
+                    ],
+                  )*/
                   GestureDetector(
-                    onTap: () {
-                      if(usernametext == username && Password == password )
-                      {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Femonths()));
-                      }
-                      else{
-                        print("wrong username or Password");
-                      }
-                    },
+                    onTap: () {},
                     child: Container(
                       decoration: BoxDecoration(
                           color: KButtonsignColor,
@@ -170,16 +130,17 @@ class _login_screenState extends State<login_screen> {
                       width: 350,
                       height: 45,
                       padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.only(left: 15,right: 15,top: 5,bottom: 5),
+                      margin: EdgeInsets.only(left: 90.0,right: 90.0,top: 10,bottom: 5),
                       child: Center(
-                        child: Text("Sign In",
-                            style: KTextButtonStyled
-                            ),
+                        child: Text("Sign Up", style: KTextButtonStyled),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 80,
+                    height:20,
+                    child: Container(
+                        // color: Colors.red,
+                        ),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -209,6 +170,7 @@ class _login_screenState extends State<login_screen> {
                   ),
                   SizedBox(
                     height: 10,
+                    //    child: Container(color: Colors.red,),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -246,5 +208,7 @@ class _login_screenState extends State<login_screen> {
         ),
       ),
     );
+    ;
   }
 }
+

@@ -1,13 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 const KIconAppbarColor =Color(0xFF7E84A3);
 const KButtonsignColor =  Color(0xFF3E21DE);
 const KIconcardColor = Color(0xFF000000);
 
-const KTextCardStyled =  TextStyle(
-  fontSize: 20,
+final KTextCardStyled =  TextStyle(
+  fontSize: 20.sp,
   color: Colors.white,);
 
-const KTextButtonStyled =  TextStyle(
-fontSize: 15,
+final KTextButtonStyled = TextStyle(
+ fontSize: 15.sp,
 color: Colors.white,);

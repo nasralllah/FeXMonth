@@ -18,8 +18,8 @@ class _menu_animatedState extends State<menu_animated> {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Container(
-       // color: Colors.red,
-        height: 166.h,
+        // color: Colors.red,
+        height: 140.h,
         //  color: Colors.red,
         child: GestureDetector(
             onTap: () {
@@ -32,19 +32,19 @@ class _menu_animatedState extends State<menu_animated> {
             child: SizedBox(
               child: Container(
                 margin: EdgeInsets.only(
-                    top: 130.h, right: 250.w, bottom: 10.h, left: 5.w),
+                    top: 100.h, right: 250.w, bottom: 10.h, left: 5.w),
                 //color: Colors.blue,
                 decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(15.r)),
+                    borderRadius: BorderRadius.circular(15)),
                 child: Center(
                     child: Text(
-                  "Sing in",
-                  style: KTextButtonStyled,
-                )),
+                      "Sing in",
+                      style: KTextButtonStyled,
+                    )),
               ),
             )
-            /*child: Container(
+          /*child: Container(
             //  margin: EdgeInsets.only(right: 300,bottom: 50),
             //  padding: EdgeInsets.only(top: 10 ),
               decoration: BoxDecoration(
@@ -54,12 +54,12 @@ class _menu_animatedState extends State<menu_animated> {
               ),
               child: Center(child: Text("Sign in",style: KTextButtonStyled)),
             )*/
-            ),
+        ),
       ),
       Container(
-      //  color: Colors.white,
+        //  color: Colors.white,
         //padding: EdgeInsets.only(top: 440),
-        height: 410.h,
+        height: 440.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.ideographic,
@@ -99,23 +99,21 @@ class _menu_animatedState extends State<menu_animated> {
               CardName: "Faviort",
               Icons: FontAwesomeIcons.heart,
             ),
-
           ],
         ),
       ),
       Container(
-      //  color: Colors.red,
-
-        padding: EdgeInsets.only(top: 15.h),
-        margin: EdgeInsets.only(left: 25.w,right: 110.w,top: 10.h),
+        //color: Colors.red,
+        padding: EdgeInsets.only(top: 20.h),
+        margin: EdgeInsets.only(left: 25.w,right: 110.w,top: 10.w),
         child: Image(height: 130.h,
             image:
             AssetImage("Images/Everything Everywhere All At Once (2022).jpg")),
 
       ),
       Container(
-      //  color: Colors.black,
-        padding: EdgeInsets.only(top: 10.h,left: 10.w),
+        //  color: Colors.black,
+        padding: EdgeInsets.only(top: 10.h,left: 10),
         margin: EdgeInsets.only(top: 0.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

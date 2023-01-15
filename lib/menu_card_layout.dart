@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Constens.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Menu_Cards extends StatelessWidget {
   const Menu_Cards({
     Key? key, required this.onpress, required this.Icons, required this.CardName,
@@ -12,23 +13,23 @@ class Menu_Cards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        margin: EdgeInsets.only(right: 100),
+        margin: EdgeInsets.only(right: 100.w),
         elevation: 0,
         color: Colors.transparent,
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: onpress,
           child: SizedBox(
-            height: 50,
-            width: 500,
+            height: 70.h,
+            width: 400.w,
             child: Row(
               children: [
                 Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: EdgeInsets.only(left: 5.w),
                     child: Icon(Icons,color: Colors.white,)
                 ),
                 Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: Text(CardName,style: KTextCardStyled,)),
 
               ],

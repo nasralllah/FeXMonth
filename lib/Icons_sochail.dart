@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class sochil_Icons extends StatelessWidget {
   const sochil_Icons({
@@ -13,7 +14,7 @@ class sochil_Icons extends StatelessWidget {
         onTap: onpress,
         child: CircleAvatar(
           backgroundColor: Color(0xFFF2F4F8),
-          radius: 30,
+          radius: 35.r,
           child: ImageIcon(
             AssetImage(image),
             color: Colors.black,

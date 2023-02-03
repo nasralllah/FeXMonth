@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'Bottom_Menu_Icons.dart';
-import 'Constens.dart';
-import 'login_screen.dart';
-import 'menu_card_layout.dart';
+import '../Components/Bottom_Menu_Icons.dart';
+import '../Constens.dart';
+import '../Login_display/login_screen.dart';
+import '../Components/menu_card_layout.dart';
 
 class menu_animated extends StatefulWidget {
   const menu_animated({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _menu_animatedState extends State<menu_animated> {
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Container(
         // color: Colors.red,
-        height: 140.h,
+        height: 166.h,
         //  color: Colors.red,
         child: GestureDetector(
             onTap: () {
@@ -32,19 +32,19 @@ class _menu_animatedState extends State<menu_animated> {
             child: SizedBox(
               child: Container(
                 margin: EdgeInsets.only(
-                    top: 100.h, right: 250.w, bottom: 10.h, left: 5.w),
+                    top: 130.h, right: 250.w, bottom: 10.h, left: 5.w),
                 //color: Colors.blue,
                 decoration: BoxDecoration(
                     color: Colors.blue,
-                    borderRadius: BorderRadius.circular(15)),
+                    borderRadius: BorderRadius.circular(15.r)),
                 child: Center(
                     child: Text(
-                      "Sing in",
-                      style: KTextButtonStyled,
-                    )),
+                  "Sing in",
+                  style: KTextButtonStyled,
+                )),
               ),
             )
-          /*child: Container(
+            /*child: Container(
             //  margin: EdgeInsets.only(right: 300,bottom: 50),
             //  padding: EdgeInsets.only(top: 10 ),
               decoration: BoxDecoration(
@@ -54,12 +54,12 @@ class _menu_animatedState extends State<menu_animated> {
               ),
               child: Center(child: Text("Sign in",style: KTextButtonStyled)),
             )*/
-        ),
+            ),
       ),
       Container(
         //  color: Colors.white,
         //padding: EdgeInsets.only(top: 440),
-        height: 440.h,
+        height: 410.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.baseline,
           textBaseline: TextBaseline.ideographic,
@@ -103,17 +103,18 @@ class _menu_animatedState extends State<menu_animated> {
         ),
       ),
       Container(
-        //color: Colors.red,
-        padding: EdgeInsets.only(top: 20.h),
-        margin: EdgeInsets.only(left: 25.w,right: 110.w,top: 10.w),
-        child: Image(height: 130.h,
-            image:
-            AssetImage("Images/Everything Everywhere All At Once (2022).jpg")),
+        //  color: Colors.red,
 
+        padding: EdgeInsets.only(top: 15.h),
+        margin: EdgeInsets.only(left: 25.w, right: 110.w, top: 10.h),
+        child: Image(
+            height: 130.h,
+            image: AssetImage(
+                "Images/Everything Everywhere All At Once (2022).jpg")),
       ),
       Container(
         //  color: Colors.black,
-        padding: EdgeInsets.only(top: 10.h,left: 10),
+        padding: EdgeInsets.only(top: 10.h, left: 10.w),
         margin: EdgeInsets.only(top: 0.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

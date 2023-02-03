@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'Constens.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fexmonths/Constens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Menu_Cards extends StatelessWidget {
   const Menu_Cards({
-    Key? key, required this.onpress, required this.Icons, required this.CardName,
+    Key? key,
+    required this.onpress,
+    required this.Icons,
+    required this.CardName,
   }) : super(key: key);
 
   final VoidCallback onpress;
- final IconData Icons;
- final String CardName;
+  final IconData Icons;
+  final String CardName;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,17 +29,19 @@ class Menu_Cards extends StatelessWidget {
               children: [
                 Padding(
                     padding: EdgeInsets.only(left: 5.w),
-                    child: Icon(Icons,color: Colors.white,)
-                ),
+                    child: Icon(
+                      Icons,
+                      color: Colors.white,
+                    )),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
-                    child: Text(CardName,style: KTextCardStyled,)),
-
+                    child: Text(
+                      CardName,
+                      style: KTextCardStyled,
+                    )),
               ],
             ),
-
           ),
-        )
-    );
+        ));
   }
 }

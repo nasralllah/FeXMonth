@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'Constens.dart';
+import 'package:fexmonths/Constens.dart';
 
 class bottom_menu_Icons extends StatelessWidget {
   const bottom_menu_Icons({
-    Key? key, required this.onpress, required this.iconassetImage,
+    Key? key,
+    required this.onpress,
+    required this.iconassetImage,
   }) : super(key: key);
   final VoidCallback onpress;
   final AssetImage iconassetImage;
@@ -12,11 +14,10 @@ class bottom_menu_Icons extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: onpress,
-        child:CircleAvatar(
+        child: CircleAvatar(
           radius: 25,
           backgroundColor: Colors.white,
-          child: ImageIcon(iconassetImage,color: KIconcardColor),
-        )
-    );
+          child: ImageIcon(iconassetImage, color: KIconcardColor),
+        ));
   }
 }

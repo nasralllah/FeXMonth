@@ -1,23 +1,19 @@
-
-import 'package:fexmonths/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'Constens.dart';
-import 'main.dart';
-import 'Icons_sochail.dart';
+import '../Constens.dart';
+import '../main.dart';
+import 'package:fexmonths/Components/Icons_sochail.dart';
 import 'package:flutter/cupertino.dart';
-import 'Creat_Account_TextFiled.dart';
+import '../Components/Creat_Account_TextFiled.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'ApiPost.dart';
+import '../API_Backend/ApiPost.dart';
 
-final  myControllername = TextEditingController();
+final myControllername = TextEditingController();
 final myControllerEmail = TextEditingController();
 final myControllerpassword = TextEditingController();
 final myControllerrepassword = TextEditingController();
 
 class Create_Account extends StatelessWidget {
   const Create_Account({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +22,9 @@ class Create_Account extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [Colors.lightBlue,Colors.white60])),
+              colors: [Colors.lightBlue, Colors.white60])),
       child: Scaffold(
-                  backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
         //   resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           padding: EdgeInsets.only(top: 40.h),
@@ -36,10 +32,9 @@ class Create_Account extends StatelessWidget {
           // padding: EdgeInsets.symmetric(vertical: 100),
           physics: AlwaysScrollableScrollPhysics(),
           child: Card(
-
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.r))),
-            margin: EdgeInsets.symmetric(vertical: 10.h,horizontal:30.w ),
+            margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
             child: Container(
               height: 755.h,
               child: Column(
@@ -49,16 +44,20 @@ class Create_Account extends StatelessWidget {
                     //    color: Colors.red,
                     alignment: AlignmentDirectional.topEnd,
                     margin: EdgeInsets.only(right: 20.w),
-                  /*  width: 45,
+                    /*  width: 45,
                     height: 45,*/
 
                     child: GestureDetector(
                       onTap: () {
                         myControllername.text = "";
                         myControllerEmail.text = "";
-                         myControllerpassword.text = "";
+                        myControllerpassword.text = "";
                         myControllerrepassword.text = "";
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => Femonths(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Femonths(),
+                            ));
                       },
                       child: CircleAvatar(
                           backgroundColor: Color(0xFFF2F4F8),
@@ -112,17 +111,35 @@ class Create_Account extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 24.w),
                     child: Column(
                       children: [
-                        Creat_Account_TextFiled(hintText: "Email",obscureText: false, controlers: myControllerEmail ,),
+                        Creat_Account_TextFiled(
+                          hintText: "Email",
+                          obscureText: false,
+                          controlers: myControllerEmail,
+                        ),
                         SizedBox(
-                          height: 10.0.h,),
-                        Creat_Account_TextFiled(hintText: "password",obscureText: false, controlers:myControllerpassword , ),
+                          height: 10.0.h,
+                        ),
+                        Creat_Account_TextFiled(
+                          hintText: "password",
+                          obscureText: false,
+                          controlers: myControllerpassword,
+                        ),
                         SizedBox(
-                          height: 10.0.h,),
-                        Creat_Account_TextFiled(hintText: "Name",obscureText: false, controlers: myControllername, ),
+                          height: 10.0.h,
+                        ),
+                        Creat_Account_TextFiled(
+                          hintText: "Name",
+                          obscureText: false,
+                          controlers: myControllername,
+                        ),
                         SizedBox(
-                          height: 10.0.h,),
-                        Creat_Account_TextFiled(hintText: "re-Password",obscureText: false,controlers: myControllerrepassword, )
-
+                          height: 10.0.h,
+                        ),
+                        Creat_Account_TextFiled(
+                          hintText: "re-Password",
+                          obscureText: false,
+                          controlers: myControllerrepassword,
+                        )
                       ],
                     ),
                   ),
@@ -140,7 +157,7 @@ class Create_Account extends StatelessWidget {
                     onTap: () {
                       senddata(context);
 
-                     /* if(response.statusCode == 200){
+                      /* if(response.statusCode == 200){
 
                         Alert(
                             context: context,
@@ -150,23 +167,25 @@ class Create_Account extends StatelessWidget {
                         ).show();
                       }
 */
-
                     },
                     child: Container(
                       decoration: BoxDecoration(
                           color: KButtonsignColor,
-                          borderRadius: BorderRadius.all(Radius.circular(25.r))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(25.r))),
                       //width: 310.w,
                       height: 45.h,
-                      padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 5.h),
-                      margin: EdgeInsets.only(left: 90.0.w,right: 90.0.w,top: 20.h,bottom: 5.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+                      margin: EdgeInsets.only(
+                          left: 90.0.w, right: 90.0.w, top: 20.h, bottom: 5.h),
                       child: Center(
                         child: Text("Sign Up", style: KTextButtonStyled),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height:40.h,
+                    height: 40.h,
                     child: Container(
                         // color: Colors.red,
                         ),
@@ -240,4 +259,3 @@ class Create_Account extends StatelessWidget {
     ;
   }
 }
-

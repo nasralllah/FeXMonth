@@ -1,20 +1,22 @@
-import 'package:fexmonths/the_main_screen.dart';
+import 'package:fexmonths/Home_display/the_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class Creat_Account_TextFiled extends StatelessWidget {
   const Creat_Account_TextFiled({
-    Key? key, required this.hintText,required this.obscureText,/* required this.onchangess*/ required this.controlers,
+    Key? key,
+    required this.hintText,
+    required this.obscureText,
+    /* required this.onchangess*/ required this.controlers,
   }) : super(key: key);
   final String hintText;
- // final Function(String) onchangess;
+  // final Function(String) onchangess;
   final bool obscureText;
   final TextEditingController controlers;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height:50 ,
+      height: 50,
       child: TextField(
         // onChanged: onchangess,
         /*(varss) {
@@ -23,7 +25,6 @@ class Creat_Account_TextFiled extends StatelessWidget {
         decoration: InputDecoration(
           isDense: true,
           hintText: hintText,
-
           fillColor: Color(0xFFF2F4F8),
           filled: true,
           border: OutlineInputBorder(
@@ -32,7 +33,6 @@ class Creat_Account_TextFiled extends StatelessWidget {
         ),
         obscureText: obscureText,
         controller: controlers,
-
       ),
     );
   }

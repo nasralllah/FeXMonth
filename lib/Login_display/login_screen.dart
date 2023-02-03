@@ -1,19 +1,14 @@
-import 'package:fexmonths/menu_animated.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'ApiPost.dart';
-import 'Constens.dart';
-import 'Text_filedd_widget.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'Icons_sochail.dart';
-import 'main.dart';
-import 'package:googleapis_auth/googleapis_auth.dart';
+import '../API_Backend/ApiPost.dart';
+import '../Constens.dart';
+import 'package:fexmonths/Components/Icons_sochail.dart';
 import 'Creat_Accounts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
-import 'package:rflutter_alert/rflutter_alert.dart';
+
 final mycontrolerusername = TextEditingController();
 final mycontrolerpassword = TextEditingController();
+
 class login_screen extends StatefulWidget {
   const login_screen({Key? key}) : super(key: key);
   @override
@@ -33,8 +28,7 @@ class _login_screenState extends State<login_screen> {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [Colors.lightBlue,Colors.white60])),
-
+              colors: [Colors.lightBlue, Colors.white60])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         //   resizeToAvoidBottomInset: false,
@@ -45,7 +39,8 @@ class _login_screenState extends State<login_screen> {
           child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.r))),
-            margin: EdgeInsets.only(top: 30.h,bottom: 30.h,right: 30.w,left: 30.w),
+            margin: EdgeInsets.only(
+                top: 30.h, bottom: 30.h, right: 30.w, left: 30.w),
             child: Container(
               height: 680.h,
               child: Column(
@@ -56,8 +51,8 @@ class _login_screenState extends State<login_screen> {
                     margin: EdgeInsets.only(right: 10.w),
                     child: GestureDetector(
                       onTap: () {
-                         mycontrolerusername.text = "";
-                         mycontrolerpassword.text ="" ;
+                        mycontrolerusername.text = "";
+                        mycontrolerpassword.text = "";
                         Navigator.pop(context);
                       },
                       child: CircleAvatar(
@@ -90,7 +85,11 @@ class _login_screenState extends State<login_screen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Create_Account(),));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Create_Account(),
+                              ));
                         },
                         child: Text(
                           "Create an account",
@@ -104,10 +103,7 @@ class _login_screenState extends State<login_screen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                     child: TextField(
-                      onChanged: (vasr)
-                      {
-
-                      },
+                      onChanged: (vasr) {},
                       controller: mycontrolerusername,
                       decoration: InputDecoration(
                         hintText: "Username or email",
@@ -120,9 +116,10 @@ class _login_screenState extends State<login_screen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.w,vertical: 10.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.h),
                     child: TextField(
-                      onChanged: (varss){
+                      onChanged: (varss) {
                         Password = varss;
                       },
                       controller: mycontrolerpassword,
@@ -135,7 +132,6 @@ class _login_screenState extends State<login_screen> {
                             borderSide: BorderSide.none),
                       ),
                       obscureText: true,
-
                     ),
                   ),
                   Row(
@@ -148,7 +144,7 @@ class _login_screenState extends State<login_screen> {
                         child: Checkbox(
                           value: checkbox,
                           checkColor: Colors.white,
-                          activeColor:KButtonsignColor,
+                          activeColor: KButtonsignColor,
                           onChanged: (bool? value) {
                             setState(() {
                               checkbox = value!;
@@ -180,15 +176,16 @@ class _login_screenState extends State<login_screen> {
                     child: Container(
                       decoration: BoxDecoration(
                           color: KButtonsignColor,
-                          borderRadius: BorderRadius.all(Radius.circular(25.r))),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(25.r))),
                       width: 350.w,
                       height: 45.h,
-                      padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 5.h),
-                      margin: EdgeInsets.only(left: 90.0.w,right: 90.0.w,top: 20.h,bottom: 5.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+                      margin: EdgeInsets.only(
+                          left: 90.0.w, right: 90.0.w, top: 20.h, bottom: 5.h),
                       child: Center(
-                        child: Text("Sign In",
-                            style: KTextButtonStyled
-                            ),
+                        child: Text("Sign In", style: KTextButtonStyled),
                       ),
                     ),
                   ),

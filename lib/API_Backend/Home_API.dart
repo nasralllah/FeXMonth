@@ -1,44 +1,48 @@
-import 'package:flutter/foundation.dart';
-
-import '';
-import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'dart:convert';
-/*
 
-Future<List<Photo>> fetchPhotos(http.Client client) async {
-  final response =
-  await client.get(Uri.parse('http://10.0.2.2:8000/api/register'));
+import 'package:flutter/services.dart' as rootbundul;
+import 'package:http/http.dart' as http;
 
-  // Use the compute function to run parsePhotos in a separate isolate
-  return compute(parsePhotos, response.body);
-}
-*/
-/*
-// A function that will convert a response body into a List<Photo>
-List<Photo> parsePhotos(String responseBody) {
-  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+class products{
+  int? id;
+  String? name;
+  String? catagory;
+  String? ImageUrl;
+  String? price;
+  String? albumID;
 
-  return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
-}*//*
-class Photo{
+  products(
+      {this.id,
+      this.name,
+      this.catagory,
+      this.ImageUrl,
+      this.price,
+      this.albumID
+      });
 
-  final int albumId;
-  final int id;
-  final String title;
-  final String url;
-  final String thumbnailUrl;
-  Photo({this.albumId, this.id, this.title, this.url, this.thumbnailUrl})
-*/
- /* factory Photo.fromJson(Map<String , dynamic> json)
+  products.fromJson(Map<String,dynamic> json)
   {
-    return Photo(
-    albumId: json['albumId'] as int,
-      id: json['id'] as int,
-      title: json['title'] as String,
-      url: json['url'] as String,
-      thumbnailUrl: json['thumbnailUrl'] as String,
+    id = json['id'];
+    albumID = json['albumId'];
+    name = json['nametitle'];
+    ImageUrl = json['image'];
 
-    );
   }
+}
+/*
+Future<List<products>>Readjasondata()async {
+
+  var headers = {
+    'Accept': 'application/vnd.api+json',
+    'Content-Type': 'application/vnd.api+json',
+    'Authorization': 'Bearer 22|Fj8UYSP2BdJDKYhMNtM5qZdlmTGzca75JTDMSwue'
+  };
+  var request = http.MultipartRequest(
+      'POST', Uri.parse('http://10.0.2.2:8000/api/register'));
+
+
 }*/
+
+
+
+

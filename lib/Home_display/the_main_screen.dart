@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../API_Backend/Home_API.dart';
 import '../Constens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,19 +25,21 @@ class homepagecontent extends StatefulWidget {
 
 }
 
-class _homepagecontentState extends State<homepagecontent> {
+class _homepagecontentState extends State<homepagecontent>with SingleTickerProviderStateMixin {
   @override
 
- /* late final AnimationController _controller;
+  late final AnimationController _controller;
+
+
   void initState()
   {
     super.initState();
     _controller = AnimationController(
-        vsync: this,
+       vsync: this,
         duration: Duration(milliseconds: 400)
 
     );
-  }*/
+  }
   Widget build(BuildContext context) {
     final List<Widget> imageSliders = imgList
         .map((item) => Container(
@@ -138,6 +141,76 @@ class _homepagecontentState extends State<homepagecontent> {
             ),
           ),
           // buuldindecator(),
+             /* FutureBuilder(future: Readjasondata(),
+              builder: (context,data)
+              {
+                if(data.hasError)
+                {
+                  return Center(child: Text("${data.error}"),);
+
+                }
+                else if(data.hasData)
+                {
+                  var items = data.data as List<products>;
+                  return ListView.builder(
+                      itemBuilder: (context , index)
+                      {
+                        return Card(
+                          elevation: 5,
+                          margin: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: Image(image: AssetImage( "Images/Everything Everywhere All At Once (2022).jpg")),
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                Expanded(child: Container(
+                                  padding: EdgeInsets.only(bottom: 8),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                        EdgeInsets.only(left: 8,right: 8),
+                                        child:
+                                        Text("sld;fkgd;lfkg",
+                                            style:
+                                            TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold
+                                            )
+                                        ),
+                                      ),
+                                    Padding(
+                                      padding:
+                                      EdgeInsets.only(left: 8,right: 8),
+                                      child:
+                                      Text("hidl;fgk;dflgk;dfl")
+                                    )
+                                    ],
+                                  ),
+
+                                ))
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                  );
+                }
+                else
+                {
+                  return Center(child: CircularProgressIndicator(),);
+                }
+
+              },
+              )*/
         ]),
     ),
 

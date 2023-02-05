@@ -53,11 +53,12 @@ class Create_Account extends StatelessWidget {
                         myControllerEmail.text = "";
                         myControllerpassword.text = "";
                         myControllerrepassword.text = "";
-                        Navigator.push(
+                        Navigator.pop(context);
+                        /*push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Femonths(),
-                            ));
+                              builder: (context) => Femonths(showHome: true,),
+                            ));*/
                       },
                       child: CircleAvatar(
                           backgroundColor: Color(0xFFF2F4F8),

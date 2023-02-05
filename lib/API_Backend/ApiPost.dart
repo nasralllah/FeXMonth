@@ -50,6 +50,21 @@ Future<void> senddata(BuildContext context) async {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Future<void> senddatalogin(BuildContext contextr) async {
   var headers = {
     'Accept': 'application/vnd.api+json',
@@ -84,7 +99,7 @@ Future<void> senddatalogin(BuildContext contextr) async {
               Navigator.push(
                   contextr,
                   MaterialPageRoute(
-                    builder: (context) => Femonths(),
+                    builder: (context) => const Femonths(showHome: true,),
                   ));
             },
           )

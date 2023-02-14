@@ -8,6 +8,11 @@ import 'package:fexmonths/main.dart';
 
 
 
+void main() {
+  runApp(MaterialApp(home: onbordingScreen()));
+}
+
+
 class onbordingScreen extends StatefulWidget {
   const onbordingScreen({Key? key}) : super(key: key);
 
@@ -18,6 +23,7 @@ class onbordingScreen extends StatefulWidget {
 class _onbordingScreenState extends State<onbordingScreen> {
 final controller  = PageController();
 bool isLastpage = false;
+bool isfirstpage= false;
   @override
   void dispose() {
 
@@ -32,17 +38,19 @@ bool isLastpage = false;
         child: PageView(
           controller: controller,
           onPageChanged: (index){
-            setState(()=> isLastpage = index == 2);
+            Future.delayed(Duration.zero,() => setState(()=> isfirstpage = index == 0));
+            Future.delayed(Duration.zero, () => setState(()=> isLastpage = index == 2));
           },
           children: [
             Container(
-              color: Colors.red,
+              //the first page
+             // color: Colors.red,
               child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: Container(
-                        color: Colors.blue,
+               //         color: Colors.blue,
                         width: 150,
                         height: 100,
                         child: Image.asset("Images/Group 5.png",fit: BoxFit.fitWidth,)
@@ -68,22 +76,191 @@ bool isLastpage = false;
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
                     child: Card(
-                      child: SizedBox(
-                        width: 270,
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white38,
+                      child: Container(
+                        width: 250,
                         height: 300,
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 3,left: 4),
+                              alignment: Alignment.topLeft,
+                              child: CircleAvatar(
+
+                                child: Text("1",style: TextStyle(color: Colors.grey.shade700)),
+                                backgroundColor: Colors.grey.shade400,
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(top: 17),
+                              child: SizedBox(
+                                height: 230,
+                                width: 200,
+                                child: Image(
+                                    image:
+                                    AssetImage(
+                                        "Images/Group 68.png",
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
+
                     ),
                   )
                 ],
               ),
             ),
             Container(
-              color: Colors.blue,
-              child: const Center(child: Text("Page 2")),
+              //the second page
+              // color: Colors.red,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 30),
+                    child: Container(
+                      //         color: Colors.blue,
+                        width: 150,
+                        height: 100,
+                        child: Image.asset("Images/Group 5.png",fit: BoxFit.fitWidth,)
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Container(
+//  color: Colors.blue,
+                        child: Text("Spilt the cost Fei-Months (in months)",style: KTextOnbordingScreenBold,) ,
+                      )
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Column(
+                        children: [
+                          Text("YOU CAN BUY NOW AND PAY LATER",style: KTextOnbordingScreen,),
+                          Text("IN THE PLAN THAT YOU WILL CHOOSE IT",style: KTextOnbordingScreen,)
+
+                        ],
+                      )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 13),
+                    child: Card(
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white38,
+                      child: Container(
+                        width: 250,
+                        height: 300,
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 3,left: 4),
+                              alignment: Alignment.topLeft,
+                              child: CircleAvatar(
+
+                                child: Text("2",style: TextStyle(color: Colors.grey.shade700)),
+                                backgroundColor: Colors.grey.shade400,
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(top: 17),
+                              child: SizedBox(
+                                height: 230,
+                                width: 200,
+                                child: Image(
+                                    image:
+                                    AssetImage(
+                                      "Images/Group 69.png",
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+
+                    ),
+                  )
+                ],
+              ),
             ),
             Container(
-              color: Colors.black38,
-              child: const Center(child: Text("Page 3")),
+              //the third page
+              // color: Colors.red,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 30),
+                    child: Container(
+                      //         color: Colors.blue,
+                        width: 150,
+                        height: 100,
+                        child: Image.asset("Images/Group 5.png",fit: BoxFit.fitWidth,)
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Container(
+//  color: Colors.blue,
+                        child: Text("Spilt the cost Fei-Months (in months)",style: KTextOnbordingScreenBold,) ,
+                      )
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Column(
+                        children: [
+                          Text("YOU CAN BUY NOW AND PAY LATER",style: KTextOnbordingScreen,),
+                          Text("IN THE PLAN THAT YOU WILL CHOOSE IT",style: KTextOnbordingScreen,)
+
+                        ],
+                      )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 13),
+                    child: Card(
+                      shadowColor: Colors.black,
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      color: Colors.white38,
+                      child: Container(
+                        width: 250,
+                        height: 300,
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 3,left: 4),
+                              alignment: Alignment.topLeft,
+                              child: CircleAvatar(
+
+                                child: Text("3",style: TextStyle(color:Colors.grey.shade700)),
+                                backgroundColor: Colors.grey.shade400,
+                              ),
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.only(top: 17),
+                              child: SizedBox(
+                                height: 230,
+                                width: 200,
+                                child: Image(
+                                    image:
+                                    AssetImage(
+                                      "Images/Group 240.png",
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+
+                    ),
+                  )
+                ],
+              ),
             ),
           ],
         ),
@@ -92,8 +269,20 @@ bool isLastpage = false;
         padding: EdgeInsets.symmetric(horizontal: 50),
         height: 80,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            isfirstpage?OnbordingButtons(
+              Onpressd: () {
+                controller.nextPage(
+                    duration:const Duration(milliseconds: 500),
+                    curve: Curves.easeIn);
+              },
+              Colorss: Colors.blue.shade600,
+              Texts: " Next >" ,
+              TextColor: Colors.white,
+
+
+            ):
             OnbordingButtons(
               Onpressd: () {
                 controller.previousPage(
@@ -116,7 +305,7 @@ bool isLastpage = false;
               Texts: " Start" ,
               TextColor: Colors.white,):
             OnbordingButtons(
-              Onpressd: () { 
+              Onpressd: () {
                 controller.nextPage(
                      duration:const Duration(milliseconds: 500),
                     curve: Curves.easeIn);

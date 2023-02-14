@@ -16,7 +16,7 @@ color: Colors.white,);
 final KTextOnbordingScreenBold = TextStyle(
   fontSize: 15,
   fontWeight: FontWeight.bold,
-  color: Colors.grey,);
+  color: Colors.grey.shade600,);
 
 final KTextOnbordingScreen = TextStyle(
   fontSize: 12,

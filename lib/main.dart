@@ -16,8 +16,8 @@ import 'package:fexmonths/Onboarding Screen UI.dart';
 // @dart=2.9
 
 /*void main() {
-  runApp(Femonths());
-}*/
+  runApp(Femonths());*/
+/*
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final perf = await SharedPreferences.getInstance();
@@ -25,7 +25,7 @@ Future main() async{
 
   runApp(Femonths(showHome: showHome));
 
-}
+}*/
 class Femonths extends StatelessWidget {
   final bool showHome;
   const Femonths({Key? key,required this.showHome}):super(key: key);

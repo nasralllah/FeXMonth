@@ -110,7 +110,7 @@ class _menu_animatedState extends State<menu_animated> {
         child: Image(
             height: 130.h,
             image: AssetImage(
-                "Images/Everything Everywhere All At Once (2022).jpg")),
+                "Images/Group 5.png")),
       ),
       Container(
         //  color: Colors.black,

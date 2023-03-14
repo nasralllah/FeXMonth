@@ -6,11 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:fexmonths/main.dart';
 
-
-
-void main() {
+/*void main() {
   runApp(MaterialApp(home: onbordingScreen()));
-}
+}*/
 
 
 class onbordingScreen extends StatefulWidget {
@@ -265,24 +263,12 @@ bool isfirstpage= false;
           ],
         ),
       ),
-      bottomSheet: Container(
+      bottomSheet:Container(
         padding: EdgeInsets.symmetric(horizontal: 50),
         height: 80,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            isfirstpage?OnbordingButtons(
-              Onpressd: () {
-                controller.nextPage(
-                    duration:const Duration(milliseconds: 500),
-                    curve: Curves.easeIn);
-              },
-              Colorss: Colors.blue.shade600,
-              Texts: " Next >" ,
-              TextColor: Colors.white,
-
-
-            ):
             OnbordingButtons(
               Onpressd: () {
                 controller.previousPage(
@@ -307,7 +293,7 @@ bool isfirstpage= false;
             OnbordingButtons(
               Onpressd: () {
                 controller.nextPage(
-                     duration:const Duration(milliseconds: 500),
+                    duration:const Duration(milliseconds: 500),
                     curve: Curves.easeIn);
               },
               Colorss: Colors.blue.shade600,

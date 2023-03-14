@@ -156,7 +156,7 @@ class Create_Account extends StatelessWidget {
                   )*/
                   GestureDetector(
                     onTap: () {
-                      senddata(context);
+                      senddata(context: context, email: myControllerEmail.text);
 
                       /* if(response.statusCode == 200){
 

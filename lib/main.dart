@@ -1,5 +1,8 @@
 import 'package:animated_drawer/views/animated_drawer.dart';
+import 'package:dio/dio.dart';
+import 'package:fexmonths/API_Backend/Provider/CarsolProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Home_display/the_main_screen.dart';
 import 'Menu_display/menu_animated.dart';
@@ -17,7 +20,7 @@ import 'package:fexmonths/Onboarding Screen UI.dart';
 
 /*void main() {
   runApp(Femonths());*/
-/*
+
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final perf = await SharedPreferences.getInstance();
@@ -25,23 +28,28 @@ Future main() async{
 
   runApp(Femonths(showHome: showHome));
 
-}*/
+}
 class Femonths extends StatelessWidget {
   final bool showHome;
   const Femonths({Key? key,required this.showHome}):super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-            home: AnimatedSplashScreen(
-              duration: 3000,
-              splash: Image.asset("Images/Group 5.png"),
-              nextScreen: showHome ? buld_anmated_drawer() :
-              onbordingScreen(),
-              splashTransition: SplashTransition.fadeTransition,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<carsoleProvider>(create: (_) =>carsoleProvider(Dio()),)
+      ],
+      child: MaterialApp(
+              home: AnimatedSplashScreen(
+                duration: 3000,
+                splash: Image.asset("Images/Group 5.png"),
+                nextScreen: showHome ? buld_anmated_drawer() :
+                onbordingScreen(),
+                splashTransition: SplashTransition.fadeTransition,
 
 
+              ),
             ),
-          );
+    );
         }
   }
 

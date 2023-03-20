@@ -25,6 +25,7 @@ dependencies:
   get_storage: ^2.0.3
   dio: ^5.0.2
   provider:
+  flutter_rating_bar: ^4.0.1
 
 
 

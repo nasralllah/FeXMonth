@@ -25,7 +25,7 @@ class carsoleProvider extends ChangeNotifier{
         var respnse = await _dio.get(/*"https://dummyjson.com/products"*/"http://10.0.2.2:8000/api/home/news");
         if(respnse.statusCode == 200)
         {
-          var res = respnse.data["data"] as List;
+          var res = respnse.data['data'] as List;
          var carsullist = res.map((e) => News.fromJson(e)).toList();
          return carsullist;
         }

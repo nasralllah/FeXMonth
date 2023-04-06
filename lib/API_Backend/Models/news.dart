@@ -56,13 +56,13 @@
 
 
 class News{
-  final String id;
+  final int id;
   final String image;
 
   News({required this.id,required this.image});
   
   factory News.fromJson(Map<String , dynamic> json) =>
       News(id : json['id'] ?? 0,
-          image: json['picture_url'] ?? '');
+          image: json['picture_url']);
 
 }

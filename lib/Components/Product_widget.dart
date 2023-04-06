@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'Rating_Widget.dart';
 class Product_Widgit extends StatelessWidget {
-  const Product_Widgit({
-    Key? key,
+   Product_Widgit({
+    Key? key, required this.title, required this.ImageNetwork, required this.StoreName, required this.discount, required this.status, required this.Price, required this.cost,
   }) : super(key: key);
+  final String title;
+  final String ImageNetwork;
+  final String StoreName;
+  final String discount;
+  final String status;
+  final int Price;
+   var cost;
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +33,9 @@ class Product_Widgit extends StatelessWidget {
                 Container(
 
                   margin: EdgeInsets.only(left: 10,top: 5),
-                  child: Text("NIKE"),
+                  child: Text(title),
                 ),
+                discount == null ? Container():
                 Container(
                   width: 35,
                   decoration: BoxDecoration(
@@ -32,7 +43,7 @@ class Product_Widgit extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(3.0))
                   ),
                   margin: EdgeInsets.only(right: 10,top: 5),
-                  child: Center(child: Text("%25",style: TextStyle(color: Colors.green))),
+                  child: Center(child: Text("$discount",style: TextStyle(color: Colors.green))),
                 ),
 
               ],
@@ -48,7 +59,7 @@ class Product_Widgit extends StatelessWidget {
               height: 100,
               child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                  child: Image.network("https://fastly.picsum.photos/id/6/5000/3333.jpg?hmac=pq9FRpg2xkAQ7J9JTrBtyFcp9-qvlu8ycAi7bUHlL7I",fit: BoxFit.fitHeight,)
+                  child: Image.network(ImageNetwork,fit: BoxFit.fitHeight,)
 
               ),
             ),
@@ -56,13 +67,13 @@ class Product_Widgit extends StatelessWidget {
             Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(left: 10,top: 5,right: 5),
-              child: Text("Store Name",style: TextStyle(color: Colors.blue,fontSize: 13  ),),
+              child: Text(StoreName,style: TextStyle(color: Colors.blue,fontSize: 13  ),),
             ),
             Spacer(),
             Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(left: 10,top: 5,right: 5),
-              child: Text("MacBookAir",style: TextStyle(color: Colors.grey,fontSize: 13),),
+              child: Text(status,style: TextStyle(color: Colors.grey,fontSize: 13),),
             ),
             Spacer(),
             Row(
@@ -71,11 +82,12 @@ class Product_Widgit extends StatelessWidget {
               children: [
                 Container(
 
-                  child: Text("\$2000",style: TextStyle(fontSize: 13),),
                   margin: EdgeInsets.only(left: 10),
+
+                  child: Text("$Price",style: TextStyle(fontSize: 13),),
                 ),
                 SizedBox(width: 5),
-                Text("1000",style: TextStyle(color: Colors.red,decoration: TextDecoration.lineThrough,decorationColor: Colors.red,fontSize: 13),)
+                Text("$cost",style: TextStyle(color: Colors.red,decoration: TextDecoration.lineThrough,decorationColor: Colors.red,fontSize: 13),)
               ],
             ),
             Spacer(),
@@ -85,21 +97,7 @@ class Product_Widgit extends StatelessWidget {
               children: [
                 Container(
                   margin: EdgeInsets.only(left: 10,bottom: 5),
-                  child: RatingBar(
-                    initialRating: 3.0,
-                    itemCount: 5,
-                    allowHalfRating: true,
-                    direction: Axis.horizontal,
-                    ratingWidget:RatingWidget(full:Image.asset("Images/FullStar.png"), half: Image.asset("Images/HalfStar-2.png"), empty: Image.asset("Images/EmptyStar.png")) ,
-                    onRatingUpdate: (value) {
-                       /*setState(() {
-                      Rating = value;
-                    });*/
-
-                    },
-                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                    itemSize: 10.0,
-                  ),
+                  child: Rating_widget(itemSizw: 10.0, semetricPadding: 2.0, direction: Axis.horizontal,)
                 ),
                 Spacer(),
                 Container(

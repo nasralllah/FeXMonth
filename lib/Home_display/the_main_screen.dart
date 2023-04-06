@@ -4,8 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../API_Backend/Home_API.dart';
 import '../API_Backend/Models/CarsoleModels.dart';
+import '../API_Backend/Models/Catogry_Models.dart';
+import '../API_Backend/Models/Products_Model.dart';
 import '../API_Backend/Models/news.dart';
+import '../API_Backend/Provider/Category_Provider.dart';
+import '../API_Backend/Provider/Products_Provider.dart';
+import '../Components/Carsol_Slider.dart';
 import '../Components/Product_widget.dart';
+import '../Components/Rating_Widget.dart';
 import '../Constens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -19,6 +25,7 @@ import 'package:fexmonths/main.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../Prudoct_display/Prudocts_Display.dart';
+import '../Prudoct_display/Single_Product.dart';
 import 'The_App_Bar.dart';
 
 /*int activedots = 0;
@@ -32,7 +39,6 @@ f*/ /*inal List<String> imgList = [
 ];*/
 bool icon = true;
 
-
 class homepagecontent extends StatefulWidget {
   const homepagecontent({Key? key}) : super(key: key);
 
@@ -41,20 +47,36 @@ class homepagecontent extends StatefulWidget {
 }
 
 class _homepagecontentState extends State<homepagecontent> {
-  List<News>? Carsollist;
   double? Rating;
-
+  List<News>? CarsolList;
+  List<Cateogory>? categoryList;
+  List<prducts>? prductList;
 
   @override
   void initState() {
     carsoleProvider(Dio()).getAll().then((value) {
-      setState(() {
-
-      });
+      setState(() {});
 
       // Carsollist = value;
-      Carsollist = [];
-      Carsollist!.addAll(value);
+      CarsolList = [];
+      CarsolList!.addAll(value);
+      print('=======================');
+      print(value);
+      print('=======================');
+    });
+    CategoryProvider(Dio()).getAll().then((valueofcategory) {
+      setState(() {});
+
+      categoryList = [];
+      categoryList!.addAll(valueofcategory);
+      print('=======================');
+      print(valueofcategory);
+      print('=======================');
+    });
+    ProductsProvider(Dio()).getAll().then((value) {
+      setState(() {});
+      prductList = [];
+      prductList!.addAll(value);
       print('=======================');
       print(value);
       print('=======================');
@@ -95,31 +117,15 @@ class _homepagecontentState extends State<homepagecontent> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-              backgroundColor: Colors.white,
-              flexibleSpace: App_Baar())
+          const SliverAppBar(
+              backgroundColor: Colors.white, flexibleSpace: App_Baar())
         ],
         body: SingleChildScrollView(
           child: Column(children: [
-            Carsollist == null
-                ?  cardsLoading()
-                : CarouselSlider.builder(
-                    options: CarouselOptions(
-                      animateToClosest: true,
-                      autoPlay: true,
-                      aspectRatio: 2.8,
-                      enlargeCenterPage: true,
-                      /* onPageChanged: (index, reason) {
-            setState(() {
-    activedots = index;
-    });
-  },*/
-                    ),
-                    itemCount: Carsollist!.length,
-                    itemBuilder: (context, index, realIndex) {
-                      return Image.network(
-                          "http://10.0.2.2:8000${Carsollist![index].image}");
-                    }),
+            CarsolList == null
+                ? const carsoulLoadin()
+                : Carsol_Slider(
+                    CarsolList: CarsolList, itemCount: CarsolList!.length),
             /*
 
               },
@@ -155,19 +161,19 @@ class _homepagecontentState extends State<homepagecontent> {
             ),
             /*Carsollist == null
                 ? cardsLoading()
-                :*/ Container(
-                    height: 200,
-                    //padding: EdgeInsets.only(left: 50,right: 50),
-                   // margin: EdgeInsets.only(left: 50,right: 50),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-
-                        return Container(
-                          width: 160,
-                          padding: EdgeInsets.only(left: 5),
-                          /*decoration: BoxDecoration(
+                :*/
+            Container(
+              height: 200,
+              //padding: EdgeInsets.only(left: 50,right: 50),
+              // margin: EdgeInsets.only(left: 50,right: 50),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 160,
+                    padding: EdgeInsets.only(left: 5),
+                    /*decoration: BoxDecoration(
                             boxShadow: [BoxShadow(
                               color: Colors.grey,
                               spreadRadius: 1.0,
@@ -176,120 +182,170 @@ class _homepagecontentState extends State<homepagecontent> {
                             )]
 
                           ),*/
-                            child:Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight:Radius.circular(65.0),topLeft: Radius.circular(65.0),bottomLeft: Radius.circular(15.0),bottomRight: Radius.circular(15.0))),
-                         // shadowColor: Colors.grey,
+                    child: Card(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(65.0),
+                              topLeft: Radius.circular(65.0),
+                              bottomLeft: Radius.circular(15.0),
+                              bottomRight: Radius.circular(15.0))),
+                      // shadowColor: Colors.grey,
 
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-
-                              children: [
-                                Container(
-
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(
+                                top: 4, left: 2, right: 2),
+                            child: const CircleAvatar(
+                              radius: 55.0,
+                              backgroundColor: Colors.indigo,
+                              child: CircleAvatar(
+                                radius: 53.0,
+                                backgroundColor: Colors.white,
+                                child: CircleAvatar(
+                                  radius: 51,
+                                  backgroundColor: Colors.black,
                                   child: CircleAvatar(
-                                    child: CircleAvatar(
-
-                                      child: CircleAvatar(
-                                        child: CircleAvatar(
-                                          backgroundImage: NetworkImage("https://picsum.photos/id/1/200/300"),
-                                          radius: 50.0,
-                                          backgroundColor: Colors.grey,
-                                          foregroundColor: Colors.grey,
-
-                                        ),
-                                        radius: 51,
-                                        backgroundColor: Colors.black,
-                                      ),
-                                      radius:53.0 ,
-                                      backgroundColor: Colors.white,
-                                    ),
-                                    radius: 55.0,
-                                    backgroundColor: Colors.indigo,
+                                    backgroundImage: NetworkImage(
+                                        "https://picsum.photos/id/1/200/300"),
+                                    radius: 50.0,
+                                    backgroundColor: Colors.grey,
+                                    foregroundColor: Colors.grey,
                                   ),
-                                  padding: EdgeInsets.only(top: 4,left: 2,right: 2),
-                                  // decoration: BoxDecoration(
-                                  //   color: Colors.white,
-                                  //   shape: BoxShape.circle,
-                                  //   boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,spreadRadius: 3)]
-                                  // ),
-
                                 ),
-                                Spacer(),
-                                Center(child: Text("Store Name",style: TextStyle(color: Colors.blue.shade800)),),
-                                Spacer(),
-                                Center(child: Text("@Store Name",style: TextStyle(color: Colors.grey,fontSize: 10)),),
-                                Spacer(),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-
-                                  children: [
-                                    Container(
-                                      child: RatingBar(
-                                        initialRating: 3.0,
-                                        itemCount: 5,
-                                        allowHalfRating: true,
-                                        direction: Axis.horizontal,
-                                        ratingWidget:RatingWidget(full:Image.asset("Images/FullStar.png"), half: Image.asset("Images/HalfStar-2.png"), empty: Image.asset("Images/EmptyStar.png")) ,
-                                        onRatingUpdate: (value) {
-                                         setState(() {
-                                           Rating = value;
-                                         });
-
-                                        },
-                                        itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                                        itemSize: 15.0,
-                                      ),
-                                      margin: EdgeInsets.only(left: 5,bottom: 5),
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Container(child: Text(Rating != null?Rating.toString(): '*?',),margin: EdgeInsets.only(bottom: 5,right:5),)
-                                  ],
-                                )
-                              ],
+                              ),
+                            ),
+                            // decoration: BoxDecoration(
+                            //   color: Colors.white,
+                            //   shape: BoxShape.circle,
+                            //   boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,spreadRadius: 3)]
+                            // ),
                           ),
-
-                        ),
-                            );
-                      },
+                          const Spacer(),
+                          Center(
+                            child: Text("Store Name",
+                                style: TextStyle(color: Colors.blue.shade800)),
+                          ),
+                          const Spacer(),
+                          const Center(
+                            child: Text("@Store Name",
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 10)),
+                          ),
+                          const Spacer(),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 5, bottom: 5),
+                                child: Rating_widget(
+                                  direction: Axis.horizontal,
+                                    itemSizw: 15.0,
+                                    semetricPadding: 2.0,
+                                    onRatingUpdate: (value) => setState(() {
+                                          Rating = value;
+                                        })),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 5, right: 5),
+                                child: Text(
+                                  Rating != null ? Rating.toString() : '*?',
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-            Container(
-              // padding: EdgeInsets.symmetric(horizontal: 100),
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(
-                left: 10,
-                bottom: 10,
-              ),
-              child: Text("Best Product",style: TextStyle(fontWeight: FontWeight.bold)),
-            ),
-            Container(
-              // padding: EdgeInsets.symmetric(horizontal: 100),
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(
-                left: 10,
-                bottom: 10,
-              ),
-              child: Text("Catogry 1"),
-            ),
-
-            Container(
-              height: 210,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 160,
-                    padding: EdgeInsets.only(left: 5),
-                    child: Product_Widgit(),
                   );
                 },
-
               ),
-            )
+            ),
+            Container(
+              // padding: EdgeInsets.symmetric(horizontal: 100),
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(
+                left: 10,
+                bottom: 10,
+              ),
+              child: const Text("Best Product",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+            /*Container(
+             // height: double.infinity,
 
+              // padding: EdgeInsets.symmetric(horizontal: 100),
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(
+                left: 10,
+                bottom: 10,
+              ),
+              child:*/
+            Column(
+              children: [
+                if (categoryList == null)
+                  cardsLoading()
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: categoryList!.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          Container(
+                              alignment: Alignment.topLeft,
+                              margin: const EdgeInsets.only(
+                                left: 10,
+                                bottom: 10,
+                              ),
+                              child: Text(categoryList![index]
+                                  .attributes
+                                  .category_name)),
+                          Container(
+                            height: 210,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: prductList!.length,
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  width: 160,
+                                  padding: EdgeInsets.only(left: 5),
+                                  child: InkWell(
+                                    onTap: () {},
+                                    child: Product_Widgit(
+                                      title:
+                                          prductList![index].attributes.title,
+                                      ImageNetwork:
+                                          "http://10.0.2.2:8000${prductList![index].picture_url}",
+                                      StoreName:
+                                          prductList![index].store.Store_Name,
+                                      discount: prductList![index]
+                                          .attributes
+                                          .Discount,
+                                      status:
+                                          prductList![index].attributes.status,
+                                      Price:
+                                          prductList![index].attributes.price,
+                                      cost: prductList![index].attributes.cost,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+              ],
 
-
+              //)
+            ),
 
             // buuldindecator(),
             /* FutureBuilder(future: Readjasondata(),
@@ -376,7 +432,27 @@ class _homepagecontentState extends State<homepagecontent> {
               ),
               IconButton(
                   onPressed: () {
-                    print(Carsollist!.length.toString());
+                    print(
+                        "================================================================");
+                    print(
+                        "=================== Carsol list ================================");
+                    print(CarsolList!.length.toString());
+                    print(
+                        "================================================================");
+                    print(
+                        "================================================================");
+                    print(
+                        "=================== category list ================================");
+                    print(categoryList!.length.toString());
+                    print(
+                        "================================================================");
+                    print(
+                        "================================================================");
+                    print(
+                        "=================== product list ================================");
+                    print(prductList!.length.toString());
+                    print(
+                        "================================================================");
                   },
                   icon: Icon(
                     FontAwesomeIcons.tags,
@@ -389,7 +465,10 @@ class _homepagecontentState extends State<homepagecontent> {
               IconButton(
                   onPressed: () {
                     icon = false;
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const prudocts_display()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const prudocts_display()));
                   },
                   icon: Icon(
                     FontAwesomeIcons.houseChimneyUser,
@@ -405,7 +484,13 @@ class _homepagecontentState extends State<homepagecontent> {
         width: 60.w,
         child: FittedBox(
           child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingleProduct(),
+                    ));
+              },
               splashColor: Colors.blue,
               child: const Center(
                 child: Icon(
@@ -424,8 +509,8 @@ class _homepagecontentState extends State<homepagecontent> {
         child: const Icon(Icons.house),*/
     );
   }
-
-/* Widget buuldindecator() => AnimatedSmoothIndicator(
+/*
+Widget buuldindecator() => AnimatedSmoothIndicator(
         activeIndex: activedots,
         count: imgList.length,
         effect: SwapEffect(

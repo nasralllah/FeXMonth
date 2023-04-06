@@ -76,10 +76,9 @@ class _prudocts_displayState extends State<prudocts_display> {
                 crossAxisSpacing: 5.50,
                 mainAxisSpacing: 10.0,
               ),
-              itemBuilder: (context,index) => Product_Widgit(),
+              itemBuilder: (context,index) => Product_Widgit(title: 'hi', ImageNetwork: 'asjdklf', StoreName: 'sadf', discount: 'safd', status: 'sadf', Price: 234, cost: 234,)
 
-            ),
-          )
+            ),)
 
           ]),
         ),
@@ -124,7 +123,8 @@ class _prudocts_displayState extends State<prudocts_display> {
         width: 60.w,
         child: FittedBox(
           child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+              },
               splashColor: Colors.blue,
               child: const Center(
                 child: Icon(

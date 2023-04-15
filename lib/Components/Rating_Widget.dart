@@ -4,17 +4,20 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Rating_widget extends StatelessWidget {
   const Rating_widget({
-    Key? key, required this.itemSizw, required this.semetricPadding, this.onRatingUpdate,  this.direction,
+    Key? key, required this.itemSizw, required this.semetricPadding, this.onRatingUpdate,  this.direction, required this.ignoreGestures, required this.initialRating,
   }) : super(key: key);
   final double itemSizw;
   final double semetricPadding ;
   final dynamic onRatingUpdate;
   final dynamic direction;
+   final bool ignoreGestures;
+   final double initialRating;
 
   @override
   Widget build(BuildContext context) {
     return RatingBar(
-      initialRating: 3.0,
+      ignoreGestures: ignoreGestures,
+      initialRating: initialRating,
       itemCount: 5,
       allowHalfRating: true,
       direction: direction,

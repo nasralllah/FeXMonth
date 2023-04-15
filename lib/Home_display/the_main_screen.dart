@@ -240,12 +240,14 @@ class _homepagecontentState extends State<homepagecontent> {
                               Container(
                                 margin: EdgeInsets.only(left: 5, bottom: 5),
                                 child: Rating_widget(
+                                  ignoreGestures: false,
                                   direction: Axis.horizontal,
                                     itemSizw: 15.0,
                                     semetricPadding: 2.0,
                                     onRatingUpdate: (value) => setState(() {
                                           Rating = value;
-                                        })),
+                                        }),
+                                  initialRating: Rating??3.4,),
                               ),
                               const SizedBox(
                                 width: 10,
@@ -253,7 +255,7 @@ class _homepagecontentState extends State<homepagecontent> {
                               Container(
                                 margin: EdgeInsets.only(bottom: 5, right: 5),
                                 child: Text(
-                                  Rating != null ? Rating.toString() : '*?',
+                                  Rating != null ? Rating.toString() : "",
                                 ),
                               )
                             ],
@@ -422,9 +424,24 @@ class _homepagecontentState extends State<homepagecontent> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
+       shape: const CircularNotchedRectangle(),
         child: Container(
-          height: 70.0.h,
+          decoration:  BoxDecoration(
+
+              color: Colors.white,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
+              border: Border.all(
+                  color: Colors.grey.shade400),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey,
+                    //offset: Offset(0, -1),
+                    spreadRadius: 4,
+                    blurRadius: 30
+                )
+              ]
+          ),
+          height: 80.0.h,
           child: Row(
             children: [
               SizedBox(
@@ -468,7 +485,7 @@ class _homepagecontentState extends State<homepagecontent> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const prudocts_display()));
+                            builder: (context) => const prudoctsDisplay()));
                   },
                   icon: Icon(
                     FontAwesomeIcons.houseChimneyUser,

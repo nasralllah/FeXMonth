@@ -22,14 +22,14 @@ import 'package:fexmonths/Home_display/the_main_screen.dart';
 import '../Home_display/The_App_Bar.dart';
 import 'SideBar_menu_Products.dart';
 
-class prudocts_display extends StatefulWidget {
-  const prudocts_display({Key? key}) : super(key: key);
+class prudoctsDisplay extends StatefulWidget {
+  const prudoctsDisplay({Key? key}) : super(key: key);
 
   @override
-  State<prudocts_display> createState() => _prudocts_displayState();
+  State<prudoctsDisplay> createState() => _prudoctsDisplayState();
 }
 
-class _prudocts_displayState extends State<prudocts_display> {
+class _prudoctsDisplayState extends State<prudoctsDisplay> {
 
 
   @override
@@ -40,7 +40,7 @@ class _prudocts_displayState extends State<prudocts_display> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawerWidget(),
+      drawer: const NavigationDrawerWidget(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(

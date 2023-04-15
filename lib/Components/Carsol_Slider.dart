@@ -32,15 +32,18 @@ class Carsol_Slider extends StatelessWidget {
         ),
         itemCount: itemCount,
         itemBuilder: (context, index, realIndex) {
-          return Image.network(
-              "http://10.0.2.2:8000${CarsolList![index].image}",
-              loadingBuilder: ( BuildContext context, Widget child,ImageChunkEvent? loadingProgress) {
-                if(loadingProgress == null){
-                  return child;
-                }
-                return carsoulLoadin();
+          return Container(
+            width: double.infinity,
+            child: Image.network(
+                "http://10.0.2.2:8000${CarsolList![index].image}",fit: BoxFit.cover,
+                loadingBuilder: ( BuildContext context, Widget child,ImageChunkEvent? loadingProgress) {
+                  if(loadingProgress == null){
+                    return child;
+                  }
+                  return carsoulLoadin();
 
-              });
+                }),
+          );
         });
   }
 }

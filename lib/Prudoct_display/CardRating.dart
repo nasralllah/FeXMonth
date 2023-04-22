@@ -274,7 +274,7 @@ class _cardRatingState extends State<cardRating> {
                                   labelText: "A new Comment"),
                             ),
                           ),
-                          Blue_Button(ButtonText: 'Send', height: 30, width: 60, Margintop: 20, Marginleft: 260,onTap: addComments  ,)
+                          Blue_Button(ButtonText: 'Send', height: 30, width: 60, Margintop: 20, Marginleft: 260,onTap: addComments,textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0,)
                         ],
                       )
                     ],

@@ -7,7 +7,7 @@ class NavigationDrawerWidget extends StatefulWidget {
   State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
 }
 class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
-  int Valuee = 1;
+  dynamic Valuee = 1;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -37,50 +37,54 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       fontSize: 20)),
               margin: EdgeInsets.only(left: 60, top: 20),
             ),
-            Row(
-              children: [
-                Radio(
-                  value:1,
-                  groupValue: Valuee,
-                  onChanged: (int? value) => setState(() {
-                    Valuee = value!;
-                  }),
 
-                ),
-                SizedBox(child: Text("3dfklj"),)
-              ],
+        Row(
+          children: <Widget>[
+        Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Radio(
+              value: 1,
+              groupValue: Valuee,
+              onChanged: (value) {
+                setState(() {
+                  Valuee = value;
+                });
+              },
             ),
-            Row(
-              children: [
-                Radio(
-                  value:2,
-                  groupValue: Valuee,
-                  onChanged: (int? value) => setState(() {
-                    Valuee = value!;
-                  }),
+            Radio(
+              value: 2,
+              groupValue: Valuee,
+              onChanged: (value) {
+                setState(() {
+                  Valuee = value;
+                });
+              },
+            ),
+            Radio(
 
-                ),
-                SizedBox(child: Text("3dfklj"),)
-              ],
+              value: 3,
+              groupValue: Valuee,
+              onChanged: (value) {
+                setState(() {
+                  Valuee = value;
+                });
+              },
             ),
-            Container(
-              child: Row(
-                
-                children: [
-                  Radio(
-                    value:3,
-                    groupValue: Valuee,
-                    onChanged: (int? value) => setState(() {
-                      Valuee = value!;
-                    }),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Option 1'),
+            Text('Option 2'),
+            Text('Option 3'),
+          ],
+        ),
+          ],
+        )
 
-                  ),
-                  SizedBox(
-                    child: Text("3dfklj"),
-                  )
-                ],
-              ),
-            ),
+
 
 
 

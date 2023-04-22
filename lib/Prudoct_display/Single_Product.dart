@@ -13,6 +13,7 @@ import '../API_Backend/Provider/productDetailsProvider.dart';
 import '../Components/Chose_Colores_Cirlcle.dart';
 import '../Components/DynamicComments.dart';
 import '../Components/Rating_Widget.dart';
+import '../Components/plusAndminusWidget.dart';
 import '../Home_display/the_main_screen.dart';
 import 'CardCommnents.dart';
 import 'CardDetels.dart';
@@ -22,6 +23,7 @@ import 'CardVariants.dart';
 int activedots = 0;
 int imglist = 4;
 int addToCart = 0;
+int? notifaiCart;
 double? Rating;
 bool cadrVisibleDetails = true;
 bool cadrVisibleVarents = false;
@@ -507,7 +509,7 @@ class _SingleProductState extends State<SingleProduct> {
                     setState(() {});
                   },
                   child: Container(
-                    margin: EdgeInsets.only(left: 35),
+                    margin: EdgeInsets.only(left: 10),
                     height: 30,
                     width: 70,
                     decoration: BoxDecoration(
@@ -521,52 +523,15 @@ class _SingleProductState extends State<SingleProduct> {
                     )),
                   ),
                 ),
+               plusAndminusWidget(TheNumber: addToCart,),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      addToCart++;
-                      print(addToCart);
-                    });
-                  },
-                  child: Container(
-                    //color: Colors.red,
-                    child: SizedBox.square(
-                      dimension: 30,
-                      child: Icon(CupertinoIcons.plus_app,
-                          size: 30, color: Colors.blue),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: Text('$addToCart',
-                      style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold)),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      addToCart--;
-                      print(addToCart);
-                    });
-                  },
-                  child: Container(
-                    //color: Colors.red,
-                    child: SizedBox.square(
-                      dimension: 30,
-                      child: Icon(CupertinoIcons.minus_rectangle,
-                          size: 30, color: Colors.blue),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {});
+                    onTap: () {
+
                   },
                   child: Container(
                     height: 30,
                     width: 120,
+
                     decoration: BoxDecoration(
                         color: Colors.blue,
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -578,7 +543,7 @@ class _SingleProductState extends State<SingleProduct> {
                             offset: Offset(0, 4),
                           )
                         ]),
-                    child: const Center(
+                    child:  Center(
                         child: Text(
                       "ADD TO CART",
                       style: TextStyle(color: Colors.white),
@@ -591,3 +556,4 @@ class _SingleProductState extends State<SingleProduct> {
     );
   }
 }
+

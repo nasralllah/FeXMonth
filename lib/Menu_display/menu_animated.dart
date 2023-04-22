@@ -73,24 +73,24 @@ class _menu_animatedState extends State<menu_animated> {
             ),
             Menu_Cards(
               onpress: () {
-                print("settings");
+                print("Oreders");
               },
-              CardName: "settings",
-              Icons: Icons.settings,
+              CardName: "Orders",
+              Icons: FontAwesomeIcons.fileInvoice,
             ),
             Menu_Cards(
               onpress: () {
                 print("Question");
               },
-              CardName: "Question",
-              Icons: FontAwesomeIcons.question,
+              CardName: "Installment",
+              Icons: Icons.payments_outlined,
             ),
             Menu_Cards(
               onpress: () {
                 print("Help");
               },
-              CardName: "Help",
-              Icons: FontAwesomeIcons.handshake,
+              CardName: "Adress",
+              Icons: FontAwesomeIcons.solidAddressCard,
             ),
             Menu_Cards(
               onpress: () {

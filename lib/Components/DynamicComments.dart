@@ -26,12 +26,17 @@ final Widget Texts;
 
                 ],
               ),
-                Blue_Button(ButtonText: 'Report', height: 30, width: 60, Margintop: 0,Marginleft: 89,)
+                Blue_Button(ButtonText: 'Report', height: 30, width: 60, Margintop: 0,Marginleft: 89, textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0,)
             ],
           ),
           Container(
             margin: const EdgeInsets.only(top: 10,right: 5,left: 5,bottom:10),
             child:Texts,
+          ),
+          Divider(
+            color: Colors.grey.shade300,
+            indent: 10,
+            endIndent: 10,
           )
         ],
       ),

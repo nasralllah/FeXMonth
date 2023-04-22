@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Components/Blue_Button.dart';
 import '../Components/DynamicComments.dart';
+import '../Components/textFiledwithButton.dart';
 import 'Single_Product.dart';
 final myController = TextEditingController();
 class cardComments extends StatefulWidget {
@@ -43,23 +44,8 @@ class _cardCommentsState extends State<cardComments> {
             children: [
               Stack(
                 children: [
-                  Container(
-                    width: 305,
-                    height: 40,
-                    margin: EdgeInsets.only(top: 15,bottom: 15,left: 20,right: 20),
-                    child:  TextField(
-                      controller: myController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.horizontal(
-                                right: Radius.circular(30.0),
-                                left: Radius.circular(30.0)),
-                            borderSide: BorderSide(color: Colors.blue),
-                          ),
-                          labelText: "A new Comment"),
-                    ),
-                  ),
-                  Blue_Button(ButtonText: 'Send', height: 30, width: 60, Margintop: 20, Marginleft: 260,onTap: addComment,)
+                  const textFiledWithbutton(labelText: "A new Comment"),
+                  Blue_Button(ButtonText: 'Send', height: 30, width: 60, Margintop: 20, Marginleft: 260,onTap: addComment, textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0,)
                 ],
               )
             ],

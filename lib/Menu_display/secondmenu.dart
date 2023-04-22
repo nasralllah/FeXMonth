@@ -74,8 +74,8 @@ class _menu_animatedState extends State<menu_animated> {
               onpress: () {
                 print("settings");
               },
-              CardName: "settings",
-              Icons: Icons.settings,
+              CardName: "Orders",
+              Icons: FontAwesomeIcons.fileInvoice,
             ),
             Menu_Cards(
               onpress: () {

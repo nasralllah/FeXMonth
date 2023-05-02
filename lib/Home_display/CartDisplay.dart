@@ -60,8 +60,8 @@ class _CartState extends State<Cart> {
                        child: ClipRRect(
                          borderRadius: BorderRadius.all(Radius.circular(10)),
                          child: Image.network(
-                             'https://imglarger.com/Images/before-after/ai-image-enlarger-1-before-2.jpg',
-                             fit: BoxFit.fill),
+                             'https://img.pixelz.com/blog/how-to-color-match-recolor/final-processed-product-image.jpg',
+                             fit: BoxFit.cover),
                        ),
                      ),
                      Column(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class Blue_Button extends StatelessWidget {
    Blue_Button({
-    Key? key, required this.ButtonText, required this.height, required this.width, required this.Margintop, required this.Marginleft,this.onTap, required this.textStyle, required this.buttonColor, required this.Marginbottom,
+    Key? key, required this.ButtonText, required this.height, required this.width, required this.Margintop, required this.Marginleft,this.onTap, required this.textStyle, required this.buttonColor, required this.Marginbottom, required this.MarginRight,
   }) : super(key: key);
  final String ButtonText;
   final double height;
@@ -9,6 +9,8 @@ class Blue_Button extends StatelessWidget {
   final double Margintop;
   final double Marginleft;
    final double Marginbottom;
+   final double MarginRight;
+
 
    final TextStyle textStyle;
   final MaterialStatePropertyAll<Color> buttonColor;
@@ -18,7 +20,7 @@ class Blue_Button extends StatelessWidget {
     return Container(
         width: width,
         height: height,
-        margin: EdgeInsets.only(left: Marginleft, top: Margintop,bottom:Marginbottom ),
+        margin: EdgeInsets.only(left: Marginleft, top: Margintop,bottom:Marginbottom,right: MarginRight ),
         child: TextButton(
           onPressed: onTap,
           style:  ButtonStyle(

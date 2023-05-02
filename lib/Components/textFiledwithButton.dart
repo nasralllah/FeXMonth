@@ -30,7 +30,7 @@ class textFiledWithbutton extends StatelessWidget {
                 labelText: labelText),
           ),
         ),
-          Blue_Button(onTap:ontap ,ButtonText: "Apply", height: 32, width: 80, Margintop: 18.5, Marginleft: 240 ,textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0,)
+          Blue_Button(onTap:ontap ,ButtonText: "Apply", height: 32, width: 80, Margintop: 18.5, Marginleft: 240 ,textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0, MarginRight: 0,)
      ]
      )]
     );

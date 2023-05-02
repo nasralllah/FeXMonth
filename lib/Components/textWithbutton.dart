@@ -26,7 +26,7 @@ class textWithbutton extends StatelessWidget {
             margin: EdgeInsets.only(left: 12,top: 11),
               child: Text(labelText,style: TextStyle(color: Colors.white,fontSize: 16),))
         ),
-          Blue_Button(ButtonText: "Select", height: 32, width: 80, Margintop: 18.5, Marginleft: Marginleftbuttoon ,textStyle: TextStyle(color: Colors.blue), buttonColor: MaterialStatePropertyAll<Color>(Colors.white),onTap:onTap, Marginbottom: 0 ,)
+          Blue_Button(ButtonText: "Select", height: 32, width: 80, Margintop: 18.5, Marginleft: Marginleftbuttoon ,textStyle: TextStyle(color: Colors.blue), buttonColor: MaterialStatePropertyAll<Color>(Colors.white),onTap:onTap, Marginbottom: 0, MarginRight: 0 ,)
 
         ]
       ),

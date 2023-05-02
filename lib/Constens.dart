@@ -4,6 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const KIconAppbarColor =Color(0xFF7E84A3);
 const KButtonsignColor =  Color(0xFF3E21DE);
 const KIconcardColor = Color(0xFF000000);
+const String ApiProductsUrl = "http://10.0.2.2:8000/api/";
+const String variants = "/variants";
+const String comments = "/comments";
+const String rating = "/rating";
+const String add_to_cart = "/add_to_cart";
+  String Slug = "";
+
 
 final KTextCardStyled =  TextStyle(
   fontSize: 20.sp,

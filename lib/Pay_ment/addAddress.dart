@@ -46,7 +46,7 @@ showDialogselect(BuildContext context){
                       textWithbutton(labelText: Strings[index].toString(), onTap: () {}, Width: 224, Marginleftbuttoon: 160,),
                       ),
 
-                  Blue_Button(ButtonText: "Ok", height: 32, width: 100, Margintop: 10, Marginleft: 0, textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0,onTap: ()=>Navigator.pop(context),)
+                  Blue_Button(ButtonText: "Ok", height: 32, width: 100, Margintop: 10, Marginleft: 0, textStyle: TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue), Marginbottom: 0,onTap: ()=>Navigator.pop(context), MarginRight: 0,)
 
 
 

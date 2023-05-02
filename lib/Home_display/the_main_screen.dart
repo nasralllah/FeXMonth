@@ -5,9 +5,12 @@ import 'package:provider/provider.dart';
 import '../API_Backend/Home_API.dart';
 import '../API_Backend/Models/CarsoleModels.dart';
 import '../API_Backend/Models/Catogry_Models.dart';
+import '../API_Backend/Models/HomeStoresModel.dart';
 import '../API_Backend/Models/Products_Model.dart';
+import '../API_Backend/Models/StorsDisplayModel.dart';
 import '../API_Backend/Models/news.dart';
 import '../API_Backend/Provider/Category_Provider.dart';
+import '../API_Backend/Provider/HomeStoresProvider.dart';
 import '../API_Backend/Provider/Products_Provider.dart';
 import '../Components/Carsol_Slider.dart';
 import '../Components/Product_widget.dart';
@@ -26,6 +29,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../Prudoct_display/Prudocts_Display.dart';
 import '../Prudoct_display/Single_Product.dart';
+import 'SrotesDisplay.dart';
 import 'The_App_Bar.dart';
 
 /*int activedots = 0;
@@ -51,6 +55,7 @@ class _homepagecontentState extends State<homepagecontent> {
   List<News>? CarsolList;
   List<Cateogory>? categoryList;
   List<prducts>? prductList;
+  List<HomeStores>? homeStoresList;
 
   @override
   void initState() {
@@ -81,11 +86,21 @@ class _homepagecontentState extends State<homepagecontent> {
       print(value);
       print('=======================');
     });
+    HomeStoresProvider(Dio()).getAll().then((value) {
+      setState(() {});
+      homeStoresList = [];
+      homeStoresList!.addAll(value);
+      print(
+          '=======homeStoresList======homeStoresList======homeStoresList====');
+      print(value);
+      print(
+          '====homeStoresList=======homeStoresList======homeStoresList======');
+    });
 
     super.initState();
   }
-
   Widget build(BuildContext context) {
+      Slug= prductList![0].Slug;
     /* final List<Widget> imageSliders = imgList
         .map((item) => Shimmer.fromColors(
       highlightColor: Colo rs.white38,
@@ -125,7 +140,8 @@ class _homepagecontentState extends State<homepagecontent> {
             CarsolList == null
                 ? const carsoulLoadin()
                 : Carsol_Slider(
-                    CarsolList: CarsolList, itemCount: CarsolList!.length),
+                    CarsolList: CarsolList,
+                itemCount: CarsolList!.length),
             /*
 
               },
@@ -156,126 +172,152 @@ class _homepagecontentState extends State<homepagecontent> {
               margin: EdgeInsets.only(
                 left: 10,
                 bottom: 10,
+                top: 10
               ),
-              child: Text("Best Stores"),
+              child: Text("Best Stores",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15)),
             ),
-            /*Carsollist == null
+            homeStoresList == null
                 ? cardsLoading()
-                :*/
-            Container(
-              height: 200,
-              //padding: EdgeInsets.only(left: 50,right: 50),
-              // margin: EdgeInsets.only(left: 50,right: 50),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 160,
-                    padding: EdgeInsets.only(left: 5),
-                    /*decoration: BoxDecoration(
-                            boxShadow: [BoxShadow(
-                              color: Colors.grey,
-                              spreadRadius: 1.0,
-                              blurRadius: 10.0,
-                              offset: Offset(0, 20.0)
-                            )]
+                : Container(
+                    height: 200,
+                    //padding: EdgeInsets.only(left: 50,right: 50),
+                    // margin: EdgeInsets.only(left: 50,right: 50),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: homeStoresList!.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
 
-                          ),*/
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(65.0),
-                              topLeft: Radius.circular(65.0),
-                              bottomLeft: Radius.circular(15.0),
-                              bottomRight: Radius.circular(15.0))),
-                      // shadowColor: Colors.grey,
+                          child: Container(
+                            width: 160,
+                            padding: EdgeInsets.only(left: 5),
+                            /*decoration: BoxDecoration(
+                              boxShadow: [BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1.0,
+                                blurRadius: 10.0,
+                                offset: Offset(0, 20.0)
+                              )]
 
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(
-                                top: 4, left: 2, right: 2),
-                            child: const CircleAvatar(
-                              radius: 55.0,
-                              backgroundColor: Colors.indigo,
-                              child: CircleAvatar(
-                                radius: 53.0,
-                                backgroundColor: Colors.white,
-                                child: CircleAvatar(
-                                  radius: 51,
-                                  backgroundColor: Colors.black,
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        "https://picsum.photos/id/1/200/300"),
-                                    radius: 50.0,
-                                    backgroundColor: Colors.grey,
-                                    foregroundColor: Colors.grey,
+                            ),*/
+                            child: Card(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(65.0),
+                                      topLeft: Radius.circular(65.0),
+                                      bottomLeft: Radius.circular(15.0),
+                                      bottomRight: Radius.circular(15.0))),
+                              // shadowColor: Colors.grey,
+
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 4, left: 2, right: 2),
+                                    child: CircleAvatar(
+                                      radius: 55.0,
+                                      backgroundColor: Colors.indigo,
+                                      child: CircleAvatar(
+                                        radius: 53.0,
+                                        backgroundColor: Colors.white,
+                                        child: CircleAvatar(
+                                          radius: 51,
+                                          backgroundColor: Colors.black,
+                                          child: CircleAvatar(
+                                            radius: 50.0,
+                                            child: ClipOval(
+                                              child: FadeInImage.assetNetwork(
+                                                placeholder:
+                                                    "http://10.0.2.2:8000${homeStoresList![index].profile.logourl}${homeStoresList![index].profile.logourl}",
+                                                image:
+                                                    "http://10.0.2.2:8000${homeStoresList![index].profile.logourl}${homeStoresList![index].profile.logourl}",
+                                                fit: BoxFit.fill,
+                                                imageErrorBuilder: (context,
+                                                        error, stackTrace) =>
+                                                    phptosLoading(),
+                                                placeholderErrorBuilder: (context,
+                                                        error, stackTrace){
+                                                  return phptosLoading();
+                                                 },
+                                                fadeInDuration:
+                                                    Duration(milliseconds: 300),
+                                                fadeOutDuration:
+                                                    Duration(milliseconds: 300),
+                                                fadeInCurve: Curves.easeIn,
+                                                fadeOutCurve: Curves.easeOut,
+
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    // decoration: BoxDecoration(
+                                    //   color: Colors.white,
+                                    //   shape: BoxShape.circle,
+                                    //   boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,spreadRadius: 3)]
+                                    // ),
                                   ),
-                                ),
+                                  const Spacer(),
+                                  Center(
+                                    child: Text("Store Name",
+                                        style: TextStyle(
+                                            color: Colors.blue.shade800)),
+                                  ),
+                                  const Spacer(),
+                                  const Center(
+                                    child: Text("@Store Name",
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 10)),
+                                  ),
+                                  const Spacer(),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(left: 5, bottom: 5),
+                                        child: Rating_widget(
+                                          ignoreGestures: false,
+                                          direction: Axis.horizontal,
+                                          itemSizw: 15.0,
+                                          semetricPadding: 2.0,
+                                          onRatingUpdate: (value) => setState(() {
+                                            Rating = value;
+                                          }),
+                                          initialRating: Rating ?? 3.4,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(bottom: 5, right: 5),
+                                        child: Text(
+                                          Rating != null ? Rating.toString() : "",
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
                               ),
                             ),
-                            // decoration: BoxDecoration(
-                            //   color: Colors.white,
-                            //   shape: BoxShape.circle,
-                            //   boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,spreadRadius: 3)]
-                            // ),
                           ),
-                          const Spacer(),
-                          Center(
-                            child: Text("Store Name",
-                                style: TextStyle(color: Colors.blue.shade800)),
-                          ),
-                          const Spacer(),
-                          const Center(
-                            child: Text("@Store Name",
-                                style: TextStyle(
-                                    color: Colors.grey, fontSize: 10)),
-                          ),
-                          const Spacer(),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 5, bottom: 5),
-                                child: Rating_widget(
-                                  ignoreGestures: false,
-                                  direction: Axis.horizontal,
-                                    itemSizw: 15.0,
-                                    semetricPadding: 2.0,
-                                    onRatingUpdate: (value) => setState(() {
-                                          Rating = value;
-                                        }),
-                                  initialRating: Rating??3.4,),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 5, right: 5),
-                                child: Text(
-                                  Rating != null ? Rating.toString() : "",
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            ),
+                  ),
             Container(
               // padding: EdgeInsets.symmetric(horizontal: 100),
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(
                 left: 10,
-                bottom: 10,
+                top: 10
               ),
               child: const Text("Best Product",
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15)),
             ),
             /*Container(
              // height: double.infinity,
@@ -303,42 +345,52 @@ class _homepagecontentState extends State<homepagecontent> {
                               alignment: Alignment.topLeft,
                               margin: const EdgeInsets.only(
                                 left: 10,
-                                bottom: 10,
+                                bottom: 5,
+                                top: 5
                               ),
                               child: Text(categoryList![index]
                                   .attributes
-                                  .category_name)),
-                          Container(
-                            height: 210,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: prductList!.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  width: 160,
-                                  padding: EdgeInsets.only(left: 5),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Product_Widgit(
-                                      title:
-                                          prductList![index].attributes.title,
-                                      ImageNetwork:
-                                          "http://10.0.2.2:8000${prductList![index].picture_url}",
-                                      StoreName:
-                                          prductList![index].store.Store_Name,
-                                      discount: prductList![index]
-                                          .attributes
-                                          .Discount,
-                                      status:
-                                          prductList![index].attributes.status,
-                                      Price:
-                                          prductList![index].attributes.price,
-                                      cost: prductList![index].attributes.cost,
+                                  .category_name,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)),
+                          GestureDetector(
+                            onTap: (){
+
+                            },
+                            child: Container(
+                              height: 210,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: prductList!.length,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    width: 160,
+                                    padding: EdgeInsets.only(left: 5),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SingleProduct(Slugg:prductList![index].Slug ),));
+                                        print("$Slug s;ldfks;dfk;dslkfa;sldkf;dslk'======================================================================================ads;ldsl");
+                                      },
+                                      child: Product_Widgit(
+                                        title:
+                                            prductList![index].attributes.title,
+                                        ImageNetwork:
+                                            "http://10.0.2.2:8000${prductList![index].picture_url}",
+                                        StoreName:
+                                            prductList![index].store.Store_Name,
+                                        discount: prductList![index]
+                                            .attributes
+                                            .Discount,
+                                        status:
+                                            prductList![index].attributes.status,
+                                        Price:
+                                            prductList![index].attributes.price,
+                                        cost: prductList![index].attributes.cost,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
+
                           )
                         ],
                       );
@@ -424,23 +476,20 @@ class _homepagecontentState extends State<homepagecontent> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-       shape: const CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         child: Container(
-          decoration:  BoxDecoration(
-
+          decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
-              border: Border.all(
-                  color: Colors.grey.shade400),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              border: Border.all(color: Colors.grey.shade400),
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey,
                     //offset: Offset(0, -1),
                     spreadRadius: 4,
-                    blurRadius: 30
-                )
-              ]
-          ),
+                    blurRadius: 30)
+              ]),
           height: 80.0.h,
           child: Row(
             children: [
@@ -449,27 +498,7 @@ class _homepagecontentState extends State<homepagecontent> {
               ),
               IconButton(
                   onPressed: () {
-                    print(
-                        "================================================================");
-                    print(
-                        "=================== Carsol list ================================");
-                    print(CarsolList!.length.toString());
-                    print(
-                        "================================================================");
-                    print(
-                        "================================================================");
-                    print(
-                        "=================== category list ================================");
-                    print(categoryList!.length.toString());
-                    print(
-                        "================================================================");
-                    print(
-                        "================================================================");
-                    print(
-                        "=================== product list ================================");
-                    print(prductList!.length.toString());
-                    print(
-                        "================================================================");
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => prudoctsDisplay(),));
                   },
                   icon: Icon(
                     FontAwesomeIcons.tags,
@@ -485,7 +514,7 @@ class _homepagecontentState extends State<homepagecontent> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const prudoctsDisplay()));
+                            builder: (context) =>  Stroes()));
                   },
                   icon: Icon(
                     FontAwesomeIcons.houseChimneyUser,
@@ -502,11 +531,7 @@ class _homepagecontentState extends State<homepagecontent> {
         child: FittedBox(
           child: FloatingActionButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SingleProduct(),
-                    ));
+
               },
               splashColor: Colors.blue,
               child: const Center(

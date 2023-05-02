@@ -40,7 +40,7 @@ class Product_Widgit extends StatelessWidget {
                   margin: EdgeInsets.only(left: 10, top: 5),
                   child: Text(title),
                 ),
-                discount == null
+                discount ==null
                     ? Container()
                     : Container(
                         width: 35,

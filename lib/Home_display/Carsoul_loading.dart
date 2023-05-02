@@ -104,3 +104,27 @@ class cardsLoading extends StatelessWidget {
   }
 }
 
+class phptosLoading extends StatelessWidget {
+  const phptosLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        children: [
+          Shimmer.fromColors(
+            baseColor: Colors.blue.shade100,
+            highlightColor: Colors.white,
+            child: Container(
+              height: 100.0,
+              width: 100.0,
+              decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.all(Radius.circular( 10))
+              ),
+            ),
+          ),
+        ]
+    );
+  }
+}
+

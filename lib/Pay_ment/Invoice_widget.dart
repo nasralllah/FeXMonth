@@ -26,7 +26,7 @@ class InvoiceWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
          Padding(
-          padding: EdgeInsets.only(top: 15, left: 20,bottom: 13),
+           padding: EdgeInsets.only(top: 15, left: 10, bottom: 5),
           child: Text(
             invoiceName,
             style: const TextStyle(
@@ -36,6 +36,8 @@ class InvoiceWidget extends StatelessWidget {
           ),
         ),
         ListView.builder(
+          padding: EdgeInsets.only(top: 5, left: 10, bottom: 13),
+
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: itemCount,
@@ -43,9 +45,9 @@ class InvoiceWidget extends StatelessWidget {
             return Row(
               children:  [
                 Padding(
-                  padding: EdgeInsets.only(top: 5, left: 10),
+                  padding: EdgeInsets.only(top: 5, left: 5),
                   child: Text(
-                    heNumberandThename,
+                    "${index+1}${heNumberandThename}",
                     style: const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),

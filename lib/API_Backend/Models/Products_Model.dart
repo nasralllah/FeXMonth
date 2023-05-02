@@ -1,5 +1,6 @@
 class prducts {
   final int id;
+  final String Slug;
   final String product_url;
   final String picture_url;
   final bool is_saved;
@@ -7,7 +8,9 @@ class prducts {
   final childStore store;
 
   prducts(
-      {required this.id,
+      {
+        required this.Slug,
+        required this.id,
       required this.attributes,
       required this.store,
       required this.product_url,
@@ -19,10 +22,9 @@ class prducts {
       product_url: json['product_url'],
       picture_url: json["picture_url"],
       is_saved: json['is_saved'],
-      attributes: ChildModel.fromjson(
-        json['attributes'],
-      ),
-      store: childStore.fromjson(json['store']));
+      attributes: ChildModel.fromjson(json['attributes'],),
+      store: childStore.fromjson(json['store']),
+      Slug: json['slug']);
 }
 
 class ChildModel {

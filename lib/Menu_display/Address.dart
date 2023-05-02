@@ -176,14 +176,14 @@ shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.ci
                    margin: EdgeInsets.only(top: 15,bottom: 15,left: 20,right: 20),
                    child: TextField(
                      controller: textEditingController,
-                     decoration: InputDecoration(
-                         border: const OutlineInputBorder(
+                     decoration: const InputDecoration(
+                         border: OutlineInputBorder(
                            borderRadius: BorderRadius.horizontal(
                                right: Radius.circular(30.0),
                                left: Radius.circular(30.0)),
                            borderSide: BorderSide(color: Colors.blue),
                          ),
-                         labelText: "skdl;s;adlfk"),
+                         labelText: "Your Address"),
                    ),
                  ),
                    Container(
@@ -267,7 +267,7 @@ shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.ci
                                    left: Radius.circular(30.0)),
                                borderSide: BorderSide(color: Colors.blue),
                              ),
-                             labelText: "Phone Number",),
+                             labelText: "Description",),
                        ),
                      ),
                    ],

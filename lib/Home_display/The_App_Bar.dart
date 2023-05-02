@@ -70,7 +70,7 @@ class _App_BaarState extends State<App_Baar> {
                 width: 30,
               ),
               Visibility(
-                visible: true,
+                visible: false,
                 child: Positioned(
                   width: 15,
                   height: 15,
@@ -88,7 +88,7 @@ class _App_BaarState extends State<App_Baar> {
           )
         ),
         Container(
-          color: Colors.red,
+      //    color: Colors.red,
           // alignment: Alignment.centerRight,
           margin: EdgeInsets.only(top: 40.h, left: 25.w),
           child: const Icon(

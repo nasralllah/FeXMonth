@@ -6,14 +6,20 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../API_Backend/CommentsProvider.dart';
+import '../API_Backend/Models/CommentModel.dart';
+import '../API_Backend/Models/SingleProductModel.dart';
 import '../API_Backend/Models/productsDetails.dart';
+import '../API_Backend/Provider/SingleProductProvider.dart';
 import '../API_Backend/Provider/productDetailsProvider.dart';
 import '../Components/Chose_Colores_Cirlcle.dart';
 import '../Components/DynamicComments.dart';
 import '../Components/Rating_Widget.dart';
 import '../Components/plusAndminusWidget.dart';
+import '../Constens.dart';
 import '../Home_display/the_main_screen.dart';
 import 'CardCommnents.dart';
 import 'CardDetels.dart';
@@ -31,9 +37,11 @@ bool cardVisibleComments = false;
 bool cardVisibleRating = false;
 
 class SingleProduct extends StatefulWidget {
-  const SingleProduct({Key? key}) : super(key: key);
+  var Slugg;
 
-  @override
+   SingleProduct({required this.Slugg,Key? key}) : super(key: key);
+   
+   @override
   State<SingleProduct> createState() => _SingleProductState();
 }
 
@@ -46,24 +54,38 @@ circleColor? SelectColor;
 
 const Active = Colors.blue;
 const inactive = Colors.white;
+List<SingleProductModel>? SingleProductModelList;
+List<Comments>? CommentsList;
+
 
 class _SingleProductState extends State<SingleProduct> {
   final controller = PageController(viewportFraction: 0.8, keepPage: false);
-  List<productsDetails>? productsDetailsList;
+
   Color hearColors = Colors.white;
 
   @override
   void initState() {
-    productDetailsProvider(Dio()).getAll().then((value) {
+    SingleProductProvider(Dio()).getAll(Slug: widget.Slugg).then((value) {
       setState(() {});
-      productsDetailsList = [];
-      productsDetailsList!.addAll(value);
-      print(
-          '==========================================================================================');
+        SingleProductModelList =[];
+      SingleProductModelList!.add(value);
+
+      print(SingleProductModelList![0].pictures);
       print(value);
       print(
-          '==========================================================================================');
+          '==========$Slug==============lkads;fkda;lfshdsfhsadfhafhdfhjdfjdfjadshjadfsfsdjldfsdsh===================SingleProductModelList======================SingleProductModelList=========================');
     });
+
+    CommentsProvider(Dio()).getAll(Slug: Slug).then((value) {
+      CommentsList = [];
+      CommentsList!.add(value);
+      print(
+          '======CommentsList==================CommentsList========================CommentsList=============================CommentsList=============');
+      print(value);
+      print(
+          '==========$Slug==============CommentsList===================CommentsList=====================CommentsList========================');
+    });
+
   }
 
   void heatColor(){
@@ -98,13 +120,14 @@ class _SingleProductState extends State<SingleProduct> {
                       Container(
                         width: double.infinity,
                         child: CarouselSlider.builder(
-                          itemCount: imglist,
+                          itemCount: SingleProductModelList!.length,
                           options: CarouselOptions(
                             height: 180,
                             viewportFraction: 1,
                             enlargeCenterPage: false,
-                            onPageChanged: (index,
-                                reason) => /*productsDetailsList![index].pictures.pictures.length = index*/ "",
+                            onPageChanged: (index,reason){},
+                            scrollDirection: Axis.horizontal
+                            /*productsDetailsList![index].pictures.pictures.length = index*/
                             /*aspectRatio: 1,
                               viewportFraction: 1,
                               initialPage: 0,
@@ -119,10 +142,11 @@ class _SingleProductState extends State<SingleProduct> {
                               scrollDirection: Axis.horizontal,*/
                           ),
                           itemBuilder:
-                              (BuildContext context, int index, int realIndex) {
-                            return Image.network(
+                              (context, index, realIndex) =>
+                             Image.network(
                               // productsDetailsList![index].pictures.pictures.toString()
-                              "https://www.goldenhaven.com.ph/wp-content/uploads/2022/02/Different-Steps-of-Product-Quality-Management.jpg",
+                              // "http://10.0.2.2:8000${SingleProductModelList![index].pictures}"
+                               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzWTTnEpu2pPbAjH2ps-MW4nsjUrmn3gNlgA&usqp=CAU',
                               fit: BoxFit.fill,
                               loadingBuilder: (BuildContext context,
                                   Widget child,
@@ -132,8 +156,7 @@ class _SingleProductState extends State<SingleProduct> {
                                 }
                                 return carsoulLoadin();
                               },
-                            );
-                          },
+                            )
                         ),
                       ),
                       Container(
@@ -141,7 +164,7 @@ class _SingleProductState extends State<SingleProduct> {
                           padding: EdgeInsets.symmetric(),
                           child: IconButton(
                               onPressed:
-                                  () => /*Navigator.pop(context)*/ productsDetailsList![0].id,
+                                  () => null,
                               icon: Icon(
                                 FontAwesomeIcons.arrowLeft,
                                 color: Colors.blue,
@@ -189,11 +212,11 @@ class _SingleProductState extends State<SingleProduct> {
                               Row(
                                 children: [
                                   Container(
-                                      child: Text('Nike Shose',
+                                      margin: EdgeInsets.only(left: 40),
+                                      child: Text('${SingleProductModelList![0].attributes.title}',
                                           style: TextStyle(
-                                              fontSize: 30,
-                                              color: Colors.grey.shade700)),
-                                      margin: EdgeInsets.only(left: 40)),
+                                              fontSize: 27,
+                                              color: Colors.grey.shade700))),
                                   Container(
                                     margin:
                                         const EdgeInsets.only(left: 110, top: 4),
@@ -214,7 +237,7 @@ class _SingleProductState extends State<SingleProduct> {
                               Row(
                                 children: [
                                   Container(
-                                      child: Text('Nike Shose',
+                                      child: Text("${SingleProductModelList![0].store.store_name}",
                                           style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.grey.shade700)),
@@ -268,10 +291,10 @@ class _SingleProductState extends State<SingleProduct> {
                                         ),
                                       ),
                                       Container(
-                                        padding: EdgeInsets.only(right: 20),
-                                        child: const Text(
-                                          "StoreNamae",
-                                          style: TextStyle(
+                                        padding: EdgeInsets.only(right: 5),
+                                        child:  Text(
+                                          "@${SingleProductModelList![0].store.store_name}",
+                                          style: const TextStyle(
                                               color: Colors.blue, fontSize: 10),
                                         ),
                                       ),
@@ -279,12 +302,12 @@ class _SingleProductState extends State<SingleProduct> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(left: 35),
-                                    child: Text("\$100.00"),
+                                    child: Text("\$${SingleProductModelList![0].attributes.price}"),
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(left: 5, top: 4),
-                                    child: Text(
-                                      "\$149.00",
+                                    child:/*SingleProductModelList?[0].attributes.discount == 0 ? Container():*/
+                                    Text("\$${SingleProductModelList![0].attributes.discount}",
                                       style: TextStyle(
                                           decoration: TextDecoration.lineThrough,
                                           color: Colors.red,
@@ -363,9 +386,7 @@ class _SingleProductState extends State<SingleProduct> {
                                           width: 70,
                                           decoration: BoxDecoration(
                                               color: SelectCatogry ==
-                                                      Catogerys.vairants
-                                                  ? Active
-                                                  : inactive,
+                                                      Catogerys.vairants ? Active : inactive,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20.0)),
                                               border: Border.all(
@@ -471,10 +492,10 @@ class _SingleProductState extends State<SingleProduct> {
                                   ],
                                 ),
                               ),
-                              CardDetels(),
-                              CardVarints(),
-                              cardComments(),
-                              cardRating(),
+                               CardDetels(),
+                               CardVarints(),
+                               cardComments(),
+                               cardRating(),
                             ],
                           ),
                         ),

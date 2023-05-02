@@ -1,5 +1,6 @@
 import 'package:fexmonths/Pay_ment/payLater.dart';
 import 'package:fexmonths/Pay_ment/payNow.dart';
+import 'package:fexmonths/Pay_ment/shppingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,7 +38,7 @@ class CheckOut extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 15, left: 35, right: 20),
-                child: const Text("Have a Coupon?",
+                child: const Text("Select Your Address?",
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
@@ -50,7 +51,7 @@ class CheckOut extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
-               textWithbutton(onTap: () => null,
+               textWithbutton(onTap: () => shpping(context),
                 labelText: "Select A shipping Method", Width: 305, Marginleftbuttoon: 240,
               ),
               Container(

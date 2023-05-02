@@ -32,6 +32,7 @@ dependencies:
   json_annotation: ^4.8.0
   geolocator: ^9.0.2
   modal_bottom_sheet: ^2.1.2
+  syncfusion_flutter_gauges: ^18.2.44
 
 
 

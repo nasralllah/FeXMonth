@@ -4,6 +4,7 @@ import '../Components/Blue_Button.dart';
 import '../Components/textFiledwithButton.dart';
 import '../Components/textWithbutton.dart';
 import 'Alert.dart';
+import 'InstallmentPlan.dart';
 import 'Invoice_widget.dart';
 
 class PayLater extends StatelessWidget {
@@ -58,8 +59,8 @@ class PayLater extends StatelessWidget {
 
             child: const Text("Payment Method",style: const TextStyle(color: Colors.blue,fontWeight: FontWeight.bold)),
           ),
-           textWithbutton(labelText: 'Select installment Method',onTap: () => showdailg(context), Width: 305, Marginleftbuttoon: 240,),
-          Blue_Button(ButtonText: 'Ask the Agreement', height: 32, width: 160, Margintop: 20, Marginleft: 100, textStyle: const TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue),onTap: () => null, Marginbottom: 0,)
+           textWithbutton(labelText: 'Select installment Method',onTap: () => InstallmentPlan(context), Width: 305, Marginleftbuttoon: 240,),
+          Blue_Button(ButtonText: 'Ask the Agreement', height: 32, width: 160, Margintop: 20, Marginleft: 100, textStyle: const TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue),onTap: () => showdailg(context), Marginbottom: 0, MarginRight: 0,)
         ],
       )
       

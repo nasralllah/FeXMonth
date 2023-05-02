@@ -6,6 +6,9 @@ import '../Components/Bottom_Menu_Icons.dart';
 import '../Constens.dart';
 import '../Login_display/login_screen.dart';
 import '../Components/menu_card_layout.dart';
+import '../Pay_ment/addAddress.dart';
+import 'MyInstallment.dart';
+import 'myOrders.dart';
 
 class menu_animated extends StatefulWidget {
   const menu_animated({Key? key}) : super(key: key);
@@ -73,6 +76,7 @@ class _menu_animatedState extends State<menu_animated> {
             ),
             Menu_Cards(
               onpress: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => myOreders(),));
                 print("Oreders");
               },
               CardName: "Orders",
@@ -80,6 +84,7 @@ class _menu_animatedState extends State<menu_animated> {
             ),
             Menu_Cards(
               onpress: () {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => MyInstallment(),));
                 print("Question");
               },
               CardName: "Installment",
@@ -87,6 +92,7 @@ class _menu_animatedState extends State<menu_animated> {
             ),
             Menu_Cards(
               onpress: () {
+                showDialogselect(context);
                 print("Help");
               },
               CardName: "Adress",

@@ -19,7 +19,7 @@ class Product_Widgit extends StatelessWidget {
   final String title;
   final String ImageNetwork;
   final String StoreName;
-  final String discount;
+  final int discount;
   final String status;
   final int Price;
   var cost;
@@ -40,9 +40,7 @@ class Product_Widgit extends StatelessWidget {
                   margin: EdgeInsets.only(left: 10, top: 5),
                   child: Text(title),
                 ),
-                discount ==null
-                    ? Container()
-                    : Container(
+                discount == 0 ? Container() : Container(
                         width: 35,
                         decoration: BoxDecoration(
                             color: Colors.green.withOpacity(0.4),
@@ -50,8 +48,7 @@ class Product_Widgit extends StatelessWidget {
                                 BorderRadius.all(Radius.circular(3.0))),
                         margin: EdgeInsets.only(right: 10, top: 5),
                         child: Center(
-                            child: Text("$discount",
-                                style: TextStyle(color: Colors.green))),
+                            child: Text("$discount",style: TextStyle(color: Colors.green))),
                       ),
               ],
             ),
@@ -83,7 +80,7 @@ class Product_Widgit extends StatelessWidget {
             Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(left: 10, top: 5, right: 5),
-              child: Text(
+              child: status == null? Container(height: 10,color: Colors.green,):Text(
                 status,
                 style: TextStyle(color: Colors.grey, fontSize: 13),
               ),
@@ -100,7 +97,7 @@ class Product_Widgit extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 5),
-                Text(
+               cost== null?Container(): Text(
                   "$cost",
                   style: TextStyle(
                       color: Colors.red,

@@ -13,6 +13,7 @@ import '../API_Backend/CommentsProvider.dart';
 import '../API_Backend/Models/CommentModel.dart';
 import '../API_Backend/Models/SingleProductModel.dart';
 import '../API_Backend/Models/productsDetails.dart';
+import '../API_Backend/Provider/AddToCartProvider.dart';
 import '../API_Backend/Provider/SingleProductProvider.dart';
 import '../API_Backend/Provider/productDetailsProvider.dart';
 import '../Components/Chose_Colores_Cirlcle.dart';
@@ -28,7 +29,7 @@ import 'CardVariants.dart';
 
 int activedots = 0;
 int imglist = 4;
-int addToCart = 0;
+//int addToCart = 0;
 int? notifaiCart;
 double? Rating;
 bool cadrVisibleDetails = true;
@@ -45,10 +46,12 @@ class SingleProduct extends StatefulWidget {
   State<SingleProduct> createState() => _SingleProductState();
 }
 
-enum Catogerys { details, vairants, Comments, Rating ,heart}
+enum Catogerys { details, vairants, Comments, Rating}
+enum heart{blue,white}
 
 enum circleColor { red, blue, green }
 
+heart? Selectheart;
 Catogerys? SelectCatogry;
 circleColor? SelectColor;
 
@@ -61,7 +64,7 @@ List<Comments>? CommentsList;
 class _SingleProductState extends State<SingleProduct> {
   final controller = PageController(viewportFraction: 0.8, keepPage: false);
 
-  Color hearColors = Colors.white;
+  Color hearColors = Colors.blue;
 
   @override
   void initState() {
@@ -75,7 +78,6 @@ class _SingleProductState extends State<SingleProduct> {
       print(
           '==========$Slug==============lkads;fkda;lfshdsfhsadfhafhdfhjdfjdfjadshjadfsfsdjldfsdsh===================SingleProductModelList======================SingleProductModelList=========================');
     });
-
     CommentsProvider(Dio()).getAll(Slug: Slug).then((value) {
       CommentsList = [];
       CommentsList!.add(value);
@@ -91,11 +93,11 @@ class _SingleProductState extends State<SingleProduct> {
   void heatColor(){
     setState(() {
 
-    if (hearColors== Colors.white ){
-      hearColors = Colors.blue;
+    if (hearColors== Colors.blue ){
+      hearColors = Colors.red;
     }
     else
-      hearColors = Colors.white;
+      hearColors = Colors.blue;
     });
 
 
@@ -159,35 +161,19 @@ class _SingleProductState extends State<SingleProduct> {
                             )
                         ),
                       ),
-                      Container(
-                          clipBehavior: Clip.none,
-                          padding: EdgeInsets.symmetric(),
-                          child: IconButton(
-                              onPressed:
-                                  () => null,
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () => Navigator.pop(context),
                               icon: Icon(
                                 FontAwesomeIcons.arrowLeft,
                                 color: Colors.blue,
-                              ))),
-                      GestureDetector(
-                        onTap: () => setState(() {
-                          SelectCatogry == Catogerys.heart;
-                        }),
-                        child: Container(
-                          margin: EdgeInsets.only(left: 320),
-                            clipBehavior: Clip.none,
-                            padding: EdgeInsets.symmetric(),
-                            child: IconButton(
-                              onPressed: () {
-                                heatColor();
-                              },
-                                icon: Icon(
-                                  Icons.favorite_rounded,
-                                  color: hearColors,
-                                )
-                            )
-                        ),
+                              )
+                          ),
+
+                        ],
                       ),
+
                       SingleChildScrollView(
                         physics: PageScrollPhysics(),
                         child: Container(
@@ -200,15 +186,40 @@ class _SingleProductState extends State<SingleProduct> {
                                   topRight: Radius.circular(20.0))),
                           child: Column(
                             children: [
-                              Center(
-                                heightFactor: 4,
-                                child: SmoothPageIndicator(
-                                  controller: controller,
-                                  count: imglist,
-                                  effect: const SwapEffect(
-                                      dotHeight: 6, dotWidth: 6, spacing: 10),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+
+                                Container(
+                                  margin: EdgeInsets.only(left: 160),
+
+                                  child: SmoothPageIndicator(
+                                    controller: controller,
+                                    count: imglist,
+                                    effect: const SwapEffect(
+                                        dotHeight: 6, dotWidth: 6, spacing: 10),
+                                  ),
                                 ),
-                              ),
+                                Container(
+                                  margin: EdgeInsets.only(left: 80),
+                                  clipBehavior: Clip.none,
+                                  padding: EdgeInsets.symmetric(),
+                                  child: IconButton(
+                                    onPressed: (){
+                                      setState(() {
+                                        heatColor();
+                                      });
+                                      print("hiiiiiiiiiiiii");
+                                    },
+                                    icon: Icon(Icons.favorite_border),
+                                    color: hearColors,
+
+                                  ),
+
+                                ),
+                              ],),
+
                               Row(
                                 children: [
                                   Container(
@@ -306,7 +317,7 @@ class _SingleProductState extends State<SingleProduct> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(left: 5, top: 4),
-                                    child:/*SingleProductModelList?[0].attributes.discount == 0 ? Container():*/
+                                    child:SingleProductModelList?[0].attributes.discount == null? Container():
                                     Text("\$${SingleProductModelList![0].attributes.discount}",
                                       style: TextStyle(
                                           decoration: TextDecoration.lineThrough,
@@ -544,10 +555,11 @@ class _SingleProductState extends State<SingleProduct> {
                     )),
                   ),
                 ),
-               plusAndminusWidget(TheNumber: addToCart,),
+               plusAndminusWidget(),
                 GestureDetector(
                     onTap: () {
-
+                      addToCart();
+                        print(theNumber);
                   },
                   child: Container(
                     height: 30,

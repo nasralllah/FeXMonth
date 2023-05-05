@@ -1,16 +1,88 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:fexmonths/Pay_ment/payLater.dart';
 import 'package:fexmonths/Pay_ment/payNow.dart';
 import 'package:fexmonths/Pay_ment/shppingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/utils.dart';
 
+import '../API_Backend/Models/MyAddressModel.dart';
+import '../API_Backend/Models/SelectShippingModel.dart';
+import '../API_Backend/Provider/CartTotalProvider.dart';
+import '../API_Backend/Provider/SelectShippingProvider.dart';
+import '../API_Backend/Provider/myAddressProvider.dart';
 import '../Components/textFiledwithButton.dart';
 import '../Components/textWithbutton.dart';
 import 'addAddress.dart';
 import 'Invoice_widget.dart';
+import 'package:http/http.dart' as http;
 
-class CheckOut extends StatelessWidget {
+class CheckOut extends StatefulWidget {
   const CheckOut({Key? key}) : super(key: key);
+
+  @override
+  State<CheckOut> createState() => _CheckOutState();
+}
+
+List<ShippingOption> ShippingOptionList = [];
+List<myAddressModel>? myAddressModelList;
+
+class _CheckOutState extends State<CheckOut> {
+  @override
+  void initState() {
+    super.initState();
+    getAll();
+
+    myAddressProvider(Dio()).getAll().then((value) {
+      setState(() {});
+      myAddressModelList = [];
+      myAddressModelList!.addAll(value);
+      print(
+          "=======myAddressModelList============myAddressModelList===================myAddressModelList");
+      print(value);
+      print(
+          "=======myAddressModelList============myAddressModelList===================myAddressModelList");
+    });
+    // SelectShippingProvider(Dio()).getAll().then((value){
+    //   setState((){});
+    //     ShippingOptionList = [];
+    //     ShippingOptionList!.addAll(value);
+    //   print("=================ShippingOptionList=======================ShippingOptionList====================ShippingOptionList");
+    //   print(value);
+    //   print("=================ShippingOptionList=======================ShippingOptionList====================ShippingOptionList");
+    // });
+  }
+
+  Future<void> getAll() async {
+    var headers = {
+      'Accept': 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+      'Authorization': 'Bearer 4|5oc5xYJ65zacvZoOIrqnyU0Kr6XZaSc8R7wU4Vwe'
+    };
+    try {
+      var response = await http.get(
+          Uri.parse("http://10.0.2.2:8000/api/shipping/types"),
+          headers: headers);
+      if (response.statusCode == 200) {
+        // var res = response.data[0]as List;
+        // print(response.data);
+        // var ShippingOptionlist = res.map((e) => ShippingOption.fromJson(e)).toList();
+        // return ShippingOptionlist;
+        final List<dynamic> data = jsonDecode(response.body);
+        final List<ShippingOption> shippingoption =
+            data.map((e) => ShippingOption.fromJson(e)).toList();
+        print(response.body);
+        setState(() {
+          ShippingOptionList = shippingoption;
+        });
+      }
+      // throw Exception("__ Erorr in get ALl Products __");
+    } catch (e) {
+      throw Exception("__ Erorr in get ALl Products __::::::::$e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +114,15 @@ class CheckOut extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
-               textWithbutton(
-                labelText: "${Strings.toString()}", onTap: ()=> showDialogselect(context), Width: 305, Marginleftbuttoon: 240,
+              textWithbutton(
+                title: Strings!.isEmpty? "Select Your Addres":Strings![0],
+                onTap: () {
+                  showDialogselect(context);
+                  Strings!.clear();
+                } ,
+                Width: 305,
+                Marginleftbuttoon: 240,
+                Margin: EdgeInsets.only(top: 15, left: 5),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 15, left: 35, right: 20),
@@ -51,8 +130,12 @@ class CheckOut extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
-               textWithbutton(onTap: () => shpping(context),
-                labelText: "Select A shipping Method", Width: 305, Marginleftbuttoon: 240,
+              textWithbutton(
+                onTap: () => shpping(context),
+                title: Shipp!.isEmpty? "Select Shipping Method":Shipp![0],
+                Width: 305,
+                Marginleftbuttoon: 240,
+                Margin: EdgeInsets.only(top: 15, left: 5),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 15, left: 40, right: 20),

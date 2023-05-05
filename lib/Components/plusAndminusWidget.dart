@@ -1,27 +1,40 @@
+import 'package:fexmonths/Constens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class plusAndminusWidget extends StatefulWidget {
    plusAndminusWidget({
-    Key? key, required this.TheNumber,
+    Key? key,
   }) : super(key: key);
 
-   int TheNumber;
+
 
   @override
   State<plusAndminusWidget> createState() => _plusAndminusWidgetState();
 }
 
+
 class _plusAndminusWidgetState extends State<plusAndminusWidget> {
+  void incressNumber(){
+if(theNumber>=0){
+    setState(() {
+      theNumber++;
+    });
+  }}
+  void decressNumber(){
+    if(theNumber>=1){
+
+      setState(() {
+      theNumber--;
+    });
+  }
+    }
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         GestureDetector(
           onTap: () {
-             setState(() {
-               widget.TheNumber++;
-              print( widget.TheNumber);
-            });
+            incressNumber();
           },
           child: Container(
             margin: EdgeInsets.only(right: 8,left: 8),
@@ -35,7 +48,7 @@ class _plusAndminusWidgetState extends State<plusAndminusWidget> {
         ),
         Container(
 
-          child: Text('${widget.TheNumber}',
+          child: Text('$theNumber',
               style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 15,
@@ -43,10 +56,7 @@ class _plusAndminusWidgetState extends State<plusAndminusWidget> {
         ),
         GestureDetector(
           onTap: () {
-             setState(() {
-               widget.TheNumber--;
-              print( widget.TheNumber);
-            });
+            decressNumber();
           },
           child: Container(
             margin: EdgeInsets.only(right: 8,left: 8),

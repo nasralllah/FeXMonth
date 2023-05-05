@@ -74,13 +74,13 @@ class _PayNowState extends State<PayNow> {
                       color: Colors.blue, fontWeight: FontWeight.bold)),
             ),
             textWithbutton(
-              labelText: 'Select Payment Method',
+              title: 'Select Payment Method',
               onTap: () {
                 setState(() {});
                 onnavgatortapeds(context);
               },
               Width: 305,
-              Marginleftbuttoon: 240,
+              Marginleftbuttoon: 240, Margin:  EdgeInsets.only(top: 15,left: 5),
             ),
             Container(
               margin: const EdgeInsets.only(left: 30, right: 25),

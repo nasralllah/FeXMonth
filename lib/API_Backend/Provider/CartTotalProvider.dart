@@ -1,31 +1,28 @@
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-import '../../Constens.dart';
-import '../../Prudoct_display/CardCommnents.dart';
-
-void SendCommment() async {
+Future<double> CartTotalProvider() async {
   var headers = {
     'Accept': 'application/vnd.api+json',
     'Content-Type': 'application/vnd.api+json',
     'Authorization': 'Bearer 4|5oc5xYJ65zacvZoOIrqnyU0Kr6XZaSc8R7wU4Vwe'
   };
-  var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/products/$Slug/comments'));
-  request.fields.addAll({
-    'comment': commentController.text
-
-  });
+  var request = http.MultipartRequest('GET', Uri.parse('http://10.0.2.2:8000/api/user/mycart/total'));
 
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();
 
   if (response.statusCode == 200) {
-    print(await response.stream.bytesToString());
+    // print(await response.stream.bytesToString());
+    String responseBody = await response.stream.bytesToString();
+    var data = json.decode(responseBody);
+    var itemCount = data['total'];
+    return itemCount;
   }
   else {
     print(response.reasonPhrase);
-    print( commentController.text);
+    return 0;
   }
 
 }

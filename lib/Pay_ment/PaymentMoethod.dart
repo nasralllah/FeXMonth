@@ -25,10 +25,10 @@ void onnavgatortapeds(BuildContext context) {
                       child: Column(
                         children: [
                           textWithbutton(
-                            labelText: "Credt Card",
+                            title: "Credt Card",
                             onTap: () {},
                             Width: 305,
-                            Marginleftbuttoon: 240,
+                            Marginleftbuttoon: 240, Margin:  EdgeInsets.only(top: 15,left: 5),
                           ),
                           Stack(
                             children: [
@@ -228,10 +228,10 @@ void onnavgatortapeds(BuildContext context) {
                             ],
                           ),
                           textWithbutton(
-                            labelText: "Pay in Cash",
+                            title: "Pay in Cash",
                             onTap: () {},
                             Width: 305,
-                            Marginleftbuttoon: 240,
+                            Marginleftbuttoon: 240, Margin:  EdgeInsets.only(top: 15,left: 5),
                           ),
                           Blue_Button(
                             ButtonText: "ok",

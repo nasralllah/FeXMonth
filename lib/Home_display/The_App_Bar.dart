@@ -15,6 +15,7 @@ class App_Baar extends StatefulWidget {
   State<App_Baar> createState() => _App_BaarState();
 }
 
+
 class _App_BaarState extends State<App_Baar> {
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class _App_BaarState extends State<App_Baar> {
                     decoration: const BoxDecoration(color: Colors.red,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                    /* margin: EdgeInsets.only(top: 30.h, left: 40.w),*/
-                    child: Center(child: Text('$notifaiCart',style: TextStyle(color: Colors.white,fontSize: 9,fontWeight: FontWeight.bold),)),
+                    child: Center(child: Text('$cartCountnumbers}',style: TextStyle(color: Colors.white,fontSize: 9,fontWeight: FontWeight.bold),)),
                   ),
                 ),
               )

@@ -11,7 +11,7 @@ import '../Components/textFiledwithButton.dart';
 import '../Constens.dart';
 import 'Single_Product.dart';
 
-final myController = TextEditingController();
+//final myController = TextEditingController();
 
 class cardComments extends StatefulWidget {
   const cardComments({
@@ -61,7 +61,7 @@ class _cardCommentsState extends State<cardComments> {
                         margin: EdgeInsets.only(
                             top: 15, bottom: 15, left: 20, right: 20),
                         child: TextField(
-                          controller: myController,
+                          controller: commentController,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.horizontal(
@@ -79,7 +79,7 @@ class _cardCommentsState extends State<cardComments> {
                         Margintop: 20,
                         Marginleft: 260,
                         onTap: (){
-                          sendComment(Slug: Slug, Comment: myController.text.toString());
+                          SendCommment();
                         },
                         textStyle: TextStyle(color: Colors.white),
                         buttonColor:
@@ -91,10 +91,13 @@ class _cardCommentsState extends State<cardComments> {
                   )
                 ],
               ),
-              Container(
+              if(CommentsList == null)
+                Container()
+              else
+                Container(
                 width: double.infinity,
                 height: 200,
-                child: CommentsList == null ? Container():ListView.builder(
+                child: ListView.builder(
                     shrinkWrap: false,
                     primary: true,
                     itemCount: CommentsList!.length,
@@ -107,6 +110,7 @@ class _cardCommentsState extends State<cardComments> {
                       );
                     },),
               )
+
         ],
       )),
       ]

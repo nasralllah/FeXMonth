@@ -59,7 +59,7 @@ class PayLater extends StatelessWidget {
 
             child: const Text("Payment Method",style: const TextStyle(color: Colors.blue,fontWeight: FontWeight.bold)),
           ),
-           textWithbutton(labelText: 'Select installment Method',onTap: () => InstallmentPlan(context), Width: 305, Marginleftbuttoon: 240,),
+           textWithbutton(title: 'Select installment Method',onTap: () => InstallmentPlan(context), Width: 305, Marginleftbuttoon: 240, Margin:  EdgeInsets.only(top: 15,left: 5),),
           Blue_Button(ButtonText: 'Ask the Agreement', height: 32, width: 160, Margintop: 20, Marginleft: 100, textStyle: const TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue),onTap: () => showdailg(context), Marginbottom: 0, MarginRight: 0,)
         ],
       )

@@ -6,11 +6,13 @@ import '../API_Backend/Home_API.dart';
 import '../API_Backend/Models/CarsoleModels.dart';
 import '../API_Backend/Models/Catogry_Models.dart';
 import '../API_Backend/Models/HomeStoresModel.dart';
+import '../API_Backend/Models/NotifcationCartNumberModel.dart';
 import '../API_Backend/Models/Products_Model.dart';
 import '../API_Backend/Models/StorsDisplayModel.dart';
 import '../API_Backend/Models/news.dart';
 import '../API_Backend/Provider/Category_Provider.dart';
 import '../API_Backend/Provider/HomeStoresProvider.dart';
+import '../API_Backend/Provider/NotifcationCartNumberModel.dart';
 import '../API_Backend/Provider/Products_Provider.dart';
 import '../Components/Carsol_Slider.dart';
 import '../Components/Product_widget.dart';
@@ -49,13 +51,14 @@ class homepagecontent extends StatefulWidget {
   @override
   State<homepagecontent> createState() => _homepagecontentState();
 }
-
+// List<cartNumber>? cartNumberList;
 class _homepagecontentState extends State<homepagecontent> {
   double? Rating;
   List<News>? CarsolList;
   List<Cateogory>? categoryList;
   List<prducts>? prductList;
   List<HomeStores>? homeStoresList;
+
 
   @override
   void initState() {
@@ -65,9 +68,9 @@ class _homepagecontentState extends State<homepagecontent> {
       // Carsollist = value;
       CarsolList = [];
       CarsolList!.addAll(value);
-      print('=======================');
+      print('=======================CarsolList========================CarsolList==============CarsolList===============CarsolList=============CarsolList===========CarsolList');
       print(value);
-      print('=======================');
+      print('=======================CarsolList===========================CarsolList==========CarsolList===============CarsolList==============CarsolList');
     });
     CategoryProvider(Dio()).getAll().then((valueofcategory) {
       setState(() {});
@@ -78,27 +81,40 @@ class _homepagecontentState extends State<homepagecontent> {
       print(valueofcategory);
       print('=======================');
     });
-    ProductsProvider(Dio()).getAll().then((value) {
+    //for(int i =1; i<=2;i++){
+    ProductsProvider(Dio()).getAll(3).then((value) {
       setState(() {});
       prductList = [];
       prductList!.addAll(value);
       print('=======================');
       print(value);
       print('=======================');
+
     });
+    //}
     HomeStoresProvider(Dio()).getAll().then((value) {
       setState(() {});
       homeStoresList = [];
       homeStoresList!.addAll(value);
-      print(
-          '=======homeStoresList======homeStoresList======homeStoresList====');
+      print('=======homeStoresList======homeStoresList======homeStoresList====');
       print(value);
-      print(
-          '====homeStoresList=======homeStoresList======homeStoresList======');
+      print('====homeStoresList=======homeStoresList======homeStoresList======');
     });
 
+    FetchCartCount();
     super.initState();
   }
+  Future<void> FetchCartCount() async{
+   try{
+    CartNumber cartnumber = await CartnumberNotifcation();
+    setState(() {
+      cartCountnumbers = cartnumber.count;
+    });
+   }catch(ex){
+     print(ex);
+   }
+  }
+
   Widget build(BuildContext context) {
       Slug= prductList![0].Slug;
     /* final List<Widget> imageSliders = imgList
@@ -348,9 +364,7 @@ class _homepagecontentState extends State<homepagecontent> {
                                 bottom: 5,
                                 top: 5
                               ),
-                              child: Text(categoryList![index]
-                                  .attributes
-                                  .category_name,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)),
+                              child: Text(categoryList![index].attributes.category_name,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),)),
                           GestureDetector(
                             onTap: (){
 
@@ -376,11 +390,9 @@ class _homepagecontentState extends State<homepagecontent> {
                                             "http://10.0.2.2:8000${prductList![index].picture_url}",
                                         StoreName:
                                             prductList![index].store.Store_Name,
-                                        discount: prductList![index]
-                                            .attributes
-                                            .Discount,
+                                        discount: prductList![index].attributes.Discount,
                                         status:
-                                            prductList![index].attributes.status,
+                                            prductList![index].status,
                                         Price:
                                             prductList![index].attributes.price,
                                         cost: prductList![index].attributes.cost,
@@ -531,7 +543,7 @@ class _homepagecontentState extends State<homepagecontent> {
         child: FittedBox(
           child: FloatingActionButton(
               onPressed: () {
-
+              print('$cartCountnumbers');
               },
               splashColor: Colors.blue,
               child: const Center(

@@ -1,6 +1,7 @@
 import 'package:fexmonths/Components/Rating_Widget.dart';
 import 'package:flutter/material.dart';
 
+import '../API_Backend/Provider/SendCommentRating.dart';
 import '../Components/Blue_Button.dart';
 import '../Components/DynamicComments.dart';
 import 'Single_Product.dart';
@@ -15,10 +16,10 @@ class cardRating extends StatefulWidget {
   @override
   State<cardRating> createState() => _cardRatingState();
 }
+double? Ratingg;
 
 class _cardRatingState extends State<cardRating> {
   List<DynamicComments> listComments = [];
-  double? Rating;
 
   addComments() {
     setState(() {
@@ -293,8 +294,8 @@ class _cardRatingState extends State<cardRating> {
                     margin: EdgeInsets.only(left: 5, top: 5),
                     child: Rating_widget(
                         onRatingUpdate: (value) {
-                          Rating = value;
-                          print(Rating);
+                          Ratingg = value;
+                          print(Ratingg);
                         },
                         direction: Axis.horizontal,
                         itemSizw: 20,
@@ -335,7 +336,9 @@ class _cardRatingState extends State<cardRating> {
                             width: 60,
                             Margintop: 20,
                             Marginleft: 260,
-                            onTap: addComments,
+                            onTap:(){
+                              addComments();
+                              SendReview();},
                             textStyle: TextStyle(color: Colors.white),
                             buttonColor:
                                 MaterialStatePropertyAll<Color>(Colors.blue),

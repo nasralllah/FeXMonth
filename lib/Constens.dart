@@ -10,7 +10,10 @@ const String comments = "/comments";
 const String rating = "/rating";
 const String add_to_cart = "/add_to_cart";
   String Slug = "";
-
+  String? id ;
+  int theNumber = 1;
+  int cartCountnumbers = 0;
+  int Idcart = 0;
 
 final KTextCardStyled =  TextStyle(
   fontSize: 20.sp,

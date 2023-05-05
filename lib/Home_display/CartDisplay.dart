@@ -1,10 +1,21 @@
+import 'package:dio/dio.dart';
+import 'package:fexmonths/API_Backend/Provider/CartTotalProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
+
+import '../API_Backend/Models/CartDisplayModel.dart';
+import '../API_Backend/Models/CartTotalModel.dart';
+import '../API_Backend/Provider/CartDisplayProvider.dart';
 import '../Components/plusAndminusWidget.dart';
 import '../Components/textFiledwithButton.dart';
 import '../Pay_ment/Alet_CheckOut.dart';
+import '../Constens.dart';
+
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -12,11 +23,35 @@ class Cart extends StatefulWidget {
   @override
   State<Cart> createState() => _CartState();
 }
-int addProduct = 0;
 
+
+
+
+
+
+int addProduct = 0;
+List<CartDisplayModel>? cartDisplaylist;
 class _CartState extends State<Cart> {
+late int _itemCount;
+  @override
+  void initState() {
+    super.initState();
+    CartDisplayProviders(Dio()).getAll().then((value) {
+      setState((){});
+      cartDisplaylist =[];
+      cartDisplaylist!.addAll(value);
+      print("=================cartDisplaylist=======================cartDisplaylist====================cartDisplaylist");
+      print(value);
+      print("=================cartDisplaylist=======================cartDisplaylist====================cartDisplaylist");
+
+    });
+
+    CartTotalProvider();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Idcart =cartDisplaylist![0].id;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,7 +62,7 @@ class _CartState extends State<Cart> {
         ),
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: cartDisplaylist!.length,
           itemBuilder: (context, index) {
            return Dismissible(
 
@@ -60,7 +95,7 @@ class _CartState extends State<Cart> {
                        child: ClipRRect(
                          borderRadius: BorderRadius.all(Radius.circular(10)),
                          child: Image.network(
-                             'https://img.pixelz.com/blog/how-to-color-match-recolor/final-processed-product-image.jpg',
+                             'http://10.0.2.2:8000${cartDisplaylist![index].product.picture}',
                              fit: BoxFit.cover),
                        ),
                      ),
@@ -69,17 +104,15 @@ class _CartState extends State<Cart> {
                        children: [
                          Container(
                              margin: EdgeInsets.only(top: 15, left: 10),
-                             child: Text("Nike", style: TextStyle(color: Colors.grey.shade600,fontWeight: FontWeight.bold),)),
+                             child: Text(cartDisplaylist![0].product.title, style: TextStyle(color: Colors.grey.shade600,fontWeight: FontWeight.bold),)),
                          Container(
                              margin: EdgeInsets.only(top: 1, left: 10, bottom: 12),
-                             child: Text("StoreName",style: TextStyle(color: Colors.blue,fontStyle: FontStyle.italic),)),
-                         plusAndminusWidget(
-                           TheNumber: addProduct,
-                         )
+                             child: Text(cartDisplaylist![0].store.name,style: TextStyle(color: Colors.blue,fontStyle: FontStyle.italic),)),
+                         plusAndminusWidget()
                        ],
                      ),
                      Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                       Container(
+                       /*Container(
                            height: 30,
                            width: 30,
                            margin: EdgeInsets.only(left: 60, top: 5),
@@ -95,24 +128,26 @@ class _CartState extends State<Cart> {
                                icon: Icon(
                                  Icons.cancel,
                                  color: Colors.blue,
-                               ))),
+
+                               ))),*/
+                 Container(
+             margin: EdgeInsets.only(right: 5, top: 20, bottom: 2,left: 50),
+             child:  Text(
+               "${cartDisplaylist![0].product.price}",
+               style: TextStyle(
+                   color: Colors.grey.shade600,fontWeight: FontWeight.bold),
+             ),
+           ),
+            cartDisplaylist![0].product.discount == null?Container():
                        Container(
                          margin: EdgeInsets.only(right: 5, top: 5, bottom: 2),
                          child: Text(
-                           "\$199.00",
+                           "${cartDisplaylist![0].product.discount}",
                            style: TextStyle(
                                decoration: TextDecoration.lineThrough,
                                color: Colors.red,fontWeight: FontWeight.bold),
                          ),
                        ),
-                       Container(
-                         alignment: Alignment.bottomCenter,
-                         margin: EdgeInsets.only(right: 5, top: 5, bottom: 13),
-                         child: Text(
-                           "\$299.00",
-                           style: TextStyle(color: Colors.grey.shade600,fontWeight: FontWeight.bold),
-                         ),
-                       )
                      ]),
                    ],
                  ),
@@ -156,7 +191,21 @@ class _CartState extends State<Cart> {
                  borderRadius: BorderRadius.all(Radius.circular(20))
                ),
                child: Center(
-                 child: Text("Total: \$1995"),
+                 child:FutureBuilder<double>(
+                   future: CartTotalProvider(),
+                   builder: ((context, snapshot) {
+                     if(snapshot.hasData){
+                       return Text("Total: ${snapshot.data.toString()}");
+                     }
+                     else if(snapshot.hasError){
+                       return Text("${snapshot.error}") ;
+                     }
+                     else{
+                       return CircularProgressIndicator();
+                     }
+                   }
+                   ),
+                 )
                ),
               ),
               Container(

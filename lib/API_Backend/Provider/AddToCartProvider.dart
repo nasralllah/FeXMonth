@@ -1,19 +1,17 @@
+
+
 import 'dart:convert';
+import 'package:fexmonths/Constens.dart';
 import 'package:http/http.dart' as http;
-
-import '../../Constens.dart';
-import '../../Prudoct_display/CardCommnents.dart';
-
-void SendCommment() async {
+void addToCart() async {
   var headers = {
     'Accept': 'application/vnd.api+json',
     'Content-Type': 'application/vnd.api+json',
     'Authorization': 'Bearer 4|5oc5xYJ65zacvZoOIrqnyU0Kr6XZaSc8R7wU4Vwe'
   };
-  var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/products/$Slug/comments'));
+  var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/products/$Slug/mycart/add'));
   request.fields.addAll({
-    'comment': commentController.text
-
+    'quantity': "$theNumber"
   });
 
   request.headers.addAll(headers);
@@ -25,7 +23,6 @@ void SendCommment() async {
   }
   else {
     print(response.reasonPhrase);
-    print( commentController.text);
   }
 
 }

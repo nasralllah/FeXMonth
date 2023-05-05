@@ -1,6 +1,8 @@
 class prducts {
   final int id;
   final String Slug;
+  final String status;
+
   final String product_url;
   final String picture_url;
   final bool is_saved;
@@ -15,12 +17,15 @@ class prducts {
       required this.store,
       required this.product_url,
       required this.picture_url,
-      required this.is_saved});
+      required this.is_saved,
+        required this.status,
+      });
 
   factory prducts.fromJson(Map<String, dynamic> json) => prducts(
       id: json['id'],
       product_url: json['product_url'],
       picture_url: json["picture_url"],
+      status: json['status'],
       is_saved: json['is_saved'],
       attributes: ChildModel.fromjson(json['attributes'],),
       store: childStore.fromjson(json['store']),
@@ -30,8 +35,7 @@ class prducts {
 class ChildModel {
   final String title;
   final int price;
-  final String Discount;
-  final String status;
+  final int Discount;
    var cost;
    final id;
 
@@ -39,7 +43,6 @@ class ChildModel {
     required this.title,
     required this.price,
     required this.Discount,
-    required this.status,
     required this.cost,
     required this.id,
   });
@@ -47,7 +50,6 @@ class ChildModel {
       title: json['title'],
       price: json['price'],
       Discount: json['discount'],
-      status: json['status'],
       cost: json['cost'], id: json['id']);
 }
 

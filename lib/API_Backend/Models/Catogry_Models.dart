@@ -1,6 +1,6 @@
 
 class Cateogory{
-  final int id;
+  final String id;
   final ChildModel attributes;
   Cateogory(
       {

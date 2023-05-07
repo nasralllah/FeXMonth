@@ -1,3 +1,4 @@
+/*
 /// id : 15
 /// type : "Home"
 /// name : "ddddd"
@@ -60,4 +61,4 @@ class Data {
     return map;
   }
 
-}
+}*/

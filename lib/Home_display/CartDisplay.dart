@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:fexmonths/API_Backend/Provider/CartTotalProvider.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +12,13 @@ import 'package:http/http.dart' as http;
 
 import '../API_Backend/Models/CartDisplayModel.dart';
 import '../API_Backend/Models/CartTotalModel.dart';
+import '../API_Backend/Provider/CartDelete.dart';
 import '../API_Backend/Provider/CartDisplayProvider.dart';
 import '../Components/plusAndminusWidget.dart';
 import '../Components/textFiledwithButton.dart';
 import '../Pay_ment/Alet_CheckOut.dart';
 import '../Constens.dart';
+import 'decresincresWidget.dart';
 
 
 class Cart extends StatefulWidget {
@@ -32,13 +36,19 @@ class Cart extends StatefulWidget {
 int addProduct = 0;
 List<CartDisplayModel>? cartDisplaylist;
 class _CartState extends State<Cart> {
-late int _itemCount;
-  @override
+  Timer? _timer;
+    late int _itemCount;
+@override
   void initState() {
+  _timer = Timer(Duration(seconds: 1), () {
+    setState(() {
+
+    });
+  });
     super.initState();
     CartDisplayProviders(Dio()).getAll().then((value) {
       setState((){});
-      cartDisplaylist =[];
+      cartDisplaylist = [];
       cartDisplaylist!.addAll(value);
       print("=================cartDisplaylist=======================cartDisplaylist====================cartDisplaylist");
       print(value);
@@ -51,7 +61,8 @@ late int _itemCount;
 
   @override
   Widget build(BuildContext context) {
-    Idcart =cartDisplaylist![0].id;
+    cartDisplaylist![0].quantity==0? 1: cartnumber = cartDisplaylist![0].quantity;
+   // Idcart =cartDisplaylist[0].id;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -61,12 +72,18 @@ late int _itemCount;
           icon: Icon(Icons.arrow_back_ios_new),
         ),
       ),
-      body: ListView.builder(
+      body: cartDisplaylist==null?Container(): ListView.builder(
         itemCount: cartDisplaylist!.length,
           itemBuilder: (context, index) {
            return Dismissible(
-
              direction: DismissDirection.endToStart,
+             onDismissed: (direction) {
+               setState(() {
+                 cartDisplaylist!.clear();
+                 CartDelete("${cartDisplaylist![index].id}");
+               });
+
+             },
              key: Key("hi"),
              background: Container(
                decoration: BoxDecoration(
@@ -104,11 +121,11 @@ late int _itemCount;
                        children: [
                          Container(
                              margin: EdgeInsets.only(top: 15, left: 10),
-                             child: Text(cartDisplaylist![0].product.title, style: TextStyle(color: Colors.grey.shade600,fontWeight: FontWeight.bold),)),
+                             child: Text(cartDisplaylist![index].product.title, style: TextStyle(color: Colors.grey.shade600,fontWeight: FontWeight.bold),)),
                          Container(
                              margin: EdgeInsets.only(top: 1, left: 10, bottom: 12),
-                             child: Text(cartDisplaylist![0].store.name,style: TextStyle(color: Colors.blue,fontStyle: FontStyle.italic),)),
-                         plusAndminusWidget()
+                             child: Text(cartDisplaylist![index].store.name,style: TextStyle(color: Colors.blue,fontStyle: FontStyle.italic),)),
+                         DecressIncressWidget(cartnum:cartDisplaylist![index].quantity ,)
                        ],
                      ),
                      Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -133,7 +150,7 @@ late int _itemCount;
                  Container(
              margin: EdgeInsets.only(right: 5, top: 20, bottom: 2,left: 50),
              child:  Text(
-               "${cartDisplaylist![0].product.price}",
+               "${cartDisplaylist![index].product.price}",
                style: TextStyle(
                    color: Colors.grey.shade600,fontWeight: FontWeight.bold),
              ),
@@ -142,7 +159,7 @@ late int _itemCount;
                        Container(
                          margin: EdgeInsets.only(right: 5, top: 5, bottom: 2),
                          child: Text(
-                           "${cartDisplaylist![0].product.discount}",
+                           "${cartDisplaylist![index].product.discount}",
                            style: TextStyle(
                                decoration: TextDecoration.lineThrough,
                                color: Colors.red,fontWeight: FontWeight.bold),
@@ -191,7 +208,7 @@ late int _itemCount;
                  borderRadius: BorderRadius.all(Radius.circular(20))
                ),
                child: Center(
-                 child:FutureBuilder<double>(
+                 child:FutureBuilder<dynamic>(
                    future: CartTotalProvider(),
                    builder: ((context, snapshot) {
                      if(snapshot.hasData){
@@ -201,7 +218,7 @@ late int _itemCount;
                        return Text("${snapshot.error}") ;
                      }
                      else{
-                       return CircularProgressIndicator();
+                       return Container();
                      }
                    }
                    ),

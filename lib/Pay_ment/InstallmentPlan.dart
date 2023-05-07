@@ -10,7 +10,7 @@ void InstallmentPlan(BuildContext context) {
   showModalBottomSheet(
     isScrollControlled: true,
     backgroundColor: Colors.white,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20), topRight: Radius.circular(20))),
     context: context,
@@ -28,12 +28,12 @@ void InstallmentPlan(BuildContext context) {
                     children: [
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 40,horizontal: 10),
-                        child: Text("Installments Plan",style: TextStyle(fontSize: 25,color: Colors.blue,fontWeight: FontWeight.bold)),
+                        child: const Text("Installments Plan",style: TextStyle(fontSize: 25,color: Colors.blue,fontWeight: FontWeight.bold)),
                       ),
                       Stack(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(
+                            margin: const EdgeInsets.only(
                                 top: 0, bottom: 15, left: 20, right: 30),
                             decoration: BoxDecoration(
                                 borderRadius:
@@ -53,8 +53,7 @@ void InstallmentPlan(BuildContext context) {
                                           Valuewe = value;
                                           setState(() {});
                                         },
-                                      ),
-                                      RichText(text: TextSpan(
+                                      ),RichText(text: const TextSpan(
                                         text: "4 Weeks ",
                                         style: TextStyle(
                                           color: Colors.blue
@@ -65,7 +64,7 @@ void InstallmentPlan(BuildContext context) {
                                               fontSize: 10,
                                               color: Colors.blue
                                             ),
-                                          text: "(%25 from the cost every week)"
+                                          text: "(%25 of the cost every week)"
                                           )
                                         ]
                                       ),)
@@ -83,8 +82,8 @@ void InstallmentPlan(BuildContext context) {
                                           setState(() {});
                                         },
                                       ),
-                                      RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                      RichText(text: const TextSpan(
+                                          text: "8 Weeks  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -94,7 +93,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%12.50 of the cost every week)"
                                             )
                                           ]
                                       ),)
@@ -107,14 +106,14 @@ void InstallmentPlan(BuildContext context) {
                                         value: 3,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
-                                      RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                      RichText(text: const TextSpan(
+                                          text: "4 Months  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -124,7 +123,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%25 of the cost every months)"
                                             )
                                           ]
                                       ),)
@@ -137,14 +136,14 @@ void InstallmentPlan(BuildContext context) {
                                         value: 4,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
-                                      RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                      RichText(text: const TextSpan(
+                                          text: "6 Months ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -154,7 +153,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%15.66 of the cost every months)"
                                             )
                                           ]
                                       ),)
@@ -167,14 +166,14 @@ void InstallmentPlan(BuildContext context) {
                                         value: 5,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
-                                      RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                      RichText(text: const TextSpan(
+                                          text: "8 Months ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -184,7 +183,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%12.50 of the cost every months)"
                                             )
                                           ]
                                       ),)
@@ -197,14 +196,14 @@ void InstallmentPlan(BuildContext context) {
                                         value: 6,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
-                                      RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                      RichText(text: const TextSpan(
+                                          text: "12 Months ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -214,7 +213,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%7.83 of the cost every months)"
                                             )
                                           ]
                                       ),)
@@ -227,14 +226,14 @@ void InstallmentPlan(BuildContext context) {
                                         value: 7,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "18 Weeks",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -244,7 +243,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%5.55 of the cost every months)"
                                             )
                                           ]
                                       ),)
@@ -257,14 +256,14 @@ void InstallmentPlan(BuildContext context) {
                                         value: 8,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "24 Months  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -274,7 +273,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%3.92 of the cost every months)"
                                             )
                                           ]
                                       ),)
@@ -343,16 +342,16 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 1,
-                                        groupValue: Valuewe2,
+                                        value: 9,
+                                        groupValue: Valuewe,
                                         onChanged: (value) {
-                                          Valuewe2 = value;
+                                          Valuewe = value;
 
                                           setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "4 Weeks  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -362,7 +361,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every week)"
                                             )
                                           ]
                                       ),)
@@ -372,17 +371,17 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 2,
-                                        groupValue: Valuewe2,
+                                        value: 10,
+                                        groupValue: Valuewe,
                                         onChanged: (value) {
 
-                                          Valuewe2 = value;
+                                          Valuewe = value;
 
                                           setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "8 Weeks ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -392,7 +391,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every week)"
                                             )
                                           ]
                                       ),)
@@ -402,17 +401,17 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 3,
-                                        groupValue: Valuewe2,
+                                        value: 11,
+                                        groupValue: Valuewe,
                                         onChanged: (value) {
 
-                                          Valuewe2 = value;
+                                          Valuewe = value;
 
                                           setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "4 Months  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -422,7 +421,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: ",(%40 of the installment every month)"
                                             )
                                           ]
                                       ),)
@@ -432,17 +431,16 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 4,
+                                        value: 12,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
+                                          Valuewe = value;
 
-                                          setState(() {});*/
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "6 Months  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -452,7 +450,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every month)"
                                             )
                                           ]
                                       ),)
@@ -462,17 +460,16 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 5,
+                                        value: 13,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
+                                          Valuewe = value;
 
-                                          setState(() {});*/
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "8 Months  ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -482,7 +479,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every month)"
                                             )
                                           ]
                                       ),)
@@ -492,17 +489,17 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 6,
+                                        value: 14,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "12 Months",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -512,7 +509,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every month)"
                                             )
                                           ]
                                       ),)
@@ -522,17 +519,17 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 7,
+                                        value: 15,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "18 Months ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -542,7 +539,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every month)"
                                             )
                                           ]
                                       ),)
@@ -552,17 +549,17 @@ void InstallmentPlan(BuildContext context) {
                                     children: [
                                       Radio(
 
-                                        value: 8,
+                                        value: 16,
                                         groupValue: Valuewe,
                                         onChanged: (value) {
-                                          return;
-                                          /*Valuewe = value;
 
-                                          setState(() {});*/
+                                          Valuewe = value;
+
+                                          setState(() {});
                                         },
                                       ),
                                       RichText(text: TextSpan(
-                                          text: "4 Weeks ",
+                                          text: "24 Months ",
                                           style: TextStyle(
                                               color: Colors.blue
                                           ),
@@ -572,7 +569,7 @@ void InstallmentPlan(BuildContext context) {
                                                     fontSize: 10,
                                                     color: Colors.blue
                                                 ),
-                                                text: "(%25 from the cost every week)"
+                                                text: "(%40 of the installment every month)"
                                             )
                                           ]
                                       ),)
@@ -606,6 +603,8 @@ void InstallmentPlan(BuildContext context) {
                                             color: Colors.white,
                                             fontSize: 16),
                                       ))),
+
+
                               Blue_Button(
                                 ButtonText: "Select",
                                 height: 32,

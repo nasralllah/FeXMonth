@@ -89,7 +89,7 @@ class _InsallmentDoneState extends State<InsallmentDone> {
                   heNumberandThename: ".Nike",
                   theMoney: "435345",
                   Subtotal: "Subtotal",
-                  Subtotalcost: "45345",
+                  Subtotalcost: 45345.0,
                   shipping: "shipping",
                   shippingCost: "43543",
                   disCount: "disCount",

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fexmonths/Constens.dart';
 import 'package:fexmonths/Home_display/The_App_Bar.dart';
 import 'package:fexmonths/Home_display/the_main_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../API_Backend/Models/StorsDisplayModel.dart';
 import '../API_Backend/Provider/PStoresDisplayProvider.dart';
 import '../Components/Rating_Widget.dart';
 import '../Prudoct_display/Prudocts_Display.dart';
+import '../Prudoct_display/SideBar_Menu_Stores.dart';
 import '../Prudoct_display/SideBar_menu_Products.dart';
 import 'Carsoul_loading.dart';
 
@@ -40,6 +42,7 @@ class _StroesState extends State<Stroes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer:  const NavigationDrawerWidgetStores(),
       body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
                 SliverAppBar(
@@ -48,6 +51,7 @@ class _StroesState extends State<Stroes> {
                       Navigator.pop(context);
                       icon = true;
                     },
+
                     child: Container(),
                   ),
                   backgroundColor: Colors.white,
@@ -101,7 +105,7 @@ class _StroesState extends State<Stroes> {
                                     top: 4, left: 2, right: 2),
                                 child:  CircleAvatar(
                                   radius: 55.0,
-                                  backgroundColor: Colors.indigo,
+                                  backgroundColor: KBlueColor,
                                   child: CircleAvatar(
                                     radius: 53.0,
                                     backgroundColor: Colors.white,
@@ -115,8 +119,8 @@ class _StroesState extends State<Stroes> {
 
                                         ),
                                         radius: 50.0,
-                                        backgroundColor: Colors.grey,
-                                        foregroundColor: Colors.grey,
+                                        backgroundColor: KGreyColor1,
+                                        foregroundColor: KGreyColor1,
                                       ),
                                     ),
                                   ),
@@ -130,13 +134,13 @@ class _StroesState extends State<Stroes> {
                               const Spacer(),
                               Center(
                                 child: Text("${StoreList![index].attributes.name}",
-                                    style: TextStyle(color: Colors.blue.shade800)),
+                                    style: TextStyle(color: KBlueColor)),
                               ),
                               const Spacer(),
                                Center(
                                 child: Text("${StoreList![index].attributes.storename}",
                                     style: TextStyle(
-                                        color: Colors.grey, fontSize: 10)),
+                                        color: KGreyColor3, fontSize: 10)),
                               ),
                               const Spacer(),
                               Row(
@@ -182,10 +186,10 @@ class _StroesState extends State<Stroes> {
               color: Colors.white,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
               border: Border.all(
-                  color: Colors.grey.shade400),
+                  color: KGreyColor2),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey,
+                    color: KGreyColor2,
                     //offset: Offset(0, -1),
                     spreadRadius: 4,
                     blurRadius: 30
@@ -200,12 +204,14 @@ class _StroesState extends State<Stroes> {
               ),
               IconButton(
                   onPressed: () {
-                    print(StoreList![1].attributes.name.toString());
-                      },
-                  icon: Icon(
-                    FontAwesomeIcons.tags,
-                    color: Colors.grey,
-                    size: 30,
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const prudoctsDisplay()));                      },
+                  icon:ImageIcon(
+                    AssetImage("Images/path7.png"),
+                    color: KBlueColor,
+                    size: 60,
                   )),
               SizedBox(
                 width: 181.w,
@@ -213,15 +219,12 @@ class _StroesState extends State<Stroes> {
               ),
               IconButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const prudoctsDisplay()));
+
                   },
-                  icon: Icon(
-                    FontAwesomeIcons.houseChimneyUser,
-                    color: Colors.grey,
-                    size: 30,
+                  icon:const ImageIcon(
+                    AssetImage("Images/Group 80.png"),
+                    color: KBlueColor,
+                    size: 60,
                   )),
             ],
           ),
@@ -238,12 +241,14 @@ class _StroesState extends State<Stroes> {
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => Stroes(),
                 //     ));
               },
-              splashColor: Colors.blue,
+              backgroundColor: KBlueColor,
+              splashColor: KBlueColor,
               child: const Center(
-                child: Icon(
-                  Icons.store_mall_directory_outlined,
-                  size: 40,
-                ),
+                child:ImageIcon(
+                  AssetImage("Images/Mask Group 4@2x.png"),
+            color: Colors.white,
+            size: 40,
+          )
               )),
         ),
       ),

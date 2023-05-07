@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -58,10 +60,18 @@ class _homepagecontentState extends State<homepagecontent> {
   List<Cateogory>? categoryList;
   List<prducts>? prductList;
   List<HomeStores>? homeStoresList;
-
+  Timer? _timer;
+  int Counter = 0;
 
   @override
   void initState() {
+    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+      setState(() {
+        Counter++;
+      });
+    });
+
+
     carsoleProvider(Dio()).getAll().then((value) {
       setState(() {});
 
@@ -104,6 +114,13 @@ class _homepagecontentState extends State<homepagecontent> {
     FetchCartCount();
     super.initState();
   }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   Future<void> FetchCartCount() async{
    try{
     CartNumber cartnumber = await CartnumberNotifcation();
@@ -116,7 +133,6 @@ class _homepagecontentState extends State<homepagecontent> {
   }
 
   Widget build(BuildContext context) {
-      Slug= prductList![0].Slug;
     /* final List<Widget> imageSliders = imgList
         .map((item) => Shimmer.fromColors(
       highlightColor: Colo rs.white38,
@@ -229,63 +245,43 @@ class _homepagecontentState extends State<homepagecontent> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.only(
+
+                                    padding:  EdgeInsets.only(
                                         top: 4, left: 2, right: 2),
-                                    child: CircleAvatar(
+                                    child:  CircleAvatar(
                                       radius: 55.0,
-                                      backgroundColor: Colors.indigo,
+                                      backgroundColor: KBlueColor,
                                       child: CircleAvatar(
                                         radius: 53.0,
                                         backgroundColor: Colors.white,
                                         child: CircleAvatar(
                                           radius: 51,
                                           backgroundColor: Colors.black,
-                                          child: CircleAvatar(
-                                            radius: 50.0,
-                                            child: ClipOval(
-                                              child: FadeInImage.assetNetwork(
-                                                placeholder:
-                                                    "http://10.0.2.2:8000${homeStoresList![index].profile.logourl}${homeStoresList![index].profile.logourl}",
-                                                image:
-                                                    "http://10.0.2.2:8000${homeStoresList![index].profile.logourl}${homeStoresList![index].profile.logourl}",
-                                                fit: BoxFit.fill,
-                                                imageErrorBuilder: (context,
-                                                        error, stackTrace) =>
-                                                    phptosLoading(),
-                                                placeholderErrorBuilder: (context,
-                                                        error, stackTrace){
-                                                  return phptosLoading();
-                                                 },
-                                                fadeInDuration:
-                                                    Duration(milliseconds: 300),
-                                                fadeOutDuration:
-                                                    Duration(milliseconds: 300),
-                                                fadeInCurve: Curves.easeIn,
-                                                fadeOutCurve: Curves.easeOut,
+                                          child: homeStoresList == null? cardsLoading():
+                                          CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                "http://10.0.2.2:8000${homeStoresList![index].profile.logourl}"
 
-                                              ),
                                             ),
+                                            radius: 50.0,
+                                            backgroundColor: KGreyColor1,
+                                            foregroundColor: KGreyColor1,
                                           ),
                                         ),
                                       ),
                                     ),
-                                    // decoration: BoxDecoration(
-                                    //   color: Colors.white,
-                                    //   shape: BoxShape.circle,
-                                    //   boxShadow: [BoxShadow(blurRadius: 10,color: Colors.grey,spreadRadius: 3)]
-                                    // ),
                                   ),
                                   const Spacer(),
                                   Center(
-                                    child: Text("Store Name",
+                                    child: Text(homeStoresList![index].attributes.name,
                                         style: TextStyle(
-                                            color: Colors.blue.shade800)),
+                                            color: KBlueColor)),
                                   ),
                                   const Spacer(),
-                                  const Center(
-                                    child: Text("@Store Name",
+                                   Center(
+                                    child: Text(homeStoresList![index].attributes.storename,
                                         style: TextStyle(
-                                            color: Colors.grey, fontSize: 10)),
+                                            color: KGreyColor3, fontSize: 10)),
                                   ),
                                   const Spacer(),
                                   Row(
@@ -312,7 +308,7 @@ class _homepagecontentState extends State<homepagecontent> {
                                         margin:
                                             EdgeInsets.only(bottom: 5, right: 5),
                                         child: Text(
-                                          Rating != null ? Rating.toString() : "",
+                                          "",
                                         ),
                                       )
                                     ],
@@ -380,8 +376,10 @@ class _homepagecontentState extends State<homepagecontent> {
                                     padding: EdgeInsets.only(left: 5),
                                     child: InkWell(
                                       onTap: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SingleProduct(Slugg:prductList![index].Slug ),));
-                                        print("$Slug s;ldfks;dfk;dslkfa;sldkf;dslk'======================================================================================ads;ldsl");
+                                        Slug = prductList![index].Slug;
+
+                                        Navigator.push(context, MaterialPageRoute(builder: (context) => SingleProduct(Slugg:Slug ),));
+                                        print("$Slug======================================================================================ads;ldsl");
                                       },
                                       child: Product_Widgit(
                                         title:
@@ -494,10 +492,10 @@ class _homepagecontentState extends State<homepagecontent> {
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-              border: Border.all(color: Colors.grey.shade400),
+              border: Border.all(color: KGreyColor2),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey,
+                    color: KGreyColor2,
                     //offset: Offset(0, -1),
                     spreadRadius: 4,
                     blurRadius: 30)
@@ -512,10 +510,10 @@ class _homepagecontentState extends State<homepagecontent> {
                   onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => prudoctsDisplay(),));
                   },
-                  icon: Icon(
-                    FontAwesomeIcons.tags,
-                    color: Colors.grey,
-                    size: 30,
+                  icon:const ImageIcon(
+                    AssetImage("Images/path7.png"),
+                    color: KBlueColor,
+                    size: 60,
                   )),
               SizedBox(
                 width: 180.w,
@@ -528,10 +526,10 @@ class _homepagecontentState extends State<homepagecontent> {
                         MaterialPageRoute(
                             builder: (context) =>  Stroes()));
                   },
-                  icon: Icon(
-                    FontAwesomeIcons.houseChimneyUser,
-                    color: Colors.grey,
-                    size: 30,
+                  icon:const ImageIcon(
+                    AssetImage("Images/Group 80.png"),
+                    color: KBlueColor,
+                    size: 60,
                   )),
             ],
           ),
@@ -545,12 +543,14 @@ class _homepagecontentState extends State<homepagecontent> {
               onPressed: () {
               print('$cartCountnumbers');
               },
-              splashColor: Colors.blue,
+              splashColor: KBlueColor,
+            backgroundColor: KBlueColor,
               child: const Center(
-                child: Icon(
-                  Icons.store_mall_directory_outlined,
-                  size: 40,
-                ),
+                  child:ImageIcon(
+                    AssetImage("Images/Mask Group 4@2x.png"),
+                    color: Colors.white,
+                    size: 40,
+                  )
               )),
         ),
       ),

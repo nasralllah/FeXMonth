@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -10,11 +11,15 @@ import 'package:get/utils.dart';
 
 import '../API_Backend/Models/MyAddressModel.dart';
 import '../API_Backend/Models/SelectShippingModel.dart';
+import '../API_Backend/Models/chekingCodeModel.dart';
 import '../API_Backend/Provider/CartTotalProvider.dart';
+import '../API_Backend/Provider/ChekingCode.dart';
+import '../API_Backend/Provider/CreateOrdersProvider.dart';
 import '../API_Backend/Provider/SelectShippingProvider.dart';
 import '../API_Backend/Provider/myAddressProvider.dart';
 import '../Components/textFiledwithButton.dart';
 import '../Components/textWithbutton.dart';
+import '../Home_display/CartDisplay.dart';
 import 'addAddress.dart';
 import 'Invoice_widget.dart';
 import 'package:http/http.dart' as http;
@@ -28,14 +33,33 @@ class CheckOut extends StatefulWidget {
 
 List<ShippingOption> ShippingOptionList = [];
 List<myAddressModel>? myAddressModelList;
+List<CheekingCodeModel> CheekingCodeList = [];
+TextEditingController CooController = TextEditingController();
+TextEditingController noteConroller = TextEditingController();
 
 class _CheckOutState extends State<CheckOut> {
+  Timer? _timer;
+  int _counter = 0;
   @override
   void initState() {
     super.initState();
+    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+      setState(() {
+        _counter++;
+      });
+    });
     getAll();
 
-    myAddressProvider(Dio()).getAll().then((value) {
+    /* ChekingCode(Dio()).getAll(CooController.text).then((value) {
+      setState((){});
+      CheekingCodeList.addAll(value);
+      print("======CheekingCodeList==========CheekingCodeList=================CheekingCodeList");
+      print(value);
+      print("=======CheekingCodeList============CheekingCodeList===================mvCheekingCodeList");
+    });*/
+    myAddressProvider(
+      Dio(),
+    ).getAll().then((value) {
       setState(() {});
       myAddressModelList = [];
       myAddressModelList!.addAll(value);
@@ -53,6 +77,10 @@ class _CheckOutState extends State<CheckOut> {
     //   print(value);
     //   print("=================ShippingOptionList=======================ShippingOptionList====================ShippingOptionList");
     // });
+  }
+  void dispose(){
+    _timer?.cancel();
+    super.dispose();
   }
 
   Future<void> getAll() async {
@@ -84,6 +112,8 @@ class _CheckOutState extends State<CheckOut> {
     }
   }
 
+  // int subtotoall =
+  var item;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +135,19 @@ class _CheckOutState extends State<CheckOut> {
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
-              const textFiledWithbutton(
+              textFiledWithbutton(
+                ontap: () {
+                  ChekingCode(Dio()).getAll(CooController.text).then((value) {
+                    setState(() {});
+                    CheekingCodeList.addAll(value);
+                    print(
+                        "======CheekingCodeList==========CheekingCodeList=================CheekingCodeList");
+                    print(value);
+                    print(
+                        "=======CheekingCodeList============CheekingCodeList===================mvCheekingCodeList");
+                  });
+                },
+                controller: CooController,
                 labelText: "Coupon Code...",
               ),
               Container(
@@ -115,11 +157,11 @@ class _CheckOutState extends State<CheckOut> {
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
               textWithbutton(
-                title: Strings!.isEmpty? "Select Your Addres":Strings![0],
+                title: Addrss.isEmpty ? "Select Your Address" : Addrss[0],
                 onTap: () {
+                  Addrss.clear();
                   showDialogselect(context);
-                  Strings!.clear();
-                } ,
+                },
                 Width: 305,
                 Marginleftbuttoon: 240,
                 Margin: EdgeInsets.only(top: 15, left: 5),
@@ -131,8 +173,11 @@ class _CheckOutState extends State<CheckOut> {
                         color: Colors.blue, fontWeight: FontWeight.bold)),
               ),
               textWithbutton(
-                onTap: () => shpping(context),
-                title: Shipp!.isEmpty? "Select Shipping Method":Shipp![0],
+                onTap: () {
+                  shpping(context);
+                  shpp.clear();
+                },
+                title: shpp.isEmpty ? "Select Shipping Method" : shpp[0],
                 Width: 305,
                 Marginleftbuttoon: 240,
                 Margin: EdgeInsets.only(top: 15, left: 5),
@@ -147,9 +192,10 @@ class _CheckOutState extends State<CheckOut> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 15, left: 30, right: 25),
-                child: const TextField(
+                child: TextField(
+                  controller: noteConroller,
                   maxLines: 5,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Write a note for the driver...",
                     focusColor: Colors.blue,
                     border: OutlineInputBorder(
@@ -161,30 +207,195 @@ class _CheckOutState extends State<CheckOut> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 15, left: 30, right: 25),
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    /*border: Border.all(
+                  margin: const EdgeInsets.only(top: 15, left: 30, right: 25),
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      /*border: Border.all(
                     color: Colors.grey.shade400
                   ),*/
-                    borderRadius: const BorderRadius.all(Radius.circular(11))),
-                //height: 200,
-                width: double.infinity,
-                child: const InvoiceWidget(
-                  invoiceName: 'Bill',
-                  itemCount: 3,
-                  heNumberandThename: '1-Nike',
-                  theMoney: '242',
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(11))),
+                  //height: 200,
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 15, left: 10, bottom: 5),
+                        child: Text(
+                          "Bill",
+                          style: const TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
+                      ),
+                      ListView.builder(
+                        padding: EdgeInsets.only(top: 5, left: 10, bottom: 13),
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: cartDisplaylist!.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 5, left: 5),
+                                child: Text(
+                                  "${index + 1}-${cartDisplaylist![index].product.title}",
+                                  style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 100,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 5, left: 10),
+                                child: Text(
+                                  cartDisplaylist![index].total == null
+                                      ? ""
+                                      : "\$${cartDisplaylist![index].total}"
+                                          "  x ${cartDisplaylist![index].quantity}",
+                                  style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      Divider(
+                        endIndent: 20,
+                        indent: 20,
+                        color: Colors.grey.shade900,
+                      ),
+                      Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 5, left: 40),
+                            child: Text(
+                              "Subtotal",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 80,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, left: 30),
+                            child: Text(
+                              "${cartDisplaylist![0].total == null ? 0 : cartDisplaylist![0].total}",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 5, left: 40),
+                            child: Text(
+                              "shipping",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 80,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, left: 30),
+                            child: Text(
+                              ShippingOptionList[0].costPerKm == null
+                                  ? ""
+                                  : "${ShippingOptionList[0].costPerKm}",
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(top: 5, left: 40),
+                            child: Text(
+                              "disCount",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 80,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, left: 30),
+                            child: Text(
+                              '${cartDisplaylist![0].product.discount ?? 0}',
+                              style: const TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        endIndent: 30,
+                        indent: 30,
+                        color: Colors.grey.shade900,
+                      ),
+                      Row(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, left: 50),
+                            child: Text(
+                              "Total",
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 70,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5, left: 40),
+                            child: Text(
+                              "19983",
+                              // '${(cartDisplaylist[0].total.toDouble()+ShippingOptionList[0].costPerKm-cartDisplaylist[0].product.discount)}' ,
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+
+                  /*InvoiceWidget(
+
+                  heNumberandThename: cartDisplaylist[0].product.title??'defult',
+                  theMoney: */ /*cartDisplaylist[0].product.price == null?"":"${cartDisplaylist[0].product.discount}"*/ /*"778",
                   Subtotal: 'Subtotal',
-                  Subtotalcost: '4253',
+                  Subtotalcost:cartDisplaylist[0].total==null? 0: cartDisplaylist[0].total,
                   shipping: 'shipping',
-                  shippingCost: '4',
+                  shippingCost: ShippingOptionList[0].costPerKm==null?"":"${ShippingOptionList[0].costPerKm}",
                   disCount: 'DisCount',
-                  disCountCost: '3',
+                  disCountCost: '${cartDisplaylist[0].product.discount ?? 0}',
                   Total: 'Total',
-                  TotalCost: '399393',
-                ),
-              ),
+                  TotalCost: "kljlk" ,
+                ),*/
+                  ),
               Container(
                 height: 10,
               )
@@ -228,11 +439,13 @@ class _CheckOutState extends State<CheckOut> {
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))))),
-                    onPressed: () => Navigator.push(
+                    onPressed: () { Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => PayLater(),
-                        )),
+                        ));
+                    CreatOrder();
+                    },
                     child: const Center(
                         child: Text(
                       "Pay Later",
@@ -252,11 +465,14 @@ class _CheckOutState extends State<CheckOut> {
                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))))),
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PayNow(),
-                        )),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PayNow(),
+                          ));
+                      CreatOrder();
+                    },
                     child: const Center(
                         child: Text(
                       "Pay Now",

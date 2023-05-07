@@ -1,7 +1,7 @@
 class ShippingOption {
   final int id;
   final String title;
-  final int costPerKm;
+   var costPerKm;
   final int weight;
   final String time;
 

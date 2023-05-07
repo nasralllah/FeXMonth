@@ -9,7 +9,7 @@ void SendReview() async {
   var headers = {
     'Accept': 'application/vnd.api+json',
     'Content-Type': 'application/vnd.api+json',
-    'Authorization': 'Bearer 4|5oc5xYJ65zacvZoOIrqnyU0Kr6XZaSc8R7wU4Vwe'
+    'Authorization': header
   };
   var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/products/$Slug/rates'));
   request.fields.addAll({
@@ -23,8 +23,6 @@ void SendReview() async {
 
   if (response.statusCode == 200) {
     print(await response.stream.bytesToString());
-
-
 
   }
   else {

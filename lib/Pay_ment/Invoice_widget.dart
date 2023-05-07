@@ -9,7 +9,7 @@ class InvoiceWidget extends StatelessWidget {
  final String heNumberandThename;
  final String theMoney;
  final String Subtotal;
-  final String Subtotalcost;
+  final double Subtotalcost;
   final String shipping;
   final String shippingCost;
   final String disCount;
@@ -47,7 +47,7 @@ class InvoiceWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 5, left: 5),
                   child: Text(
-                    "${index+1}${heNumberandThename}",
+                    "${index+1}-$heNumberandThename",
                     style: const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),
@@ -91,7 +91,7 @@ class InvoiceWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 5, left: 30),
               child: Text(
-                Subtotalcost,
+                "$Subtotalcost",
                 style: TextStyle(
                     color: Colors.grey,
                     fontWeight: FontWeight.bold),

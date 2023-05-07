@@ -8,9 +8,11 @@ class AllProductDisplayModel{
   final Childstore store;
   final Childrates rates;
   final Childcomments comments;
+  final String? status;
+
 
   AllProductDisplayModel( {
-   required this.is_saved, required this.comments, required this.rates,required this.store, required this.id, required this.slug, required this.product_url, required this.picture_url, required this.attributes});
+   required this.is_saved,required  this.status, required this.comments, required this.rates,required this.store, required this.id, required this.slug, required this.product_url, required this.picture_url, required this.attributes});
   factory AllProductDisplayModel.fromjson(Map<String,dynamic> json) =>
       AllProductDisplayModel(
           id: json['id'],
@@ -22,24 +24,24 @@ class AllProductDisplayModel{
         rates: Childrates.fromjson(json['rates']),
         comments: Childcomments.fromjson(json['comments']),
         is_saved: json['is_saved'],
+          status: json['status']
+
       );
 }
 
 class Childattributes{
   final String title;
   final int price;
-   String? discount;
-  final int cost;
-  final String status;
+   var discount;
+  final int? cost;
 
-  Childattributes({required this.title,required  this.price,required  this.discount,required  this.cost,required  this.status});
+  Childattributes({required this.title,required  this.price,required  this.discount,required  this.cost});
   factory Childattributes.fromjson(Map<String,dynamic>json) =>
       Childattributes(
           title: json['title'],
           price: json['price'],
           discount: json['discount'],
           cost: json['cost'],
-          status: json['status']
       );
 
 }
@@ -61,7 +63,7 @@ class Childstore{
 
 class Childrates{
   final int number;
-  final int rate;
+  var rate;
 
   Childrates({required this.number, required this.rate});
   factory Childrates.fromjson(Map<String,dynamic>json)=>

@@ -28,10 +28,14 @@ Future main() async{
 
   runApp(Femonths(showHome: showHome));
 
+
 }
 class Femonths extends StatelessWidget {
   final bool showHome;
   const Femonths({Key? key,required this.showHome}):super(key: key);
+
+
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -39,6 +43,7 @@ class Femonths extends StatelessWidget {
         ChangeNotifierProvider<carsoleProvider>(create: (_) =>carsoleProvider(Dio()),)
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
               home: AnimatedSplashScreen(
                 duration: 3000,
                 splash: Image.asset("Images/Group 5.png"),

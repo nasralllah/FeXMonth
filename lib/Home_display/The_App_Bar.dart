@@ -28,7 +28,7 @@ class _App_BaarState extends State<App_Baar> {
           // alignment: Alignment.centerLeft,
           padding: EdgeInsets.only(top: 40.h, left: 5.w),
           icon: Icon(
-            icon == true ? Icons.menu : Icons.arrow_back,
+            icon == true ? Icons.menu : Icons.arrow_back,color: KGreyColor3,
           ),
           color: KIconAppbarColor,
           onPressed: () {
@@ -42,7 +42,7 @@ class _App_BaarState extends State<App_Baar> {
           margin: EdgeInsets.only(top: 40.h, left: 15.w),
           child: const Icon(
             Icons.notifications_on_outlined,
-            color: KIconAppbarColor,
+            color: KGreyColor3,
           ),
         ),
         Container(
@@ -66,7 +66,7 @@ class _App_BaarState extends State<App_Baar> {
                 margin: EdgeInsets.only(top: 40.h, left: 20.w),
                 child: Icon(
                   Icons.shopping_bag_outlined,
-                  color: KIconAppbarColor,
+                  color: KGreyColor3,
                 ),
                 width: 30,
               ),
@@ -94,7 +94,7 @@ class _App_BaarState extends State<App_Baar> {
           margin: EdgeInsets.only(top: 40.h, left: 25.w),
           child: const Icon(
             Icons.search,
-            color: KIconAppbarColor,
+            color: KGreyColor3,
           ),
         ),
       ],

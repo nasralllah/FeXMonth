@@ -91,22 +91,21 @@ class _cardCommentsState extends State<cardComments> {
                   )
                 ],
               ),
-              if(CommentsList == null)
+           /*   CommentsList == null?
                 Container()
-              else
-                Container(
+               : */Container(
                 width: double.infinity,
                 height: 200,
                 child: ListView.builder(
                     shrinkWrap: false,
                     primary: true,
-                    itemCount: CommentsList!.length,
+                    itemCount: CommentsList.length,
                     itemBuilder: (context, index) {
                       return DynamicComments(
                           widget:  Text("$date",style: TextStyle(fontSize: 9)),
-                          Texts:  Text( CommentsList![index].comment ),
-                          Imagee: CommentsList![index].writer.profile_picture,
-                          UserName:  CommentsList![index].writer.writer_name
+                          Texts:  Text( CommentsList[index].comment ),
+                          Imagee: CommentsList[index].writer.profile_picture,
+                          UserName:  CommentsList[index].writer.writer_name
                       );
                     },),
               )

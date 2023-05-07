@@ -18,7 +18,8 @@ class CommentsProvider extends ChangeNotifier {
       var response = await _dio.get("http://10.0.2.2:8000/api/products/$Slug/comments");
       if (response.statusCode == 200) {
         var res = response.data['data'];
-        print(response.data);
+
+        print(res);
         Comments SingleProductList = Comments.fromjson(res);
         // MapEntry<String,dynamic> entry = MapEntry(res, res['name']);
         return SingleProductList;

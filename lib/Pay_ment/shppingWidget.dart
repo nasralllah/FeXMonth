@@ -8,6 +8,9 @@ import '../Components/textFiledwithButton.dart';
 import 'Alet_CheckOut.dart';
 import 'addAddress.dart';
 
+
+
+ List<dynamic> shpp = [];
 shpping(BuildContext context) {
   return showDialog(
     context: context,
@@ -33,17 +36,15 @@ shpping(BuildContext context) {
                   return textWithbutton(
                     title: "${ShippingOptionList[index].title}",
                     onTap: (){
-                      Shipp!.clear();
-                      Shipp!.add(ShippingOptionList[index].title);
-                      Shipp!.add(ShippingOptionList[index].id);
-                      print(Shipp);
-
-
+                      shpp.clear();
+                      shpp.add(ShippingOptionList[index].title);
+                      shpp.add(ShippingOptionList[index].id);
+                      print(shpp);
                     },
                     Width: 224,
                     Marginleftbuttoon: 160,
-                    Cost: "\$${ShippingOptionList![index].costPerKm}",
-                    time: "${ShippingOptionList![index].time}",
+                    Cost: "\$${ShippingOptionList[index].costPerKm}",
+                    time: "${ShippingOptionList[index].time}",
                     Margin: EdgeInsets.only(left: 12, top: 5),
                   );
                 },

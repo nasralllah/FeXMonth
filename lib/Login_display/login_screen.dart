@@ -144,14 +144,14 @@ class _login_screenState extends State<login_screen> {
                         child: Checkbox(
                           value: checkbox,
                           checkColor: Colors.white,
-                          activeColor: KButtonsignColor,
+                          activeColor: KBlueColor,
                           onChanged: (bool? value) {
                             setState(() {
                               checkbox = value!;
                             });
                           },
                           side: BorderSide(
-                              color: KButtonsignColor,
+                              color: KBlueColor,
                               width: 1.0.w,
                               style: BorderStyle.solid),
                           shape: RoundedRectangleBorder(
@@ -175,7 +175,7 @@ class _login_screenState extends State<login_screen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: KButtonsignColor,
+                          color: KBlueColor,
                           borderRadius:
                               BorderRadius.all(Radius.circular(25.r))),
                       width: 350.w,

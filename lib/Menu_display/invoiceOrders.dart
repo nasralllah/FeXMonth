@@ -77,7 +77,7 @@ class InvoiceOrders extends StatelessWidget {
                     heNumberandThename: ".Nike",
                     theMoney: "2442",
                     Subtotal: "Subtotal",
-                    Subtotalcost: "425", shipping: "shipping",
+                    Subtotalcost: 45345.0, shipping: "shipping",
                     shippingCost: "245425", disCount: "DisCount",
                     disCountCost: "55", Total: "Total",
                     TotalCost: "4433453"

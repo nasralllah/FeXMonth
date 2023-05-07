@@ -2,7 +2,7 @@ class HomeStores {
   final int id;
   final ChilldModelattributes attributes;
   final ChilldModelprofile profile;
- // final ChilldModelrates rates;
+  final ChilldModelrates rates;
   final ChilldModelcategory category;
 
   HomeStores(
@@ -11,14 +11,14 @@ class HomeStores {
       required this.attributes,
       required this.profile,
       required this.category,
-    //  required this.rates
+       required this.rates
       });
   factory HomeStores.fromJson(Map<String, dynamic> json) => HomeStores(
         id: json['id'],
         attributes: ChilldModelattributes.fromJson(json['attributes']),
         profile: ChilldModelprofile.fromJson(json['profile']),
         category: ChilldModelcategory.fromJson(json['category']),
-       // rates: ChilldModelrates.fromJson(json['rates']),
+        rates: ChilldModelrates.fromJson(json['rates']),
       );
 }
 
@@ -48,7 +48,7 @@ class ChilldModelprofile {
       );
 }
 
-/*class ChilldModelrates {
+class ChilldModelrates {
   final int number;
   final int rate;
 
@@ -58,7 +58,7 @@ class ChilldModelprofile {
         number: json['number'],
         rate: json['rate'],
       );
-}*/
+}
 
 class ChilldModelcategory {
   final int id;

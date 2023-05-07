@@ -1,20 +1,15 @@
 import 'dart:convert';
+import 'package:fexmonths/Constens.dart';
 import 'package:http/http.dart' as http;
 
-import '../../Constens.dart';
-import '../../Prudoct_display/CardCommnents.dart';
-
-void SendCommment() async {
+void CartDelete(String id) async {
   var headers = {
     'Accept': 'application/vnd.api+json',
     'Content-Type': 'application/vnd.api+json',
     'Authorization': header
   };
-  var request = http.MultipartRequest('POST', Uri.parse('http://10.0.2.2:8000/api/products/$Slug/comments'));
-  request.fields.addAll({
-    'comment': commentController.text
-
-  });
+  var request = http.MultipartRequest(
+      'DELETE', Uri.parse('http://10.0.2.2:8000/api/mycart/$id/delete'));
 
   request.headers.addAll(headers);
 
@@ -25,7 +20,5 @@ void SendCommment() async {
   }
   else {
     print(response.reasonPhrase);
-    print( commentController.text);
   }
-
 }

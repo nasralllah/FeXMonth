@@ -23,7 +23,8 @@ class _cardRatingState extends State<cardRating> {
 
   addComments() {
     setState(() {
-      listComments.add(DynamicComments(
+      listComments.add(
+          DynamicComments(
         widget: Rating_widget(
             direction: Axis.horizontal,
             itemSizw: 10,

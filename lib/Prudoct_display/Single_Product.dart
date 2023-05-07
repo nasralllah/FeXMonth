@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:fexmonths/API_Backend/Provider/CarsolProvider.dart';
 import 'package:fexmonths/Home_display/Carsoul_loading.dart';
@@ -58,16 +60,23 @@ circleColor? SelectColor;
 const Active = Colors.blue;
 const inactive = Colors.white;
 List<SingleProductModel>? SingleProductModelList;
-List<Comments>? CommentsList;
+List<Comments> CommentsList = [];
 
 
 class _SingleProductState extends State<SingleProduct> {
   final controller = PageController(viewportFraction: 0.8, keepPage: false);
+  Timer? _timer;
 
   Color hearColors = Colors.blue;
 
   @override
   void initState() {
+    _timer = Timer(Duration(seconds: 1), () {
+      setState(() {
+        theNumber;
+      });
+    });
+
     SingleProductProvider(Dio()).getAll(Slug: widget.Slugg).then((value) {
       setState(() {});
         SingleProductModelList =[];
@@ -77,10 +86,20 @@ class _SingleProductState extends State<SingleProduct> {
       print(value);
       print(
           '==========$Slug==============lkads;fkda;lfshdsfhsadfhafhdfhjdfjdfjadshjadfsfsdjldfsdsh===================SingleProductModelList======================SingleProductModelList=========================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+      print('===========================================================================');
+
     });
     CommentsProvider(Dio()).getAll(Slug: Slug).then((value) {
       CommentsList = [];
-      CommentsList!.add(value);
+      CommentsList.add(value);
       print(
           '======CommentsList==================CommentsList========================CommentsList=============================CommentsList=============');
       print(value);
@@ -260,7 +279,7 @@ class _SingleProductState extends State<SingleProduct> {
                                       initialRating: Rating?? 3.7,
                                       ignoreGestures: true,
                                         direction: Axis.horizontal,
-                                        itemSizw: 20.0,
+                                        itemSizw: 15.0,
                                         semetricPadding: 2.0,
                                         onRatingUpdate: (value) {
                                           setState(() {

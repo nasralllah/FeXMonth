@@ -2,7 +2,7 @@ class CartDisplayModel {
   final int id;
   final int quantity;
   var net_cost;
-  var  total;
+  var total;
   final chidlproduct product;
   final childstore store;
 

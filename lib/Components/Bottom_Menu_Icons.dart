@@ -5,10 +5,11 @@ class bottom_menu_Icons extends StatelessWidget {
   const bottom_menu_Icons({
     Key? key,
     required this.onpress,
-    required this.iconassetImage,
+    required this.iconassetImage, required this.Size,
   }) : super(key: key);
   final VoidCallback onpress;
   final AssetImage iconassetImage;
+  final double Size;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class bottom_menu_Icons extends StatelessWidget {
         child: CircleAvatar(
           radius: 25,
           backgroundColor: Colors.white,
-          child: ImageIcon(iconassetImage, color: KIconcardColor),
+          child: ImageIcon(iconassetImage, color: KIconcardColor, size: Size),
         ));
   }
 }

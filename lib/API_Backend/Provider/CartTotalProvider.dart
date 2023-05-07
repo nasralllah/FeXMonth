@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-Future<double> CartTotalProvider() async {
+Future<dynamic> CartTotalProvider() async {
   var headers = {
     'Accept': 'application/vnd.api+json',
     'Content-Type': 'application/vnd.api+json',

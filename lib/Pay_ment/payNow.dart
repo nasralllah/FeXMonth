@@ -57,7 +57,7 @@ class _PayNowState extends State<PayNow> {
                   heNumberandThename: '1-Nike',
                   theMoney: '242',
                   Subtotal: 'Subtotal',
-                  Subtotalcost: '4253',
+                  Subtotalcost: 45345.0,
                   shipping: 'shipping',
                   shippingCost: '4',
                   disCount: 'DisCount',

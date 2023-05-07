@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -5,6 +6,7 @@ import '../Components/Bottom_Menu_Icons.dart';
 import '../Constens.dart';
 import '../Login_display/login_screen.dart';
 import '../Components/menu_card_layout.dart';
+import 'Fevaroit_Page.dart';
 
 class menu_animated extends StatefulWidget {
   const menu_animated({Key? key}) : super(key: key);
@@ -43,7 +45,8 @@ class _menu_animatedState extends State<menu_animated> {
                 )),
               ),
             )
-            /*child: Container(
+            */
+/*child: Container(
             //  margin: EdgeInsets.only(right: 300,bottom: 50),
             //  padding: EdgeInsets.only(top: 10 ),
               decoration: BoxDecoration(
@@ -52,7 +55,8 @@ class _menu_animatedState extends State<menu_animated> {
 
               ),
               child: Center(child: Text("Sign in",style: KTextButtonStyled)),
-            )*/
+            )*//*
+
             ),
       ),
       Container(
@@ -67,7 +71,7 @@ class _menu_animatedState extends State<menu_animated> {
               onpress: () {
                 print("Faviort");
               },
-              CardName: "Faviort",
+              CardName: "Favorite",
               Icons: FontAwesomeIcons.heart,
             ),
             Menu_Cards(
@@ -156,3 +160,4 @@ class _menu_animatedState extends State<menu_animated> {
     ]);
   }
 }
+*/

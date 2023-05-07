@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../Home_display/Carsoul_loading.dart';
 import 'Rating_Widget.dart';
+import '/Constens.dart';
 
 class Product_Widgit extends StatelessWidget {
   Product_Widgit({
@@ -27,7 +28,7 @@ class Product_Widgit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        shadowColor: Colors.grey,
+        shadowColor: KGreyColor1,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(7.0)),
             side: BorderSide(color: Colors.grey.withOpacity(0.4))),
@@ -43,12 +44,13 @@ class Product_Widgit extends StatelessWidget {
                 discount == 0 ? Container() : Container(
                         width: 35,
                         decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.4),
+                            color: KgreenColor4.withOpacity(0.4),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(3.0))),
                         margin: EdgeInsets.only(right: 10, top: 5),
                         child: Center(
-                            child: Text("$discount",style: TextStyle(color: Colors.green))),
+                            child: Text("$discount",style: TextStyle(color: KgreenColor4))),
+
                       ),
               ],
             ),
@@ -64,8 +66,9 @@ class Product_Widgit extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   child: Image.network(
                     ImageNetwork,
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.cover,
                   )),
+
             ),
             Spacer(),
             Container(
@@ -73,38 +76,40 @@ class Product_Widgit extends StatelessWidget {
               margin: EdgeInsets.only(left: 10, top: 5, right: 5),
               child: Text(
                 StoreName,
-                style: TextStyle(color: Colors.blue, fontSize: 13),
-              ),
-            ),
-            Spacer(),
-            Container(
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(left: 10, top: 5, right: 5),
-              child: status == null? Container(height: 10,color: Colors.green,):Text(
-                status,
-                style: TextStyle(color: Colors.grey, fontSize: 13),
+                style: TextStyle(color: KBlueColor, fontSize: 13),
               ),
             ),
             Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "$Price",
-                    style: TextStyle(fontSize: 13),
+                if(discount == 0)...[
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "$Price",
+                      style: TextStyle(fontSize: 13),
+                    ),
                   ),
-                ),
-                SizedBox(width: 5),
-               cost== null?Container(): Text(
-                  "$cost",
-                  style: TextStyle(
-                      color: Colors.red,
-                      decoration: TextDecoration.lineThrough,
-                      decorationColor: Colors.red,
-                      fontSize: 13),
-                )
+                ]
+                else...[
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "$discount",
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "$Price",
+                    style: TextStyle(
+                        color: KredColor4,
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: KredColor4,
+                        fontSize: 13),
+                  )
+                ]
               ],
             ),
             Spacer(),
@@ -125,13 +130,13 @@ class Product_Widgit extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(bottom: 5),
                   child: Icon(FontAwesomeIcons.solidComment,
-                      size: 15, color: Colors.blue),
+                      size: 15, color: KBlueColor),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 5, right: 5),
                   child: Text(
                     "100",
-                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                    style: TextStyle(fontSize: 10, color: KGreyColor3),
                   ),
                 )
               ],

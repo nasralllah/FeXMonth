@@ -8,9 +8,7 @@ import '../Components/textWithbutton.dart';
 import '../Menu_display/Address.dart';
 import 'Alet_CheckOut.dart';
 
-  List<dynamic>? Strings;
-List<dynamic>? Shipp;
-
+List<dynamic> Addrss = [];
 showDialogselect(BuildContext context) {
   return showDialog(
     context: context,
@@ -58,12 +56,11 @@ showDialogselect(BuildContext context) {
                 itemBuilder: (context, index) => textWithbutton(
                   title: myAddressModelList![index].name,
                   onTap: () {
-                    Strings!.clear();
-                    Strings!.add(myAddressModelList![index].name);
-                    Strings!.add(myAddressModelList![index].id.toString());
-                   print(Strings);
-
-                  },
+                    Addrss.clear();
+                    Addrss.add(myAddressModelList![index].name);
+                    Addrss.add(myAddressModelList![index].id);
+                    print(Addrss);
+                    },
                   Width: 224,
                   Marginleftbuttoon: 160,
                   Margin: EdgeInsets.only(top: 15, left: 5),

@@ -7,6 +7,7 @@ import '../Constens.dart';
 import '../Login_display/login_screen.dart';
 import '../Components/menu_card_layout.dart';
 import '../Pay_ment/addAddress.dart';
+import 'Fevaroit_Page.dart';
 import 'MyInstallment.dart';
 import 'myOrders.dart';
 
@@ -69,9 +70,11 @@ class _menu_animatedState extends State<menu_animated> {
           children: [
             Menu_Cards(
               onpress: () {
-                print("Faviort");
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Faevirot_Page(),));
+
+                print("Favorite");
               },
-              CardName: "Faviort",
+              CardName: "Favorite",
               Icons: FontAwesomeIcons.heart,
             ),
             Menu_Cards(
@@ -98,13 +101,6 @@ class _menu_animatedState extends State<menu_animated> {
               CardName: "Adress",
               Icons: FontAwesomeIcons.solidAddressCard,
             ),
-            Menu_Cards(
-              onpress: () {
-                print("Faviort");
-              },
-              CardName: "Faviort",
-              Icons: FontAwesomeIcons.heart,
-            ),
           ],
         ),
       ),
@@ -130,6 +126,17 @@ class _menu_animatedState extends State<menu_animated> {
                 print("hiii");
               },
               iconassetImage: AssetImage("Images/google (1).png"),
+              Size: 30,
+            ),
+            SizedBox(
+              width: 25.w,
+            ),
+            bottom_menu_Icons(
+              onpress: () {
+                print("hiii");
+              },
+              iconassetImage: AssetImage("Images/facebook.png",),
+              Size: 50,
             ),
             SizedBox(
               width: 25.w,
@@ -139,6 +146,7 @@ class _menu_animatedState extends State<menu_animated> {
                 print("hiii");
               },
               iconassetImage: AssetImage("Images/google (1).png"),
+              Size: 30,
             ),
             SizedBox(
               width: 25.w,
@@ -148,15 +156,7 @@ class _menu_animatedState extends State<menu_animated> {
                 print("hiii");
               },
               iconassetImage: AssetImage("Images/google (1).png"),
-            ),
-            SizedBox(
-              width: 25.w,
-            ),
-            bottom_menu_Icons(
-              onpress: () {
-                print("hiii");
-              },
-              iconassetImage: AssetImage("Images/google (1).png"),
+              Size: 30,
             ),
           ],
         ),

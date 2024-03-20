@@ -1,5 +1,6 @@
+import 'package:fexmonths/view/base_widget/OnbordingScreenButtons.dart';
 import 'package:flutter/material.dart';
-import 'Components/OnbordingScreenButtons.dart';
+
 import 'Constens.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,11 +73,11 @@ bool isfirstpage= false;
                       )
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 13),
+                    padding: const EdgeInsets.only(top: 11),
                     child: Card(
                       elevation: 1,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                      color: Colors.white38,
+                      color: KGreyColor1,
                       child: Container(
                         width: 250,
                         height: 300,
@@ -87,24 +88,32 @@ bool isfirstpage= false;
                               alignment: Alignment.topLeft,
                               child: CircleAvatar(
 
-                                child: Text("1",style: TextStyle(color: Colors.grey.shade700)),
-                                backgroundColor: Colors.grey.shade400,
+                                child: Text("1",style: TextStyle(color: KGreyColor4)),
+                                backgroundColor: KGreyColor2,
                               ),
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.only(top: 17),
+                              padding: const EdgeInsets.only(top: 1),
                               child: SizedBox(
-                                height: 230,
-                                width: 200,
+                                height: 178,
+                                width: 150,
                                 child: Image(
                                     image:
                                     AssetImage(
-                                        "Images/Group 68.png",
-                                    )),
+                                        "Images/Group 47.png",
+                                    )
+                                ),
                               ),
-                            )
+                            ),
+                            Text("Full Your Cart",style: KOnbordingScreenBold,),
+                            Text("Shopping from any store inside ",style: KTextOnbordingScreen,),
+                            Text("our",style: KTextOnbordingScreen,),
+                            Text("platform and get your cart full",style: KTextOnbordingScreen,),
+
+
                           ],
+
                         ),
                       ),
 
@@ -145,7 +154,7 @@ bool isfirstpage= false;
                       )
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 13),
+                    padding: const EdgeInsets.only(top: 11),
                     child: Card(
                       elevation: 1,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -166,17 +175,22 @@ bool isfirstpage= false;
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.only(top: 17),
+                              padding: const EdgeInsets.only(top: 1),
                               child: SizedBox(
-                                height: 230,
-                                width: 200,
+                                height: 178,
+                                width: 150,
                                 child: Image(
                                     image:
                                     AssetImage(
-                                      "Images/Group 69.png",
+                                      "Images/Group 48.png",
                                     )),
                               ),
-                            )
+                            ),
+                            Text("Checkout",style: KOnbordingScreenBold,),
+                            Text("Checkout from your cart than choose",style: KTextOnbordingScreen,),
+                            Text("installment method as",style: KTextOnbordingScreen,),
+                            Text("payment method",style: KTextOnbordingScreen,),
+
                           ],
                         ),
                       ),
@@ -218,7 +232,7 @@ bool isfirstpage= false;
                       )
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 13),
+                    padding: const EdgeInsets.only(top: 11),
                     child: Card(
                       shadowColor: Colors.black,
                       elevation: 1,
@@ -240,23 +254,28 @@ bool isfirstpage= false;
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.only(top: 17),
+                              padding: const EdgeInsets.only(top: 11),
                               child: SizedBox(
-                                height: 230,
-                                width: 200,
+                                height: 178,
+                                width: 130,
                                 child: Image(
                                     image:
                                     AssetImage(
-                                      "Images/Group 240.png",
+                                      "Images/Group 49.png",
                                     )),
                               ),
-                            )
+                            ),
+                            Text("choose Your Plan",style: KOnbordingScreenBold,),
+                            Text("After getting your Agreement,",style: KTextOnbordingScreen,),
+                            Text("you can select the plan that you wil",style: KTextOnbordingScreen,),
+                            Text("pay based it",style: KTextOnbordingScreen,),
                           ],
                         ),
                       ),
 
                     ),
-                  )
+                  ),
+
                 ],
               ),
             ),

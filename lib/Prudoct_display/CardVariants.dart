@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Components/Chose_Colores_Cirlcle.dart';
+
+import '../view/base_widget/Chose_Colores_Cirlcle.dart';
 import 'Single_Product.dart';
 class CardVarints extends StatelessWidget {
   const CardVarints({

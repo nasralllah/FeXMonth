@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-import '../API_Backend/CommentsProvider.dart';
-import '../API_Backend/Models/CommentModel.dart';
-import '../API_Backend/Provider/SendcommnetProvider.dart';
-import '../Components/Blue_Button.dart';
-import '../Components/DynamicComments.dart';
-import '../Components/Rating_Widget.dart';
-import '../Components/textFiledwithButton.dart';
 import '../Constens.dart';
+import '../data/API_Backend/Provider/SendcommnetProvider.dart';
+import '../utils/app_constants.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/DynamicComments.dart';
+import '../view/base_widget/Rating_Widget.dart';
 import 'Single_Product.dart';
 
 //final myController = TextEditingController();
@@ -30,15 +29,22 @@ class _cardCommentsState extends State<cardComments> {
   // final date= DateFormat.yMMMMd().format(now);
   @override
   //List<DynamicComments> listCommentsa = [];
-  double? Rating;
-
-  /*@override
-  void dispose() {
-    // TODO: implement dispose
-    myController.dispose();
-    super.dispose();
+  double Rating= 1;
+  List<DynamicComments> listComments = [];
+  DateTime now = DateTime.now();
+  String formatDate = DateFormat.yMMMEd().format(DateTime.now());
+  addComments() {
+    setState(() {
+      listComments.add(
+          DynamicComments(
+            widget: Text(formatDate),
+            Texts: Text(
+                commentController.text),
+            Imagee: "Images/profile.png",
+            UserName: AppConstants.USER,
+          ));
+    });
   }
-*/
   @override
   Widget build(BuildContext context) {
     return Visibility(
@@ -79,6 +85,7 @@ class _cardCommentsState extends State<cardComments> {
                         Margintop: 20,
                         Marginleft: 260,
                         onTap: (){
+                          addComments();
                           SendCommment();
                         },
                         textStyle: TextStyle(color: Colors.white),
@@ -91,24 +98,17 @@ class _cardCommentsState extends State<cardComments> {
                   )
                 ],
               ),
-           /*   CommentsList == null?
+             CommentsList == null?
                 Container()
-               : */Container(
-                width: double.infinity,
-                height: 200,
-                child: ListView.builder(
-                    shrinkWrap: false,
-                    primary: true,
-                    itemCount: CommentsList.length,
-                    itemBuilder: (context, index) {
-                      return DynamicComments(
-                          widget:  Text("$date",style: TextStyle(fontSize: 9)),
-                          Texts:  Text( CommentsList[index].comment ),
-                          Imagee: CommentsList[index].writer.profile_picture,
-                          UserName:  CommentsList[index].writer.writer_name
-                      );
-                    },),
-              )
+               :Container(
+               width: double.infinity,
+               height: 200,
+               child: ListView.builder(
+                   shrinkWrap: false,
+                   primary: true,
+                   itemCount: listComments.length,
+                   itemBuilder: (_, index) => listComments[index]),
+             )
 
         ],
       )),

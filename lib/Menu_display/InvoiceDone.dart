@@ -1,13 +1,9 @@
-import 'package:fexmonths/Components/Blue_Button.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 
-import '../Components/InvoiceWidgetDesign2.dart';
 import '../Pay_ment/Invoice_widget.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-import '../Pay_ment/InvoicewithPaymentbutton.dart';
-import '../Pay_ment/payNow.dart';
+import '../view/base_widget/InvoiceWidgetDesign2.dart';
 class InsallmentDone extends StatefulWidget {
   const InsallmentDone({Key? key}) : super(key: key);
 

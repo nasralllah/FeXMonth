@@ -2,7 +2,8 @@ import 'package:fexmonths/Constens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../API_Backend/Provider/AddQuantityProvider.dart';
+import '../data/API_Backend/Provider/AddQuantityProvider.dart';
+
 class increesAndDecress extends StatefulWidget {
   const increesAndDecress({
     Key? key,

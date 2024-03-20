@@ -1,17 +1,14 @@
 import 'dart:async';
 
-import 'package:fexmonths/Components/Blue_Button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import '../API_Backend/Provider/SendAddressProvider.dart';
-import '../API_Backend/Provider/locations.dart' as locations;
-import '../Components/textFiledwithButton.dart';
+
 import '../Pay_ment/addAddress.dart';
+import '../data/API_Backend/Provider/SendAddressProvider.dart';
+import '../view/base_widget/Blue_Button.dart';
 
 class Adress extends StatefulWidget {
   const Adress({Key? key}) : super(key: key);

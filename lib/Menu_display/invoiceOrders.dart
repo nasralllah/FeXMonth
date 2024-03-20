@@ -2,7 +2,8 @@ import 'package:fexmonths/Pay_ment/Invoice_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Components/InvoiceWidgetDesign2.dart';
+import '../view/base_widget/InvoiceWidgetDesign2.dart';
+
 
 class InvoiceOrders extends StatelessWidget {
   const InvoiceOrders({Key? key}) : super(key: key);

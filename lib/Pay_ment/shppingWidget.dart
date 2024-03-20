@@ -1,10 +1,8 @@
-import 'package:fexmonths/Components/textWithbutton.dart';
+
 import 'package:flutter/material.dart';
 
-import '../API_Backend/Models/SelectShippingModel.dart';
-import '../API_Backend/Provider/SelectShippingProvider.dart';
-import '../Components/Blue_Button.dart';
-import '../Components/textFiledwithButton.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/textWithbutton.dart';
 import 'Alet_CheckOut.dart';
 import 'addAddress.dart';
 
@@ -31,20 +29,20 @@ shpping(BuildContext context) {
               ListView.builder(
                 shrinkWrap: true,
                 physics: ClampingScrollPhysics(),
-                itemCount: ShippingOptionList.length,
+                itemCount: ShippingOptionList?.length,
                 itemBuilder: (context, index) {
                   return textWithbutton(
-                    title: "${ShippingOptionList[index].title}",
+                    title: "${ShippingOptionList?[index].title}",
                     onTap: (){
                       shpp.clear();
-                      shpp.add(ShippingOptionList[index].title);
-                      shpp.add(ShippingOptionList[index].id);
+                      shpp.add(ShippingOptionList?[index].title);
+                      shpp.add(ShippingOptionList?[index].id);
                       print(shpp);
                     },
                     Width: 224,
                     Marginleftbuttoon: 160,
-                    Cost: "\$${ShippingOptionList[index].costPerKm}",
-                    time: "${ShippingOptionList[index].time}",
+                    Cost: "\$${ShippingOptionList?[index].costPerKm}",
+                    time: "${ShippingOptionList?[index].time}",
                     Margin: EdgeInsets.only(left: 12, top: 5),
                   );
                 },

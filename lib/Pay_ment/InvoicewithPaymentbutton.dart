@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Components/Blue_Button.dart';
+import '../view/base_widget/Blue_Button.dart';
 class InvoicewithPayment extends StatelessWidget {
    InvoicewithPayment({Key? key, required this.invoiceName, required this.itemCount,this.ontap}) : super(key: key);
 

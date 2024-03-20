@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Components/Rating_Widget.dart';
+import '../view/base_widget/Rating_Widget.dart';
+
 
 class Faevirot_Page extends StatefulWidget {
   const Faevirot_Page({Key? key}) : super(key: key);

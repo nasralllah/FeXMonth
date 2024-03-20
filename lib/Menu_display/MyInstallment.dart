@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../Components/Blue_Button.dart';
-import '../Components/textWithButtonOrders.dart';
+
 import '../Pay_ment/InvoiceaskAgreement.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/textWithButtonOrders.dart';
 import 'InstallmentInvoiceRunning.dart';
 import 'InvoiceDone.dart';
 import 'invoiceOrders.dart';

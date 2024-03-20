@@ -1,8 +1,9 @@
 import 'package:fexmonths/Pay_ment/payNow.dart';
 import 'package:flutter/material.dart';
 
-import '../Components/Blue_Button.dart';
-import '../Components/textWithbutton.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/textWithbutton.dart';
+
 
 dynamic Valuewe = 1;
 dynamic Valuewe2 = 1;

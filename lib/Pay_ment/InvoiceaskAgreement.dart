@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Components/InvoiceWidgetDesign2.dart';
+import '../view/base_widget/InvoiceWidgetDesign2.dart';
 import 'Invoice_widget.dart';
 
 class InvoiceaskAgreement extends StatefulWidget {

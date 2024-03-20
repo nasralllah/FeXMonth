@@ -33,6 +33,12 @@ dependencies:
   geolocator: ^9.0.2
   modal_bottom_sheet: ^2.1.2
   syncfusion_flutter_gauges: ^18.2.44
+  logger:
+  cached_network_image:
+  loading_overlay_pro:
+  intl:
+
+
 
 
 

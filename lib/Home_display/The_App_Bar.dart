@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fexmonths/Home_display/the_main_screen.dart';
 
 import '../Prudoct_display/Single_Product.dart';
+import '../data/API_Backend/Provider/NotifcationCartNumberModel.dart';
 import 'CartDisplay.dart';
 
 class App_Baar extends StatefulWidget {
@@ -23,19 +24,7 @@ class _App_BaarState extends State<App_Baar> {
     return Row(
       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        IconButton(
-          //color: Colors.red,
-          // alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(top: 40.h, left: 5.w),
-          icon: Icon(
-            icon == true ? Icons.menu : Icons.arrow_back,color: KGreyColor3,
-          ),
-          color: KIconAppbarColor,
-          onPressed: () {
-            icon == true;
-            print(icon);
-          },
-        ),
+     Expanded(child: Container(),),
         Container(
           //color: Colors.red,
           // alignment: Alignment.centerLeft,
@@ -54,8 +43,8 @@ class _App_BaarState extends State<App_Baar> {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const Cart(),));
+          onTap: () async {
+            await Navigator.push(context, MaterialPageRoute(builder: (context) => const Cart(),));
             print("carttttt");
           },
           child: Stack(
@@ -70,8 +59,8 @@ class _App_BaarState extends State<App_Baar> {
                 ),
                 width: 30,
               ),
-              Visibility(
-                visible: false,
+         /*     Visibility(
+                visible: true,
                 child: Positioned(
                   width: 15,
                   height: 15,
@@ -80,11 +69,13 @@ class _App_BaarState extends State<App_Baar> {
                   child: Container(
                     decoration: const BoxDecoration(color: Colors.red,
                         borderRadius: BorderRadius.all(Radius.circular(10))),
-                   /* margin: EdgeInsets.only(top: 30.h, left: 40.w),*/
-                    child: Center(child: Text('$cartCountnumbers}',style: TextStyle(color: Colors.white,fontSize: 9,fontWeight: FontWeight.bold),)),
+                   *//* margin: EdgeInsets.only(top: 30.h, left: 40.w),*//*
+                    child: SizedBox()
+
+                    *//**//*,
                   ),
                 ),
-              )
+              )*/
             ],
           )
         ),
@@ -97,6 +88,7 @@ class _App_BaarState extends State<App_Baar> {
             color: KGreyColor3,
           ),
         ),
+        Container()
       ],
     );
   }

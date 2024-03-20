@@ -1,12 +1,16 @@
 import 'package:fexmonths/Constens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../data/API_Backend/Provider/decresssProvider.dart';
 class DecressIncressWidget extends StatefulWidget {
   DecressIncressWidget({
-    Key? key, required this.cartnum,
+    Key? key, required this.cartnum, required this.addid, required this.minusid
   }) : super(key: key);
 
-late final int cartnum;
+  int cartnum;
+  int addid;
+  int minusid;
 
   @override
   State<DecressIncressWidget> createState() => _DecressIncressWidgetState();
@@ -17,6 +21,7 @@ class _DecressIncressWidgetState extends State<DecressIncressWidget> {
   void incressNumber(){
     if(widget.cartnum>=0){
       setState(() {
+        AddQuant(widget.addid);
         widget.cartnum++;
       });
     }}
@@ -24,6 +29,7 @@ class _DecressIncressWidgetState extends State<DecressIncressWidget> {
     if(widget.cartnum>=1){
 
       setState(() {
+        minusQuant(widget.minusid);
         widget.cartnum--;
       });
     }

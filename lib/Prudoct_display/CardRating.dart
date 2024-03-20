@@ -1,9 +1,11 @@
-import 'package:fexmonths/Components/Rating_Widget.dart';
 import 'package:flutter/material.dart';
 
-import '../API_Backend/Provider/SendCommentRating.dart';
-import '../Components/Blue_Button.dart';
-import '../Components/DynamicComments.dart';
+
+import '../data/API_Backend/Provider/SendCommentRating.dart';
+import '../utils/app_constants.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/DynamicComments.dart';
+import '../view/base_widget/Rating_Widget.dart';
 import 'Single_Product.dart';
 
 final myControllerRating = TextEditingController();
@@ -16,25 +18,28 @@ class cardRating extends StatefulWidget {
   @override
   State<cardRating> createState() => _cardRatingState();
 }
-double? Ratingg;
+double Ratingg = 1;
 
 class _cardRatingState extends State<cardRating> {
-  List<DynamicComments> listComments = [];
+  List<DynamicComments> listCommentsRatinge = [];
 
   addComments() {
     setState(() {
-      listComments.add(
+      listCommentsRatinge.add(
           DynamicComments(
         widget: Rating_widget(
             direction: Axis.horizontal,
             itemSizw: 10,
             semetricPadding: 1,
             ignoreGestures: true,
-            initialRating: 1),
+            initialRating: Ratingg
+        ,onRatingUpdate: (value){
+          Ratingg = value;
+        }),
         Texts: Text(
             myControllerRating.text == null ? "" : myControllerRating.text),
-        Imagee: '',
-        UserName: '',
+        Imagee: "Images/profile.png",
+        UserName: AppConstants.USER,
       ));
     });
   }
@@ -356,8 +361,8 @@ class _cardRatingState extends State<cardRating> {
                     child: ListView.builder(
                         shrinkWrap: false,
                         primary: true,
-                        itemCount: listComments.length,
-                        itemBuilder: (_, index) => listComments[index]),
+                        itemCount: listCommentsRatinge.length,
+                        itemBuilder: (_, index) => listCommentsRatinge[index]),
                   )
                 ],
               )),

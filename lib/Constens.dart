@@ -1,6 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'data/API_Backend/ApiPost.dart';
+import 'data/API_Backend/Provider/CreatAccountProvider.dart';
+
+
 const KIconAppbarColor =Color(0xFF7E84A3);
 const KBlueColor =  Color(0xFF384AEB);
 const KIconcardColor = Color(0xFF000000);
@@ -16,7 +21,7 @@ const KgreenColor4 = Color(0xFF34DD34);
 
 
 
-const String ApiProductsUrl = "http://10.0.2.2:8000/api/";
+const String ApiProductsUrl = "/api/";
 const String variants = "/variants";
 const String comments = "/comments";
 const String rating = "/rating";
@@ -27,7 +32,7 @@ const String add_to_cart = "/add_to_cart";
   int cartCountnumbers = 0;
   int Idcart = 0;
   int cartnumber = 1;
-  String header = "Bearer 12|77iPtQw0jyg39ccmmb5AAD0YTlw5fCRnSW6IQl1C";
+  String TOkedns = 'Bearer 67|45XeXqbpODHD8MAebsJzPF9eHuGXL29nfjgj1QxD';
 
 
 
@@ -43,8 +48,11 @@ final KTextOnbordingScreenBold = TextStyle(
   fontSize: 15,
   fontWeight: FontWeight.bold,
   color: Colors.grey.shade600,);
-
+final KOnbordingScreenBold = TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+  color: KGreyColor3,);
 final KTextOnbordingScreen = TextStyle(
-  fontSize: 12,
-  color: Colors.grey,);
+  fontSize: 11,
+  color: KGreyColor3);
 

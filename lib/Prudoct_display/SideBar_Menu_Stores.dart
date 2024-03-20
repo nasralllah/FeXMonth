@@ -15,6 +15,7 @@ class _NavigationDrawerWidgetStoresState extends State<NavigationDrawerWidgetSto
   @override
   Widget build(BuildContext context) {
     return Drawer(
+
       child: SingleChildScrollView(
         child: Container(
           child: Column(

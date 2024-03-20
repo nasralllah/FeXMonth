@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../Components/Blue_Button.dart';
-import '../Components/textFiledwithButton.dart';
-import '../Components/textWithbutton.dart';
 import '../Home_display/CartDisplay.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/textWithbutton.dart';
 import 'Alert.dart';
 import 'Alet_CheckOut.dart';
 import 'InstallmentPlan.dart';
-import 'Invoice_widget.dart';
 
 class PayLater extends StatelessWidget {
   const PayLater({Key? key}) : super(key: key);
@@ -137,9 +135,9 @@ class PayLater extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 5, left: 30),
                   child: Text(
-                    ShippingOptionList[0].costPerKm == null
+                    ShippingOptionList?[0].costPerKm == null
                         ? ""
-                        : "${ShippingOptionList[0].costPerKm}",
+                        : "${ShippingOptionList?[0].costPerKm}",
                     style: const TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold),
@@ -217,7 +215,7 @@ class PayLater extends StatelessWidget {
             child: const Text("Payment Method",style: const TextStyle(color: Colors.blue,fontWeight: FontWeight.bold)),
           ),
           textWithbutton(title: 'Select installment Method',onTap: () => InstallmentPlan(context), Width: 305, Marginleftbuttoon: 240, Margin:  EdgeInsets.only(top: 15,left: 5),),
-          Blue_Button(ButtonText: 'Ask the Agreement', height: 32, width: 160, Margintop: 20, Marginleft: 100, textStyle: const TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue),onTap: () => showdailg(context), Marginbottom: 0, MarginRight: 0,)
+          Blue_Button(ButtonText: 'Ask the Agreement', height: 32, width: 160, Margintop: 20, Marginleft: 100, textStyle: const TextStyle(color: Colors.white), buttonColor: MaterialStatePropertyAll<Color>(Colors.blue),onTap: () => showdailg(context,'hi',"Images/Group 446.png","The coupon code is not","correct, try another code"), Marginbottom: 0, MarginRight: 0,)
 
         ]
     )

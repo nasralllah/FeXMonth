@@ -1,9 +1,8 @@
-import 'package:fexmonths/Components/textFiledwithButton.dart';
+
+import 'package:fexmonths/view/base_widget/Blue_Button.dart';
 import 'package:flutter/material.dart';
 
-import '../Components/Blue_Button.dart';
-import '../Components/Text_filedd_widget.dart';
-import '../Components/textWithbutton.dart';
+import '../view/base_widget/textWithbutton.dart';
 import 'Invoice_widget.dart';
 import 'PaymentMoethod.dart';
 

@@ -3,9 +3,9 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Components/Blue_Button.dart';
-import '../Components/textWithbutton.dart';
 import '../Menu_display/Address.dart';
+import '../view/base_widget/Blue_Button.dart';
+import '../view/base_widget/textWithbutton.dart';
 import 'Alet_CheckOut.dart';
 
 List<dynamic> Addrss = [];

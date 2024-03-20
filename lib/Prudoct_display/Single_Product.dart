@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:fexmonths/API_Backend/Provider/CarsolProvider.dart';
+
 import 'package:fexmonths/Home_display/Carsoul_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -11,19 +11,18 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../API_Backend/CommentsProvider.dart';
-import '../API_Backend/Models/CommentModel.dart';
-import '../API_Backend/Models/SingleProductModel.dart';
-import '../API_Backend/Models/productsDetails.dart';
-import '../API_Backend/Provider/AddToCartProvider.dart';
-import '../API_Backend/Provider/SingleProductProvider.dart';
-import '../API_Backend/Provider/productDetailsProvider.dart';
-import '../Components/Chose_Colores_Cirlcle.dart';
-import '../Components/DynamicComments.dart';
-import '../Components/Rating_Widget.dart';
-import '../Components/plusAndminusWidget.dart';
 import '../Constens.dart';
 import '../Home_display/the_main_screen.dart';
+import '../data/API_Backend/CommentsProvider.dart';
+import '../data/API_Backend/Models/CommentModel.dart';
+import '../data/API_Backend/Models/CommentRatingModel.dart';
+import '../data/API_Backend/Models/SingleProductModel.dart';
+import '../data/API_Backend/Provider/AddToCartProvider.dart';
+import '../data/API_Backend/Provider/SingleProductProvider.dart';
+import '../data/API_Backend/Provider/src/GetCoomentProvider.dart';
+import '../view/base_widget/Rating_Widget.dart';
+import '../view/base_widget/loading_widget.dart';
+import '../view/base_widget/plusAndminusWidget.dart';
 import 'CardCommnents.dart';
 import 'CardDetels.dart';
 import 'CardRating.dart';
@@ -42,14 +41,15 @@ bool cardVisibleRating = false;
 class SingleProduct extends StatefulWidget {
   var Slugg;
 
-   SingleProduct({required this.Slugg,Key? key}) : super(key: key);
-   
-   @override
+  SingleProduct({required this.Slugg, Key? key}) : super(key: key);
+
+  @override
   State<SingleProduct> createState() => _SingleProductState();
 }
 
-enum Catogerys { details, vairants, Comments, Rating}
-enum heart{blue,white}
+enum Catogerys { details, vairants, Comments, Rating }
+
+enum heart { blue, white }
 
 enum circleColor { red, blue, green }
 
@@ -79,23 +79,31 @@ class _SingleProductState extends State<SingleProduct> {
 
     SingleProductProvider(Dio()).getAll(Slug: widget.Slugg).then((value) {
       setState(() {});
-        SingleProductModelList =[];
-      SingleProductModelList!.add(value);
+      SingleProductModelList = [];
+      SingleProductModelList?.add(value);
 
       print(SingleProductModelList![0].pictures);
       print(value);
       print(
           '==========$Slug==============lkads;fkda;lfshdsfhsadfhafhdfhjdfjdfjadshjadfsfsdjldfsdsh===================SingleProductModelList======================SingleProductModelList=========================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-      print('===========================================================================');
-
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
+      print(
+          '===========================================================================');
     });
     CommentsProvider(Dio()).getAll(Slug: Slug).then((value) {
       CommentsList = [];
@@ -109,24 +117,21 @@ class _SingleProductState extends State<SingleProduct> {
 
   }
 
-  void heatColor(){
+
+  void heatColor() {
     setState(() {
-
-    if (hearColors== Colors.blue ){
-      hearColors = Colors.red;
-    }
-    else
-      hearColors = Colors.blue;
+      if (hearColors == Colors.blue) {
+        hearColors = Colors.red;
+      } else
+        hearColors = Colors.blue;
     });
-
-
   }
 
   Widget build(BuildContext context) {
     return SafeArea(
       top: true,
       child: Scaffold(
-          body: SingleChildScrollView(
+          body: SingleProductModelList== null ? Center(child: getloading3(context),): SingleProductModelList?.length==0 ?Center(child: Text('this product has been deleted '),):SingleChildScrollView(
             child: GestureDetector(
               onHorizontalDragEnd: (details) {
                 if (details.primaryVelocity! > 0) {
@@ -141,15 +146,15 @@ class _SingleProductState extends State<SingleProduct> {
                       Container(
                         width: double.infinity,
                         child: CarouselSlider.builder(
-                          itemCount: SingleProductModelList!.length,
-                          options: CarouselOptions(
-                            height: 180,
-                            viewportFraction: 1,
-                            enlargeCenterPage: false,
-                            onPageChanged: (index,reason){},
-                            scrollDirection: Axis.horizontal
-                            /*productsDetailsList![index].pictures.pictures.length = index*/
-                            /*aspectRatio: 1,
+                            itemCount: SingleProductModelList!.length,
+                            options: CarouselOptions(
+                                height: 180,
+                                viewportFraction: 1,
+                                enlargeCenterPage: false,
+                                onPageChanged: (index, reason) {},
+                                scrollDirection: Axis.horizontal
+                                /*productsDetailsList![index].pictures.pictures.length = index*/
+                                /*aspectRatio: 1,
                               viewportFraction: 1,
                               initialPage: 0,
                               enableInfiniteScroll: true,
@@ -161,24 +166,22 @@ class _SingleProductState extends State<SingleProduct> {
                               enlargeCenterPage: true,
                               enlargeFactor: 0.4,
                               scrollDirection: Axis.horizontal,*/
-                          ),
-                          itemBuilder:
-                              (context, index, realIndex) =>
-                             Image.network(
-                              // productsDetailsList![index].pictures.pictures.toString()
-                              // "http://10.0.2.2:8000${SingleProductModelList![index].pictures}"
-                               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzWTTnEpu2pPbAjH2ps-MW4nsjUrmn3gNlgA&usqp=CAU',
-                              fit: BoxFit.fill,
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                }
-                                return carsoulLoadin();
-                              },
-                            )
-                        ),
+                                ),
+                            itemBuilder: (context, index, realIndex) =>
+                                Image.network(
+                                  // productsDetailsList![index].pictures.pictures.toString()
+                                  /* "http://10.0.2.2:8000${SingleProductModelList![index].pictures}*/
+                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzWTTnEpu2pPbAjH2ps-MW4nsjUrmn3gNlgA&usqp=CAU',
+                                  fit: BoxFit.fill,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return carsoulLoadin();
+                                  },
+                                )),
                       ),
                       Row(
                         children: [
@@ -187,12 +190,9 @@ class _SingleProductState extends State<SingleProduct> {
                               icon: Icon(
                                 FontAwesomeIcons.arrowLeft,
                                 color: Colors.blue,
-                              )
-                          ),
-
+                              )),
                         ],
                       ),
-
                       SingleChildScrollView(
                         physics: PageScrollPhysics(),
                         child: Container(
@@ -206,58 +206,57 @@ class _SingleProductState extends State<SingleProduct> {
                           child: Column(
                             children: [
                               Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-
-                                Container(
-                                  margin: EdgeInsets.only(left: 160),
-
-                                  child: SmoothPageIndicator(
-                                    controller: controller,
-                                    count: imglist,
-                                    effect: const SwapEffect(
-                                        dotHeight: 6, dotWidth: 6, spacing: 10),
+                                  Container(
+                                    margin: EdgeInsets.only(left: 160),
+                                    child: SmoothPageIndicator(
+                                      controller: controller,
+                                      count: imglist,
+                                      effect: const SwapEffect(
+                                          dotHeight: 6,
+                                          dotWidth: 6,
+                                          spacing: 10),
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 80),
-                                  clipBehavior: Clip.none,
-                                  padding: EdgeInsets.symmetric(),
-                                  child: IconButton(
-                                    onPressed: (){
-                                      setState(() {
-                                        heatColor();
-                                      });
-                                      print("hiiiiiiiiiiiii");
-                                    },
-                                    icon: Icon(Icons.favorite_border),
-                                    color: hearColors,
-
+                                  Container(
+                                    margin: EdgeInsets.only(left: 80),
+                                    clipBehavior: Clip.none,
+                                    padding: EdgeInsets.symmetric(),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          heatColor();
+                                        });
+                                        print("hiiiiiiiiiiiii");
+                                      },
+                                      icon: Icon(Icons.favorite_border),
+                                      color: hearColors,
+                                    ),
                                   ),
-
-                                ),
-                              ],),
-
+                                ],
+                              ),
                               Row(
                                 children: [
                                   Container(
                                       margin: EdgeInsets.only(left: 40),
-                                      child: Text('${SingleProductModelList![0].attributes.title}',
+                                      child: Text(
+                                          '${SingleProductModelList![0].attributes.title}',
                                           style: TextStyle(
                                               fontSize: 27,
                                               color: Colors.grey.shade700))),
                                   Container(
-                                    margin:
-                                        const EdgeInsets.only(left: 110, top: 4),
+                                    margin: const EdgeInsets.only(
+                                        left: 110, top: 4),
                                     child: Icon(FontAwesomeIcons.solidComment,
                                         size: 15, color: Colors.blue),
                                   ),
                                   Container(
                                     margin:
                                         const EdgeInsets.only(left: 9, top: 4),
-                                    child: Text(
-                                      "100",
+                                    child: const Text(
+                                      "0",
                                       style: TextStyle(
                                           fontSize: 10, color: Colors.grey),
                                     ),
@@ -267,17 +266,19 @@ class _SingleProductState extends State<SingleProduct> {
                               Row(
                                 children: [
                                   Container(
-                                      child: Text("${SingleProductModelList![0].store.store_name}",
+                                      margin:
+                                          EdgeInsets.only(left: 40, top: 10),
+                                      child: Text(
+                                          "${SingleProductModelList![0].store.store_name}",
                                           style: TextStyle(
                                               fontSize: 20,
-                                              color: Colors.grey.shade700)),
-                                      margin: EdgeInsets.only(left: 40, top: 10)),
+                                              color: Colors.grey.shade700))),
                                   Container(
                                     margin:
                                         const EdgeInsets.only(top: 4, left: 60),
                                     child: Rating_widget(
-                                      initialRating: Rating?? 3.7,
-                                      ignoreGestures: true,
+                                        initialRating: Rating ?? 3.7,
+                                        ignoreGestures: true,
                                         direction: Axis.horizontal,
                                         itemSizw: 15.0,
                                         semetricPadding: 2.0,
@@ -291,7 +292,7 @@ class _SingleProductState extends State<SingleProduct> {
                                     margin:
                                         const EdgeInsets.only(left: 5, top: 4),
                                     child: Text(
-                                        Rating != null ? Rating.toString() : "",
+                                      Rating != null ? Rating.toString() : "",
                                       style: const TextStyle(
                                           fontSize: 10, color: Colors.grey),
                                     ),
@@ -322,7 +323,7 @@ class _SingleProductState extends State<SingleProduct> {
                                       ),
                                       Container(
                                         padding: EdgeInsets.only(right: 5),
-                                        child:  Text(
+                                        child: Text(
                                           "@${SingleProductModelList![0].store.store_name}",
                                           style: const TextStyle(
                                               color: Colors.blue, fontSize: 10),
@@ -332,18 +333,25 @@ class _SingleProductState extends State<SingleProduct> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(left: 35),
-                                    child: Text("\$${SingleProductModelList![0].attributes.price}"),
+                                    child: Text(
+                                        "\$${SingleProductModelList![0].attributes.price}"),
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(left: 5, top: 4),
-                                    child:SingleProductModelList?[0].attributes.discount == null? Container():
-                                    Text("\$${SingleProductModelList![0].attributes.discount}",
-                                      style: TextStyle(
-                                          decoration: TextDecoration.lineThrough,
-                                          color: Colors.red,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                    child: SingleProductModelList?[0]
+                                                .attributes
+                                                .discount ==
+                                            null
+                                        ? Container()
+                                        : Text(
+                                            "\$${SingleProductModelList![0].attributes.discount}",
+                                            style: const TextStyle(
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                color: Colors.red,
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                   ),
                                 ],
                               ),
@@ -364,7 +372,6 @@ class _SingleProductState extends State<SingleProduct> {
                                             cadrVisibleVarents = false;
                                             cardVisibleComments = false;
                                             cardVisibleRating = false;
-
                                           }
                                         });
                                       },
@@ -377,11 +384,11 @@ class _SingleProductState extends State<SingleProduct> {
                                                       Catogerys.details
                                                   ? Active
                                                   : inactive,
-                                              borderRadius: BorderRadius.all(
+                                              borderRadius: const BorderRadius.all(
                                                   Radius.circular(20.0)),
                                               border: Border.all(
                                                   color: Colors.grey.shade400),
-                                              boxShadow: [
+                                              boxShadow: const [
                                                 BoxShadow(
                                                   color: Colors.grey,
                                                   blurRadius: 5,
@@ -406,7 +413,6 @@ class _SingleProductState extends State<SingleProduct> {
                                           cadrVisibleDetails = false;
                                           cardVisibleComments = false;
                                           cardVisibleRating = false;
-
                                         });
                                       },
                                       child: Container(
@@ -416,12 +422,14 @@ class _SingleProductState extends State<SingleProduct> {
                                           width: 70,
                                           decoration: BoxDecoration(
                                               color: SelectCatogry ==
-                                                      Catogerys.vairants ? Active : inactive,
-                                              borderRadius: BorderRadius.all(
+                                                      Catogerys.vairants
+                                                  ? Active
+                                                  : inactive,
+                                              borderRadius: const BorderRadius.all(
                                                   Radius.circular(20.0)),
                                               border: Border.all(
                                                   color: Colors.grey.shade400),
-                                              boxShadow: [
+                                              boxShadow: const [
                                                 BoxShadow(
                                                   color: Colors.grey,
                                                   blurRadius: 5,
@@ -455,11 +463,11 @@ class _SingleProductState extends State<SingleProduct> {
                                                     Catogerys.Comments
                                                 ? Active
                                                 : inactive,
-                                            borderRadius: BorderRadius.all(
+                                            borderRadius: const BorderRadius.all(
                                                 Radius.circular(20.0)),
                                             border: Border.all(
                                                 color: Colors.grey.shade400),
-                                            boxShadow: [
+                                            boxShadow: const [
                                               BoxShadow(
                                                 color: Colors.grey,
                                                 blurRadius: 5,
@@ -485,22 +493,21 @@ class _SingleProductState extends State<SingleProduct> {
                                           cardVisibleComments = false;
                                           cadrVisibleVarents = false;
                                           cadrVisibleDetails = false;
-
                                         });
                                       },
                                       child: Container(
                                         height: 30,
                                         width: 70,
                                         decoration: BoxDecoration(
-                                            color:
-                                                SelectCatogry == Catogerys.Rating
-                                                    ? Active
-                                                    : inactive,
-                                            borderRadius: BorderRadius.all(
+                                            color: SelectCatogry ==
+                                                    Catogerys.Rating
+                                                ? Active
+                                                : inactive,
+                                            borderRadius: const BorderRadius.all(
                                                 Radius.circular(20.0)),
                                             border: Border.all(
                                                 color: Colors.grey.shade400),
-                                            boxShadow: [
+                                            boxShadow: const [
                                               BoxShadow(
                                                 color: Colors.grey,
                                                 blurRadius: 5,
@@ -511,10 +518,10 @@ class _SingleProductState extends State<SingleProduct> {
                                             child: Text(
                                           "Rating",
                                           style: TextStyle(
-                                            color:
-                                                SelectCatogry == Catogerys.Rating
-                                                    ? Colors.white
-                                                    : Colors.black,
+                                            color: SelectCatogry ==
+                                                    Catogerys.Rating
+                                                ? Colors.white
+                                                : Colors.black,
                                           ),
                                         )),
                                       ),
@@ -539,11 +546,11 @@ class _SingleProductState extends State<SingleProduct> {
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
                 border: Border.all(color: Colors.grey.shade400),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                       color: Colors.grey,
                       //offset: Offset(0, -1),
@@ -560,12 +567,12 @@ class _SingleProductState extends State<SingleProduct> {
                     setState(() {});
                   },
                   child: Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: const EdgeInsets.only(left: 10),
                     height: 30,
                     width: 70,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                     ),
                     child: const Center(
                         child: Icon(
@@ -574,28 +581,27 @@ class _SingleProductState extends State<SingleProduct> {
                     )),
                   ),
                 ),
-               plusAndminusWidget(),
+                plusAndminusWidget(),
                 GestureDetector(
-                    onTap: () {
-                      addToCart();
-                        print(theNumber);
+                  onTap: () {
+                    addToCart(context);
+                    print(theNumber);
                   },
                   child: Container(
                     height: 30,
                     width: 120,
-
                     decoration: BoxDecoration(
                         color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                         border: Border.all(color: Colors.grey.shade400),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.grey,
                             blurRadius: 4,
                             offset: Offset(0, 4),
                           )
                         ]),
-                    child:  Center(
+                    child: const Center(
                         child: Text(
                       "ADD TO CART",
                       style: TextStyle(color: Colors.white),
@@ -608,4 +614,3 @@ class _SingleProductState extends State<SingleProduct> {
     );
   }
 }
-

@@ -5,23 +5,25 @@ import 'package:dio/dio.dart';
 import 'package:fexmonths/Pay_ment/payLater.dart';
 import 'package:fexmonths/Pay_ment/payNow.dart';
 import 'package:fexmonths/Pay_ment/shppingWidget.dart';
+import 'package:fexmonths/utils/math_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/utils.dart';
 
-import '../API_Backend/Models/MyAddressModel.dart';
-import '../API_Backend/Models/SelectShippingModel.dart';
-import '../API_Backend/Models/chekingCodeModel.dart';
-import '../API_Backend/Provider/CartTotalProvider.dart';
-import '../API_Backend/Provider/ChekingCode.dart';
-import '../API_Backend/Provider/CreateOrdersProvider.dart';
-import '../API_Backend/Provider/SelectShippingProvider.dart';
-import '../API_Backend/Provider/myAddressProvider.dart';
-import '../Components/textFiledwithButton.dart';
-import '../Components/textWithbutton.dart';
+import '../Constens.dart';
 import '../Home_display/CartDisplay.dart';
+import '../data/API_Backend/ApiPost.dart';
+import '../data/API_Backend/Models/CreatOrderModel.dart';
+import '../data/API_Backend/Models/MyAddressModel.dart';
+import '../data/API_Backend/Models/SelectShippingModel.dart';
+import '../data/API_Backend/Models/chekingCodeModel.dart';
+import '../data/API_Backend/Provider/CartDisplayProvider.dart';
+import '../data/API_Backend/Provider/ChekingCode.dart';
+import '../data/API_Backend/Provider/CreatAccountProvider.dart';
+import '../data/API_Backend/Provider/CreateOrdersProvider.dart';
+import '../utils/app_constants.dart';
+import '../view/base_widget/textFiledwithButton.dart';
+import '../view/base_widget/textWithbutton.dart';
 import 'addAddress.dart';
-import 'Invoice_widget.dart';
 import 'package:http/http.dart' as http;
 
 class CheckOut extends StatefulWidget {
@@ -43,7 +45,7 @@ class _CheckOutState extends State<CheckOut> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _counter++;
       });
@@ -57,18 +59,7 @@ class _CheckOutState extends State<CheckOut> {
       print(value);
       print("=======CheekingCodeList============CheekingCodeList===================mvCheekingCodeList");
     });*/
-    myAddressProvider(
-      Dio(),
-    ).getAll().then((value) {
-      setState(() {});
-      myAddressModelList = [];
-      myAddressModelList!.addAll(value);
-      print(
-          "=======myAddressModelList============myAddressModelList===================myAddressModelList");
-      print(value);
-      print(
-          "=======myAddressModelList============myAddressModelList===================myAddressModelList");
-    });
+
     // SelectShippingProvider(Dio()).getAll().then((value){
     //   setState((){});
     //     ShippingOptionList = [];
@@ -78,7 +69,8 @@ class _CheckOutState extends State<CheckOut> {
     //   print("=================ShippingOptionList=======================ShippingOptionList====================ShippingOptionList");
     // });
   }
-  void dispose(){
+
+  void dispose() {
     _timer?.cancel();
     super.dispose();
   }
@@ -87,11 +79,11 @@ class _CheckOutState extends State<CheckOut> {
     var headers = {
       'Accept': 'application/vnd.api+json',
       'Content-Type': 'application/vnd.api+json',
-      'Authorization': 'Bearer 4|5oc5xYJ65zacvZoOIrqnyU0Kr6XZaSc8R7wU4Vwe'
+      'Authorization': TOkedns
     };
     try {
       var response = await http.get(
-          Uri.parse("http://10.0.2.2:8000/api/shipping/types"),
+          Uri.parse(  AppConstants.BASE_URL+"/api/shipping/types"),
           headers: headers);
       if (response.statusCode == 200) {
         // var res = response.data[0]as List;
@@ -137,7 +129,7 @@ class _CheckOutState extends State<CheckOut> {
               ),
               textFiledWithbutton(
                 ontap: () {
-                  ChekingCode(Dio()).getAll(CooController.text).then((value) {
+                  ChekingCode(Dio()).getAll(CooController.text,context).then((value) {
                     setState(() {});
                     CheekingCodeList.addAll(value);
                     print(
@@ -234,14 +226,14 @@ class _CheckOutState extends State<CheckOut> {
                         padding: EdgeInsets.only(top: 5, left: 10, bottom: 13),
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: cartDisplaylist!.length,
+                        itemCount: cartDisplaylist.length,
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(top: 5, left: 5),
                                 child: Text(
-                                  "${index + 1}-${cartDisplaylist![index].product.title}",
+                                  "${index + 1}-${cartDisplaylist[index].product.title}",
                                   style: const TextStyle(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
@@ -253,10 +245,10 @@ class _CheckOutState extends State<CheckOut> {
                               Padding(
                                 padding: EdgeInsets.only(top: 5, left: 10),
                                 child: Text(
-                                  cartDisplaylist![index].total == null
+                                  cartDisplaylist[index].total == null
                                       ? ""
-                                      : "\$${cartDisplaylist![index].total}"
-                                          "  x ${cartDisplaylist![index].quantity}",
+                                      : "\$${cartDisplaylist[index].total}"
+                                          "  x ${cartDisplaylist[index].quantity}",
                                   style: const TextStyle(
                                       color: Colors.grey,
                                       fontWeight: FontWeight.bold),
@@ -288,7 +280,7 @@ class _CheckOutState extends State<CheckOut> {
                           Padding(
                             padding: EdgeInsets.only(top: 5, left: 30),
                             child: Text(
-                              "${cartDisplaylist![0].total == null ? 0 : cartDisplaylist![0].total}",
+                              "${cartDisplaylist[0].total == null ? 0 : cartDisplaylist[0].total}",
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold),
@@ -340,7 +332,7 @@ class _CheckOutState extends State<CheckOut> {
                           Padding(
                             padding: EdgeInsets.only(top: 5, left: 30),
                             child: Text(
-                              '${cartDisplaylist![0].product.discount ?? 0}',
+                              '${cartDisplaylist[0].product.discount ?? 0}',
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold),
@@ -426,58 +418,72 @@ class _CheckOutState extends State<CheckOut> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  height: 32,
-                  width: 130,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: TextButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll(Colors.grey[300]),
-                        alignment: Alignment.center,
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))))),
-                    onPressed: () { Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PayLater(),
-                        ));
-                    CreatOrder();
-                    },
-                    child: const Center(
-                        child: Text(
-                      "Pay Later",
-                      style: TextStyle(color: Colors.blue),
-                    )),
+                AppConstants.ACCOUNT_TYPE=="Employee" ?         Expanded(
+                  flex: 5,
+                  child: Container(
+                    padding: getPadding(right: 10),
+                    height: 32,
+
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: TextButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.grey[300]),
+                          alignment: Alignment.center,
+                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))))),
+                      onPressed: () async {
+                        await CreatOrder();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PayLater(),
+                            ));    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PayLater(),
+                            ));
+
+                      },
+                      child: const Center(
+                          child: Text(
+                        "Pay Later",
+                        style: TextStyle(color: Colors.blue),
+                      )),
+                    ),
                   ),
-                ),
-                Container(
-                  height: 32,
-                  width: 130,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: TextButton(
-                    style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                        alignment: Alignment.center,
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))))),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PayNow(),
-                          ));
-                      CreatOrder();
-                    },
-                    child: const Center(
-                        child: Text(
-                      "Pay Now",
-                      style: TextStyle(color: Colors.white),
-                    )),
+                ):SizedBox(),
+                Expanded(
+                  flex: 5,
+                  child: Container(
+                    padding: getPadding(left: 10),
+                    height: 32,
+
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: TextButton(
+                      style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                          alignment: Alignment.center,
+                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))))),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PayNow(),
+                            ));
+                        CreatOrder();
+                      },
+                      child: const Center(
+                          child: Text(
+                        "Pay Now",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                    ),
                   ),
                 ),
               ],
@@ -485,4 +491,50 @@ class _CheckOutState extends State<CheckOut> {
           ),
         ));
   }
+}
+
+Future CreatOrder() async {
+  var headers = {
+    'Accept': 'application/vnd.api+json',
+    'Content-Type': 'application/vnd.api+json',
+    'Authorization':TOkedns,
+  };
+  // http.Response response = await http.post(Uri.parse('http://10.0.2.2:8000/api/orders/create'),
+  //   headers: headers,
+  //   body: {
+  //     'address': '${Addrss[1]}',
+  //     'shipping type': '${shpp[1]}',
+  //     'coupon': CooController.text,
+  //     'note': noteConroller.text
+  //   }
+  //
+  // )
+  // ;
+  var cobons = CooController.text==null ? "" : CooController.text;
+  var request = await  http.MultipartRequest('post', Uri.parse(AppConstants.BASE_URL+'/api/orders/create'));
+  request.fields.addAll({
+    'address': '${Addrss[1]}',
+    'shipping type': '${shpp[1]}',
+    'coupon': "$cobons" ?? " ",
+    'note': noteConroller.text ?? " "
+  });
+  request.headers.addAll(headers);
+  http.StreamedResponse response= await request.send();
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    print("ccccccccccc");
+    String responseBody =await response.stream.bytesToString();
+    var jsoresponse= json.decode(responseBody);
+
+    print(jsoresponse['data']['code']);
+   AppConstants.ORDER_CODE = jsoresponse['data']['code'];
+    CreatOrderModel creatOrder =CreatOrderModel.fromjson(jsoresponse);
+    print(creatOrder.data);
+
+  }
+  else {
+    print('ffffff');
+  }
+
+
+
 }

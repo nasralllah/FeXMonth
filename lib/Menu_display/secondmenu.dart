@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../Components/Bottom_Menu_Icons.dart';
+import '../base_widget/Bottom_Menu_Icons.dart';
 import '../Constens.dart';
 import '../Login_display/login_screen.dart';
-import '../Components/menu_card_layout.dart';
+import '../base_widget/menu_card_layout.dart';
 import 'Fevaroit_Page.dart';
 
 class menu_animated extends StatefulWidget {
